@@ -1,0 +1,9 @@
+{
+  "name": "mtg-commander",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "protocol:capture": "node scripts/capture-real-session.mjs",
+    "protocol:poc": "node scripts/protocol-poc.mjs"
+  }
+}

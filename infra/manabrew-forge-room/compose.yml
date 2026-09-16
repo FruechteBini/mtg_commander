@@ -1,0 +1,29 @@
+services:
+  relay:
+    image: ghcr.io/witchesofthehill/manabrew-server:latest
+    environment:
+      MANABREW_SERVER_KEY: "${MANABREW_SERVER_KEY:?required}"
+      RUST_LOG: "manabrew_server=info"
+    ports:
+      - "9443:9443"
+      - "9444:9444"
+    restart: unless-stopped
+
+  forge-room:
+    image: ghcr.io/witchesofthehill/manabrew-node:latest
+    depends_on:
+      - relay
+    environment:
+      SELF_HOSTED_NODE_RELAY_URL: "ws://relay:9443"
+      SELF_HOSTED_NODE_SERVER_KEY: "${MANABREW_SERVER_KEY:?required}"
+      SELF_HOSTED_NODE_ROOM_NAME: "${SELF_HOSTED_NODE_ROOM_NAME:-MTG-Commander PoC}"
+      SELF_HOSTED_NODE_ROOM_PASSWORD: "${SELF_HOSTED_NODE_ROOM_PASSWORD:-}"
+      SELF_HOSTED_NODE_FORMAT: "commander"
+      SELF_HOSTED_NODE_MAX_PLAYERS: "${SELF_HOSTED_NODE_MAX_PLAYERS:-4}"
+      SELF_HOSTED_NODE_MAX_GAMES: "${SELF_HOSTED_NODE_MAX_GAMES:-1}"
+      SELF_HOSTED_NODE_ENGINE_BACKEND: "forge"
+      SELF_HOSTED_NODE_BOT_ENABLED: "true"
+      SELF_HOSTED_NODE_AUTO_START: "false"
+      RUST_LOG: "self_hosted_node=info"
+    restart: unless-stopped
+

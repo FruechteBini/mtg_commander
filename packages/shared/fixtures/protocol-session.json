@@ -1,0 +1,79 @@
+{
+  "messages": [
+    {
+      "kind": "state",
+      "fingerprint": "fixture-001",
+      "gameView": {
+        "players": [
+          { "id": "player-0", "name": "You", "life": 40 },
+          { "id": "player-1", "name": "Bot A", "life": 40 },
+          { "id": "player-2", "name": "Bot B", "life": 40 },
+          { "id": "player-3", "name": "Bot C", "life": 40 }
+        ],
+        "zones": [
+          {
+            "zone": "hand",
+            "ownerId": "player-0",
+            "count": 2,
+            "cards": [
+              {
+                "visibility": "visible",
+                "id": "card-1",
+                "card": {
+                  "id": "card-1",
+                  "identity": { "name": "Sol Ring" },
+                  "text": "{T}: Add {C}{C}."
+                }
+              },
+              {
+                "visibility": "visible",
+                "id": "card-2",
+                "card": {
+                  "id": "card-2",
+                  "identity": { "name": "Command Tower" },
+                  "text": "{T}: Add one mana of any color in your commander's color identity."
+                }
+              }
+            ]
+          },
+          {
+            "zone": "battlefield",
+            "ownerId": "player-0",
+            "count": 0,
+            "cards": []
+          }
+        ],
+        "stack": [],
+        "activePlayerId": "player-0",
+        "priorityPlayerId": "player-0",
+        "step": "precombatMain",
+        "turnNumber": 1
+      }
+    },
+    {
+      "kind": "prompt",
+      "prompt": {
+        "promptId": 7,
+        "decidingPlayerId": "player-0",
+        "input": {
+          "type": "chooseAction",
+          "actions": [
+            {
+              "id": "act-play-land-card-2",
+              "type": "playLand",
+              "cardId": "card-2",
+              "modeLabel": "Play Command Tower"
+            },
+            {
+              "id": "act-cast-card-1",
+              "type": "cast",
+              "cardId": "card-1",
+              "mode": "cast",
+              "modeLabel": "Cast Sol Ring"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

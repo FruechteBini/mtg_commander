@@ -1,0 +1,124 @@
+{
+  "relayUrl": "ws://localhost:9443",
+  "roomName": "MTG-Commander PoC",
+  "username": "capture-player-1789566446060",
+  "startedAt": "2026-09-16T13-47-26-060Z",
+  "capturePath": "C:\\Users\\korbi\\Documents\\Codex\\2026-09-16\\welches-modell-bist-du\\captures\\manabrew-real-session-2026-09-16T13-47-26-060Z.jsonl",
+  "events": [
+    {
+      "at": "2026-09-16T13:47:26.062Z",
+      "event": "connecting",
+      "relayUrl": "ws://localhost:9443"
+    },
+    {
+      "at": "2026-09-16T13:47:26.152Z",
+      "event": "connected"
+    },
+    {
+      "at": "2026-09-16T13:47:26.160Z",
+      "event": "authenticated",
+      "username": "capture-player-1789566446060"
+    },
+    {
+      "at": "2026-09-16T13:47:26.164Z",
+      "event": "joining-room",
+      "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+      "roomName": "MTG-Commander PoC"
+    },
+    {
+      "at": "2026-09-16T13:47:26.209Z",
+      "event": "spawning-bot",
+      "index": 1
+    },
+    {
+      "at": "2026-09-16T13:47:26.212Z",
+      "event": "spawning-bot",
+      "index": 2
+    },
+    {
+      "at": "2026-09-16T13:47:26.214Z",
+      "event": "spawning-bot",
+      "index": 3
+    },
+    {
+      "at": "2026-09-16T13:47:26.215Z",
+      "event": "selecting-deck"
+    },
+    {
+      "at": "2026-09-16T13:47:26.226Z",
+      "event": "setting-ready"
+    },
+    {
+      "at": "2026-09-16T13:47:26.243Z",
+      "event": "starting-game",
+      "players": [
+        "capture-player-1789566446060",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot"
+      ]
+    },
+    {
+      "at": "2026-09-16T13:47:26.250Z",
+      "event": "game-started",
+      "gameId": "562acb10-b4ae-4e1b-8634-f09542cbe933",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:47:26.348Z",
+      "event": "answering-prompt",
+      "inputType": "diceRolled",
+      "promptResponses": 1
+    },
+    {
+      "at": "2026-09-16T13:47:26.350Z",
+      "event": "finished",
+      "reason": "captured-state-and-prompt"
+    }
+  ],
+  "counts": {
+    "Authenticate": 1,
+    "AuthResult": 1,
+    "ListRooms": 1,
+    "ChatHistory": 2,
+    "PlayerList": 5,
+    "RoomList": 1,
+    "JoinRoom": 1,
+    "PlayerJoined": 2,
+    "RoomUpdate": 7,
+    "BroadcastState": 4,
+    "SetDeckSelection": 1,
+    "SetReady": 1,
+    "ReadyStateChanged": 2,
+    "StartGame": 1,
+    "GameStarted": 2,
+    "RequestResync": 1,
+    "StateUpdate": 2
+  },
+  "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+  "gameId": "562acb10-b4ae-4e1b-8634-f09542cbe933",
+  "playerOrder": [
+    "capture-player-1789566446060",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot"
+  ],
+  "mySlot": "player-0",
+  "prompts": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "promptId": 1,
+      "inputType": "diceRolled"
+    }
+  ],
+  "states": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "keys": [
+        "gameView"
+      ]
+    }
+  ],
+  "errors": [],
+  "finishedAt": "2026-09-16T13:47:26.350Z",
+  "reason": "captured-state-and-prompt"
+}

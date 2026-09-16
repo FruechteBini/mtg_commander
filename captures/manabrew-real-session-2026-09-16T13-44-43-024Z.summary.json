@@ -1,0 +1,1956 @@
+{
+  "relayUrl": "ws://localhost:9443",
+  "roomName": "MTG-Commander PoC",
+  "username": "capture-player-1789566283024",
+  "startedAt": "2026-09-16T13-44-43-024Z",
+  "capturePath": "C:\\Users\\korbi\\Documents\\Codex\\2026-09-16\\welches-modell-bist-du\\captures\\manabrew-real-session-2026-09-16T13-44-43-024Z.jsonl",
+  "events": [
+    {
+      "at": "2026-09-16T13:44:43.028Z",
+      "event": "connecting",
+      "relayUrl": "ws://localhost:9443"
+    },
+    {
+      "at": "2026-09-16T13:44:43.132Z",
+      "event": "connected"
+    },
+    {
+      "at": "2026-09-16T13:44:43.139Z",
+      "event": "authenticated",
+      "username": "capture-player-1789566283024"
+    },
+    {
+      "at": "2026-09-16T13:44:43.146Z",
+      "event": "joining-room",
+      "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+      "roomName": "MTG-Commander PoC"
+    },
+    {
+      "at": "2026-09-16T13:44:43.189Z",
+      "event": "spawning-bot",
+      "index": 2
+    },
+    {
+      "at": "2026-09-16T13:44:43.194Z",
+      "event": "spawning-bot",
+      "index": 3
+    },
+    {
+      "at": "2026-09-16T13:44:43.198Z",
+      "event": "selecting-deck"
+    },
+    {
+      "at": "2026-09-16T13:44:43.217Z",
+      "event": "setting-ready"
+    },
+    {
+      "at": "2026-09-16T13:44:43.232Z",
+      "event": "starting-game",
+      "players": [
+        "capture-player-1789566283024",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot"
+      ]
+    },
+    {
+      "at": "2026-09-16T13:44:43.246Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.251Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.256Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.264Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.270Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.275Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.283Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.288Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.292Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.300Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.303Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.307Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.312Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.318Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.321Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.326Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.332Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.337Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.341Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.346Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.351Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.355Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.360Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.366Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.370Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.374Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.379Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.385Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.389Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.394Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.399Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.404Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.408Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.413Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.419Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.423Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.427Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.433Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.437Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.442Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.447Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.453Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.457Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.462Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.467Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.470Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.475Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.482Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.486Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.491Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.496Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.502Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.507Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.514Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.518Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.523Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.527Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.534Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.538Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.542Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.548Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.554Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.558Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.565Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.569Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.573Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.579Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.587Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.591Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.599Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.603Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.608Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.613Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.622Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.625Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.632Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.637Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.641Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.646Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.650Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.654Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.659Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.666Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.670Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.674Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.685Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.691Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.698Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.703Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.708Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.714Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.719Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.723Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.728Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.732Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.737Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.741Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.746Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.750Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.756Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.761Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.769Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.773Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.778Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.783Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.788Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.792Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.799Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.803Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.807Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.812Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.818Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.821Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.825Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.830Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.835Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.840Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.846Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.851Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.856Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.861Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.867Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.871Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.876Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.884Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.889Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.895Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.902Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.907Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.912Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.917Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.922Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.926Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.932Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.936Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.940Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.944Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.950Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.956Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.962Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.967Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.971Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.974Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.980Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.985Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.989Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:43.994Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.000Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.004Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.008Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.013Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.017Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.022Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.026Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.033Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.036Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.041Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.046Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.050Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.054Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.058Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.063Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.067Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.072Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.076Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.082Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.087Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.091Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.096Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.101Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.105Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.109Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.114Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.120Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.124Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.129Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.134Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.139Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.145Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.151Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.155Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.161Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.166Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.171Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.175Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.181Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.185Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.191Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.196Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.201Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.206Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.212Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.216Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.220Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.225Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.230Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.235Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.240Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.245Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.250Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.254Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.259Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.265Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.270Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.274Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.280Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.284Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.288Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.294Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.299Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.304Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.308Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.313Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.320Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.324Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.330Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.335Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.340Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.345Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.352Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.357Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.363Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.367Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.373Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.380Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.387Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.391Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.398Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.404Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.408Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.414Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.418Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.423Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.429Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.434Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.438Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.444Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.449Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.454Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.458Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.464Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.469Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.473Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.478Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.482Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.487Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.492Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.497Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.501Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.506Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.512Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.517Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.522Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.529Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.535Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.541Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.550Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.558Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.574Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.596Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.603Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.613Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.618Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.629Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.634Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.640Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.646Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.653Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.663Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.669Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.673Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.678Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.683Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.688Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.692Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.698Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.702Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.706Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.712Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.716Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.720Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.724Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.728Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.733Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.736Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.740Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.745Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.750Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.754Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.757Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.764Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.769Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.773Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.777Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.782Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.787Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.792Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.798Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.803Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.807Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.812Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.817Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.820Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.824Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.831Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.835Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.841Z",
+      "event": "game-started",
+      "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T13:44:44.847Z",
+      "event": "answering-prompt",
+      "inputType": "diceRolled",
+      "promptResponses": 1
+    },
+    {
+      "at": "2026-09-16T13:44:44.849Z",
+      "event": "finished",
+      "reason": "captured-state-and-prompt"
+    }
+  ],
+  "counts": {
+    "Authenticate": 1,
+    "AuthResult": 1,
+    "ListRooms": 1,
+    "ChatHistory": 2,
+    "PlayerList": 5,
+    "RoomList": 1,
+    "JoinRoom": 1,
+    "PlayerJoined": 3,
+    "RoomUpdate": 10,
+    "BroadcastState": 3,
+    "SetDeckSelection": 1,
+    "PlayerLeft": 2,
+    "SetReady": 1,
+    "ReadyStateChanged": 2,
+    "StartGame": 1,
+    "GameStarted": 307,
+    "RequestResync": 307,
+    "StateUpdate": 2
+  },
+  "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+  "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+  "playerOrder": [
+    "capture-player-1789566283024",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot"
+  ],
+  "mySlot": "player-0",
+  "prompts": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "promptId": 1,
+      "inputType": "diceRolled"
+    }
+  ],
+  "states": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "keys": [
+        "gameView"
+      ]
+    }
+  ],
+  "errors": [],
+  "finishedAt": "2026-09-16T13:44:44.849Z",
+  "reason": "captured-state-and-prompt"
+}
