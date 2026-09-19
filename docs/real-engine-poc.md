@@ -15,7 +15,7 @@ Local status on this machine:
 
 The real Forge-room PoC has been started successfully on this Windows workspace. The same Compose setup is still intended to be portable to the Synology/NAS Docker environment.
 
-A dependency-free capture client now connects directly to the local relay, joins the hosted room, selects a Commander deck, marks the user ready, starts a real Forge-backed game, records raw relay traffic, and answers the first simple prompt.
+A dependency-free capture client now connects directly to the local relay, joins the hosted room, selects a Commander deck, spawns three bots in one batch, starts a real four-player Forge-backed game, records raw relay traffic, passes empty priority prompts, and executes the first available action.
 
 ## Local verification: 2026-09-16
 
@@ -154,22 +154,28 @@ Important protocol details learned:
 - `SetDeckSelection.deck.format` expects `commander`.
 - `StartGame.format` expects `Commander`.
 
-The next captures should go deeper into player decisions:
+The 2026-09-17 capture `manabrew-real-session-2026-09-17T12-59-23-759Z` additionally proved:
 
-1. First full `state` / `gameView`.
-2. Opening-hand or mulligan prompt.
-3. First `chooseAction` prompt.
-4. A legal `act` response.
-5. A `pass` response.
+1. One human and three self-hosted-node bots joined and became ready.
+2. Forge started a four-player Commander game.
+3. The client acknowledged `diceRolled`, kept its mulligan hand, passed priority, and played a Mountain.
+4. A later `chooseAction` offered `Cast Shock`; the client sent its advertised action ID.
+5. `chooseBoardTargets` advertised valid `TargetRef` values; the client selected opponent `player-1`.
+6. The first `payManaCost` advertised the Mountain mana ability; the client activated it by action ID.
+7. The next `payManaCost` reported `canConfirmFromPool: true`; the client confirmed with `pay(auto: false)`.
+8. The client passed priority and waited for resolution.
+9. The same `player-0` perspective showed `Shock` in `graveyard`, an empty stack, and `player-1` at 38 instead of 40 life.
+10. The engine returned no error.
 
-Then compare those messages against the local fixture in `packages/shared/fixtures/protocol-session.json` and update our TypeScript protocol types.
+The captured messages have now been converted into the protocol-v5 TypeScript contract, runtime parser, and sanitized regression fixture under `packages/shared`. `node scripts/protocol-contract-test.mjs` validates the fixture and, when present, streams all messages from the ignored local raw capture. Additional prompt families can now be proven with focused fixtures.
 
 ## Open issue / next step
 
-The custom capture client can drive the real relay, so the own-client strategy is still viable. The current open issue is bot count:
+The custom capture client can drive the real relay, so the own-client strategy is still viable. The bot-count issue is resolved:
 
-- The script asks for three bots.
-- The hosted node currently starts reliably with one self-hosted-node bot.
-- For milestone 1 we still need to understand whether the self-hosted node supports multiple spawned bots in one room, whether we need multiple node services, or whether we should run our own simple bot clients.
+- Manabrew accepts multiple requested bot decks in one `spawnBot` payload.
+- Every separate `spawnBot` request replaces the existing bot set; this was why the former three-request loop produced only one bot.
+- One self-hosted node successfully supplied all three bot seats in the real capture.
+- The capture now waits for all four ready seats before sending `StartGame`.
 
-The next engineering step is to capture a real `chooseAction` prompt and send one legal `act` or `pass` response against the real engine.
+The multi-prompt spell proof and `PROTO-005` DTO/parser alignment are complete. The next engineering step is `ARCH-001`: define the process, reconnect, secret, deployment, and license boundary before extracting the reusable engine client.

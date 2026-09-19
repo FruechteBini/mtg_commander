@@ -1,0 +1,259 @@
+{
+  "relayUrl": "ws://localhost:9443",
+  "roomName": "MTG-Commander PoC",
+  "username": "capture-player-1789568770157",
+  "startedAt": "2026-09-16T14-26-10-157Z",
+  "capturePath": "C:\\Users\\korbi\\Documents\\ChatGPT\\mtg commander\\captures\\manabrew-real-session-2026-09-16T14-26-10-157Z.jsonl",
+  "events": [
+    {
+      "at": "2026-09-16T14:26:10.160Z",
+      "event": "connecting",
+      "relayUrl": "ws://localhost:9443"
+    },
+    {
+      "at": "2026-09-16T14:26:10.374Z",
+      "event": "connected"
+    },
+    {
+      "at": "2026-09-16T14:26:10.393Z",
+      "event": "authenticated",
+      "username": "capture-player-1789568770157"
+    },
+    {
+      "at": "2026-09-16T14:26:10.400Z",
+      "event": "joining-room",
+      "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+      "roomName": "MTG-Commander PoC"
+    },
+    {
+      "at": "2026-09-16T14:26:10.450Z",
+      "event": "spawning-bots",
+      "requested": 3
+    },
+    {
+      "at": "2026-09-16T14:26:10.465Z",
+      "event": "selecting-deck"
+    },
+    {
+      "at": "2026-09-16T14:26:10.552Z",
+      "event": "setting-ready"
+    },
+    {
+      "at": "2026-09-16T14:26:10.767Z",
+      "event": "starting-game",
+      "players": [
+        "capture-player-1789568770157",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 2",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 3"
+      ]
+    },
+    {
+      "at": "2026-09-16T14:26:10.794Z",
+      "event": "game-started",
+      "gameId": "54c6b93f-fd11-468d-8816-ec40d22cdaea",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T14:26:13.411Z",
+      "event": "answering-prompt",
+      "inputType": "diceRolled",
+      "promptResponses": 1,
+      "outputType": "diceRolledAcknowledged"
+    },
+    {
+      "at": "2026-09-16T14:26:15.368Z",
+      "event": "answering-prompt",
+      "inputType": "mulligan",
+      "promptResponses": 2,
+      "outputType": "mulliganDecision"
+    },
+    {
+      "at": "2026-09-16T14:26:16.615Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 3,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:26:16.661Z",
+      "event": "finished",
+      "reason": "captured-choose-action-loop"
+    }
+  ],
+  "counts": {
+    "Authenticate": 1,
+    "AuthResult": 1,
+    "ListRooms": 1,
+    "ChatHistory": 2,
+    "PlayerList": 5,
+    "RoomList": 1,
+    "JoinRoom": 1,
+    "PlayerJoined": 4,
+    "RoomUpdate": 13,
+    "BroadcastState": 4,
+    "SetDeckSelection": 1,
+    "SetReady": 1,
+    "ReadyStateChanged": 4,
+    "StartGame": 1,
+    "GameStarted": 2,
+    "RequestResync": 1,
+    "StateUpdate": 16
+  },
+  "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+  "gameId": "54c6b93f-fd11-468d-8816-ec40d22cdaea",
+  "playerOrder": [
+    "capture-player-1789568770157",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 2",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 3"
+  ],
+  "mySlot": "player-0",
+  "prompts": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "promptId": 1,
+      "inputType": "diceRolled"
+    },
+    {
+      "index": 2,
+      "forPlayer": "player-0",
+      "promptId": 2,
+      "inputType": "mulligan"
+    },
+    {
+      "index": 3,
+      "forPlayer": "player-0",
+      "promptId": 6,
+      "inputType": "chooseAction"
+    }
+  ],
+  "states": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "3e6c11fbbcf5f43a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 2,
+      "hasFingerprint": true,
+      "fingerprint": "eb078bb9050af491",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 3,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "c7285cc8d07eb617",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 4,
+      "hasFingerprint": true,
+      "fingerprint": "03b5afde3ea33cf9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 5,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "c7285cc8d07eb617",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 6,
+      "hasFingerprint": true,
+      "fingerprint": "03b5afde3ea33cf9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 7,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "c7285cc8d07eb617",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 8,
+      "hasFingerprint": true,
+      "fingerprint": "03b5afde3ea33cf9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 9,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "c7285cc8d07eb617",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 10,
+      "hasFingerprint": true,
+      "fingerprint": "03b5afde3ea33cf9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 11,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "77cfc90e4e5053be",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 12,
+      "hasFingerprint": true,
+      "fingerprint": "c8b19acd39e8512e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 13,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "50482abf3813d8eb",
+      "keys": [
+        "gameView"
+      ]
+    }
+  ],
+  "chooseAction": {
+    "promptId": 6,
+    "availableActions": [],
+    "response": {
+      "type": "pass",
+      "exhaustStack": false
+    },
+    "baseFingerprint": "c8b19acd39e8512e",
+    "confirmedBy": "state",
+    "resultFingerprint": "50482abf3813d8eb"
+  },
+  "errors": [],
+  "finishedAt": "2026-09-16T14:26:16.661Z",
+  "reason": "captured-choose-action-loop"
+}

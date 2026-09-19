@@ -1,79 +1,187 @@
 {
+  "source": "Sanitized from manabrew-real-session-2026-09-17T12-59-23-759Z",
+  "protocolVersion": 5,
   "messages": [
     {
-      "kind": "state",
-      "fingerprint": "fixture-001",
-      "gameView": {
-        "players": [
-          { "id": "player-0", "name": "You", "life": 40 },
-          { "id": "player-1", "name": "Bot A", "life": 40 },
-          { "id": "player-2", "name": "Bot B", "life": 40 },
-          { "id": "player-3", "name": "Bot C", "life": 40 }
-        ],
-        "zones": [
-          {
-            "zone": "hand",
-            "ownerId": "player-0",
-            "count": 2,
-            "cards": [
+      "type": "GameStarted",
+      "room_id": "fixture-room",
+      "game_id": "fixture-game",
+      "player_order": ["human", "bot-a", "bot-b", "bot-c"],
+      "starting_life": 40
+    },
+    {
+      "type": "StateUpdate",
+      "state": {
+        "kind": "state",
+        "forPlayer": "player-0",
+        "fingerprint": "before-shock",
+        "emitMs": 0,
+        "state": {
+          "gameView": {
+            "gameId": "fixture-game",
+            "activePlayerId": "player-0",
+            "priorityPlayerId": "player-0",
+            "gameOver": false,
+            "players": [
+              { "id": "player-0", "name": "You", "life": 40, "isHuman": true },
+              { "id": "player-1", "name": "Bot A", "life": 40, "isHuman": false },
+              { "id": "player-2", "name": "Bot B", "life": 40, "isHuman": false },
+              { "id": "player-3", "name": "Bot C", "life": 40, "isHuman": false }
+            ],
+            "zones": [
               {
-                "visibility": "visible",
-                "id": "card-1",
-                "card": {
-                  "id": "card-1",
-                  "identity": { "name": "Sol Ring" },
-                  "text": "{T}: Add {C}{C}."
-                }
+                "zone": "hand",
+                "ownerId": "player-0",
+                "count": 1,
+                "cards": [{
+                  "id": "engine-card-shock",
+                  "identity": { "name": "Shock", "setCode": "MSC", "cardNumber": "809", "isToken": false },
+                  "ownerId": "player-0",
+                  "controllerId": "player-0",
+                  "visibility": "visible"
+                }]
               },
-              {
-                "visibility": "visible",
-                "id": "card-2",
-                "card": {
-                  "id": "card-2",
-                  "identity": { "name": "Command Tower" },
-                  "text": "{T}: Add one mana of any color in your commander's color identity."
-                }
-              }
-            ]
-          },
-          {
-            "zone": "battlefield",
-            "ownerId": "player-0",
-            "count": 0,
-            "cards": []
+              { "zone": "battlefield", "ownerId": "player-0", "count": 1, "cards": [] },
+              { "zone": "graveyard", "ownerId": "player-0", "count": 0, "cards": [] },
+              { "zone": "library", "ownerId": "player-1", "count": 92, "cards": [] }
+            ],
+            "stack": [],
+            "step": "main1",
+            "turn": 3,
+            "winnerId": null
           }
-        ],
-        "stack": [],
-        "activePlayerId": "player-0",
-        "priorityPlayerId": "player-0",
-        "step": "precombatMain",
-        "turnNumber": 1
+        }
       }
     },
     {
-      "kind": "prompt",
-      "prompt": {
-        "promptId": 7,
-        "decidingPlayerId": "player-0",
-        "input": {
-          "type": "chooseAction",
-          "actions": [
-            {
-              "id": "act-play-land-card-2",
-              "type": "playLand",
-              "cardId": "card-2",
-              "modeLabel": "Play Command Tower"
-            },
-            {
-              "id": "act-cast-card-1",
+      "type": "StateUpdate",
+      "state": {
+        "kind": "prompt",
+        "forPlayer": "player-0",
+        "prompt": {
+          "promptId": 58,
+          "decidingPlayerId": "player-0",
+          "input": {
+            "type": "chooseAction",
+            "actions": [{
+              "id": "prompt-action-1",
               "type": "cast",
-              "cardId": "card-1",
-              "mode": "cast",
-              "modeLabel": "Cast Sol Ring"
-            }
-          ]
+              "cardId": "engine-card-shock",
+              "label": "Cast Shock",
+              "mode": { "type": "normal" }
+            }]
+          }
+        }
+      }
+    },
+    {
+      "type": "StateUpdate",
+      "state": {
+        "kind": "prompt",
+        "forPlayer": "player-0",
+        "prompt": {
+          "promptId": 59,
+          "decidingPlayerId": "player-0",
+          "input": {
+            "type": "chooseBoardTargets",
+            "cancellable": true,
+            "candidates": [
+              { "id": "player-0", "kind": "player" },
+              { "id": "player-1", "kind": "player" }
+            ],
+            "chosenTargets": 0,
+            "hostile": true,
+            "intent": "damage",
+            "minTargets": 1,
+            "maxTargets": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "StateUpdate",
+      "state": {
+        "kind": "prompt",
+        "forPlayer": "player-0",
+        "prompt": {
+          "promptId": 60,
+          "decidingPlayerId": "player-0",
+          "input": {
+            "type": "payManaCost",
+            "actions": [{
+              "id": "tap:engine-card-mountain:0",
+              "type": "activateManaAbility",
+              "cardId": "engine-card-mountain",
+              "abilityIndex": 0,
+              "description": "Mountain",
+              "isManaAbility": true,
+              "producedMana": [{ "amount": 1, "color": "R" }]
+            }],
+            "canConfirmFromPool": false,
+            "cardId": "engine-card-shock",
+            "cardName": "Shock",
+            "manaCost": "{R}"
+          }
+        }
+      }
+    },
+    {
+      "type": "StateUpdate",
+      "state": {
+        "kind": "prompt",
+        "forPlayer": "player-0",
+        "prompt": {
+          "promptId": 61,
+          "decidingPlayerId": "player-0",
+          "input": {
+            "type": "payManaCost",
+            "actions": [],
+            "canConfirmFromPool": true,
+            "cardId": "engine-card-shock",
+            "cardName": "Shock",
+            "manaCost": "{R}"
+          }
+        }
+      }
+    },
+    {
+      "type": "StateUpdate",
+      "state": {
+        "kind": "state",
+        "forPlayer": "player-0",
+        "fingerprint": "after-shock",
+        "emitMs": 0,
+        "state": {
+          "gameView": {
+            "gameId": "fixture-game",
+            "activePlayerId": "player-0",
+            "priorityPlayerId": "player-0",
+            "gameOver": false,
+            "players": [
+              { "id": "player-0", "name": "You", "life": 40, "isHuman": true },
+              { "id": "player-1", "name": "Bot A", "life": 38, "isHuman": false },
+              { "id": "player-2", "name": "Bot B", "life": 40, "isHuman": false },
+              { "id": "player-3", "name": "Bot C", "life": 40, "isHuman": false }
+            ],
+            "zones": [
+              { "zone": "hand", "ownerId": "player-0", "count": 0, "cards": [] },
+              { "zone": "battlefield", "ownerId": "player-0", "count": 1, "cards": [] },
+              {
+                "zone": "graveyard",
+                "ownerId": "player-0",
+                "count": 1,
+                "cards": [{ "id": "engine-card-shock", "identity": { "name": "Shock" }, "visibility": "visible" }]
+              },
+              { "zone": "library", "ownerId": "player-1", "count": 92, "cards": [] }
+            ],
+            "stack": [],
+            "step": "main1",
+            "turn": 3,
+            "winnerId": null
+          }
         }
       }
     }
   ]
 }
+

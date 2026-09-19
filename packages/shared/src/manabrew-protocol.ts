@@ -1,168 +1,278 @@
-export type PlayerId = string;
+/**
+ * Manabrew protocol contract observed against protocol_version 5.
+ * Runtime validation lives in manabrew-protocol-parser.mjs.
+ */
+
+export type PlayerId = `player-${number}` | string;
 export type CardId = string;
 export type ActionId = string;
+export type Fingerprint = string;
+export type JsonObject = Record<string, unknown>;
 
-export type StepKind =
-  | "beginning"
-  | "precombatMain"
-  | "combat"
-  | "postcombatMain"
-  | "ending"
-  | string;
+export interface AuthResultMessage {
+  type: "AuthResult";
+  success: boolean;
+  player_id?: string | null;
+  reconnected?: boolean;
+  error?: string | null;
+  features?: string[];
+}
+
+export interface RoomPlayerDto {
+  username: string;
+  ready: boolean;
+  connected: boolean;
+  is_bot: boolean;
+  selected_deck_name?: string;
+}
+
+export interface RoomDto {
+  room_id: string;
+  room_name: string;
+  host: string;
+  protocol_version: number;
+  players: RoomPlayerDto[];
+  max_players: number;
+  format: string;
+  status: string;
+  engine: string;
+  hosted?: boolean;
+  official?: boolean;
+  password_protected?: boolean;
+  reconnect_timeout_s?: number;
+}
+
+export interface RoomListMessage { type: "RoomList"; rooms: RoomDto[] }
+export interface RoomUpdateMessage { type: "RoomUpdate"; room: RoomDto }
+
+export interface GameStartedMessage {
+  type: "GameStarted";
+  room_id: string;
+  game_id: string;
+  player_order: string[];
+  player_decks?: unknown[];
+  starting_life?: number;
+}
+
+export interface RelayErrorMessage {
+  type: "Error";
+  code?: string;
+  message: string;
+  [key: string]: unknown;
+}
+
+export interface StateUpdateMessage { type: "StateUpdate"; state: EngineToClientEnvelope }
+export interface BroadcastStateMessage {
+  type: "BroadcastState";
+  state: ClientToEngineEnvelope | RoomRelayEnvelope;
+  target_player: PlayerId | null;
+}
+
+export type RelayInboundMessage =
+  | AuthResultMessage
+  | RoomListMessage
+  | RoomUpdateMessage
+  | GameStartedMessage
+  | StateUpdateMessage
+  | RelayErrorMessage
+  | ({ type: string } & JsonObject);
 
 export interface CardIdentity {
   name: string;
   setCode?: string;
   cardNumber?: string;
-  token?: boolean;
+  isToken?: boolean;
 }
 
-export interface CardDto {
-  id: CardId;
-  identity: CardIdentity;
-  tapped?: boolean;
-  power?: string;
-  toughness?: string;
-  text?: string;
-}
-
-export interface CardView {
-  visibility: "visible" | "hidden" | "redacted";
+export interface CardViewDto {
   id?: CardId;
-  card?: CardDto;
+  identity?: CardIdentity;
+  visibility?: "visible" | "hidden" | "redacted" | string;
+  ownerId?: PlayerId;
+  controllerId?: PlayerId;
+  tapped?: boolean;
+  power?: string | null;
+  toughness?: string | null;
+  text?: string;
+  [key: string]: unknown;
 }
 
 export interface ZoneDto {
   zone: string;
   ownerId: PlayerId;
   count: number;
-  cards: CardView[];
+  /** Hidden zones can have count > 0 while cards is empty. */
+  cards: CardViewDto[];
 }
 
 export interface PlayerDto {
   id: PlayerId;
   name: string;
   life: number;
+  status?: string;
+  isHuman?: boolean;
   manaPool?: Record<string, number>;
+  [key: string]: unknown;
 }
 
 export interface StackObjectDto {
-  id: string;
-  source?: CardDto;
+  id?: string;
+  source?: CardViewDto;
   controllerId?: PlayerId;
-  targets?: unknown[];
+  targets?: TargetRef[];
+  [key: string]: unknown;
 }
 
 export interface GameViewDto {
+  gameId: string;
   players: PlayerDto[];
   zones: ZoneDto[];
   stack: StackObjectDto[];
   activePlayerId: PlayerId;
-  priorityPlayerId?: PlayerId;
-  step: StepKind;
-  turnNumber?: number;
+  priorityPlayerId: PlayerId | null;
+  step: string;
+  /** The real protocol uses turn, not turnNumber. */
+  turn: number;
+  gameOver: boolean;
+  winnerId?: PlayerId | null;
+  [key: string]: unknown;
 }
 
-export type EngineToClientMessage =
-  | { kind: "state"; gameView: GameViewDto; fingerprint?: string }
-  | { kind: "stateDelta"; base: string; fingerprint: string; patch: unknown }
-  | { kind: "prompt"; prompt: AgentPrompt }
-  | { kind: "error"; code: ProtocolErrorCode; message: string; promptId?: number };
+export interface StateEnvelope {
+  kind: "state";
+  forPlayer?: PlayerId;
+  fingerprint: Fingerprint;
+  emitMs?: number;
+  engineMs?: number;
+  state: { gameView: GameViewDto; [key: string]: unknown };
+}
 
-export type ProtocolErrorCode =
-  | "stalePrompt"
-  | "wrongPlayer"
-  | "wrongPromptType"
-  | "unknownActionId"
-  | "invalidShape";
+/** Inventoried from the protocol contract; not emitted by the successful Shock capture. */
+export interface StateDeltaEnvelope {
+  kind: "stateDelta";
+  forPlayer?: PlayerId;
+  base: Fingerprint;
+  fingerprint: Fingerprint;
+  patch: unknown;
+  emitMs?: number;
+  engineMs?: number;
+}
+
+export interface PromptEnvelope {
+  kind: "prompt";
+  forPlayer: PlayerId;
+  prompt: AgentPrompt;
+  emitMs?: number;
+  engineMs?: number;
+}
+
+export interface EngineErrorEnvelope {
+  kind: "error" | "fatal";
+  code?: string;
+  message: string;
+  promptId?: number;
+  [key: string]: unknown;
+}
+
+export type EngineToClientEnvelope = StateEnvelope | StateDeltaEnvelope | PromptEnvelope | EngineErrorEnvelope;
 
 export interface AgentPrompt {
   promptId: number;
   decidingPlayerId: PlayerId;
-  sourceCard?: CardDto;
+  sourceCard?: CardViewDto;
+  sourceAbilityText?: string;
   input: PromptInput;
 }
 
 export type PromptInput =
   | ChooseActionInput
-  | { type: string; [key: string]: unknown };
+  | ChooseBoardTargetsInput
+  | PayManaCostInput
+  | DiceRolledInput
+  | MulliganInput
+  | ({ type: string } & JsonObject);
 
-export interface ChooseActionInput {
-  type: "chooseAction";
+export interface ChooseActionInput { type: "chooseAction"; actions: AvailableAction[] }
+
+export interface TargetRef {
+  id: string;
+  kind: "player" | "card" | string;
+}
+
+export interface ChooseBoardTargetsInput {
+  type: "chooseBoardTargets";
+  candidates: TargetRef[];
+  minTargets: number;
+  maxTargets: number;
+  chosenTargets: number;
+  cancellable: boolean;
+  hostile?: boolean;
+  intent?: string;
+  presentation?: JsonObject;
+}
+
+export interface PayManaCostInput {
+  type: "payManaCost";
   actions: AvailableAction[];
-}
-
-export type AvailableAction =
-  | CastAction
-  | ActivateAbilityAction
-  | GenericAvailableAction;
-
-export interface CastAction {
-  id: ActionId;
-  type: "cast";
+  canConfirmFromPool: boolean;
   cardId: CardId;
-  mode?: string;
-  modeLabel?: string;
+  cardName: string;
+  manaCost: string;
+  presentation?: JsonObject;
 }
 
-export interface ActivateAbilityAction {
-  id: ActionId;
-  type: "activateAbility";
-  cardId: CardId;
-  abilityIndex: number;
-  description?: string;
-  isManaAbility?: boolean;
-  producedMana?: Array<{ color: string; amount: number }>;
-}
+export interface DiceRolledInput { type: "diceRolled"; [key: string]: unknown }
+export interface MulliganInput { type: "mulligan"; [key: string]: unknown }
 
-export interface GenericAvailableAction {
+export interface AvailableAction {
   id: ActionId;
   type: string;
   cardId?: CardId;
+  label?: string;
+  mode?: JsonObject;
+  abilityIndex?: number;
+  description?: string;
+  isManaAbility?: boolean;
+  producedMana?: Array<{ color: string; amount: number }>;
   [key: string]: unknown;
 }
 
-export type ClientToEngineMessage =
-  | { kind: "response"; promptId: number; action: PromptOutput }
-  | { kind: "directive"; directive: DirectiveInput };
-
-export type PromptOutput =
-  | {
-      type: "chooseAction";
-      output: ChooseActionOutput;
-    }
-  | { type: string; output?: unknown };
-
 export type ChooseActionOutput =
-  | { type: "pass"; until?: PassUntil; exhaustStack: boolean }
+  | { type: "pass"; exhaustStack: boolean }
   | { type: "restoreSnapshot"; checkpointId: number }
   | { type: "act"; actionId: ActionId };
+export type ChooseBoardTargetsOutput = { type: "boardTargets"; chosen: TargetRef[] } | { type: "cancel" };
+export type PayManaCostOutput =
+  | { type: "act"; actionId: ActionId }
+  | { type: "pay"; auto: boolean }
+  | { type: "cancel" };
+export type PromptOutput =
+  | ChooseActionOutput
+  | ChooseBoardTargetsOutput
+  | PayManaCostOutput
+  | { type: "diceRolledAcknowledged" }
+  | { type: "mulliganDecision"; keep: boolean }
+  | ({ type: string } & JsonObject);
 
-export interface PassUntil {
-  playerId: PlayerId;
-  phase: StepKind;
+export interface PromptAction<TOutput extends PromptOutput = PromptOutput> {
+  type: string;
+  output: TOutput;
 }
 
-export type DirectiveInput = { type: "concede" };
-
-export function actionResponse(promptId: number, actionId: ActionId): ClientToEngineMessage {
-  return {
-    kind: "response",
-    promptId,
-    action: {
-      type: "chooseAction",
-      output: { type: "act", actionId },
-    },
-  };
+export interface ClientToEngineEnvelope {
+  kind: "response";
+  fromPlayer: PlayerId;
+  promptId: number;
+  action: PromptAction;
 }
 
-export function passResponse(promptId: number, exhaustStack = false): ClientToEngineMessage {
-  return {
-    kind: "response",
-    promptId,
-    action: {
-      type: "chooseAction",
-      output: { type: "pass", exhaustStack },
-    },
-  };
+export interface RoomRelayEnvelope {
+  kind: "roomRelay";
+  protocol: string;
+  version: number;
+  messageId: string;
+  fromPlayer: string;
+  roomId: string;
+  payload: JsonObject;
 }
+

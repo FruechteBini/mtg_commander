@@ -24,13 +24,33 @@ Eine Person startet lokal oder auf dem privaten Server eine Commander-Partie geg
 
 ## Dokumentation
 
-Die aktuelle Wayfinder-Map liegt in [docs/wayfinding.md](docs/wayfinding.md).
+Der zentrale Einstiegspunkt fuer Status, Historie und alle Pflicht- sowie Optional-Tickets ist:
+[docs/project-tickets.md](docs/project-tickets.md).
+
+Diese Datei ist das laufende Projektboard. Nach einem Clone auf einem anderen Rechner zuerst dort den Abschnitt **Weiterarbeiten auf einem neuen Rechner** lesen und danach das oberste Ticket mit Status `NEXT` bearbeiten. Bei jeder Aenderung werden Ticketstatus, Evidence, Ergebnis, naechster Schritt und Risiken direkt im Projektboard aktualisiert.
+
+Die Dokumentation ist so aufgeteilt:
+
+- [docs/project-tickets.md](docs/project-tickets.md): zentrale Ticketliste, aktueller Stand, Historie, Risiken und Reihenfolge.
+- [docs/wayfinding.md](docs/wayfinding.md): Produktentscheidungen und Forschungsfragen.
+- [docs/protocol-poc.md](docs/protocol-poc.md): Protocol-Grenze, Nachrichtenformen und Capture-Ergebnisse.
+- [docs/real-engine-poc.md](docs/real-engine-poc.md): lokales Docker-/Forge-Runbook.
+
+Wichtiger aktueller Repository-Status: Der Branch `master` hat noch keinen ersten Commit. Das ist als `BOOT-001` im Projektboard erfasst und muss erledigt werden, bevor der Stand wirklich auf einem anderen Rechner geklont werden kann.
 
 Der erste lokale Protokoll-PoC liegt in [docs/protocol-poc.md](docs/protocol-poc.md). Er kann ohne Dependencies direkt mit Node ausgefuehrt werden:
 
 ```sh
 node scripts/protocol-poc.mjs
 ```
+
+Der reale Protocol-v5-Vertrag und der sanitiserte Shock-Regressionsloop werden ebenfalls ohne Dependencies geprueft:
+
+```sh
+node scripts/protocol-contract-test.mjs
+```
+
+Der Test validiert Relay- und Engine-Envelopes, State, Ziel-/Mana-Prompts, die erzeugten Antworten und den abschliessenden Zustandswechsel. Liegt der ignorierte lokale Raw-Capture vor, werden auch alle seine Nachrichten gestreamt und validiert. Bei einer normalen Node-Installation steht derselbe Lauf auch als `npm run protocol:test` bereit; in der aktuellen Codex-Runtime ist nur der direkte Node-Befehl verfuegbar.
 
 Der echte Engine-Schritt ist als Docker-Runbook vorbereitet und lokal mit Docker Desktop/WSL2 erfolgreich gestartet:
 [docs/real-engine-poc.md](docs/real-engine-poc.md).
@@ -54,4 +74,4 @@ Echten Protokoll-Capture gegen die laufende lokale Engine starten:
 node scripts\capture-real-session.mjs
 ```
 
-Der erste saubere Real-Capture bestaetigt: ein eigener Node-Client kann dem Relay beitreten, ein Deck setzen, eine Forge-Partie starten, `gameView` empfangen und einen ersten Prompt beantworten.
+Der aktuelle Real-Capture bestaetigt einen mehrstufigen MVP-Aktionsloop: Ein eigener Node-Client startet eine Vier-Spieler-Forge-Partie, spielt ein Mountain, wirkt `Shock`, waehlt einen Gegner, aktiviert die Manafaehigkeit, bestaetigt die Zahlung, passt Prioritaet und prueft die Aufloesung. Im Proof wechselte `Shock` von der Hand in den Friedhof, der Stack war danach leer und das Ziel verlor zwei Leben.

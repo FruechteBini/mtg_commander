@@ -1,5 +1,7 @@
 # Wayfinding: MTG-Commander
 
+> Zentrale Arbeits- und Ticketliste: `docs/project-tickets.md`. Dieses Dokument behaelt die Produktentscheidungen, Forschungsfragen und technischen Begruendungen.
+
 ## Destination
 
 Ein privater Commander-Prototyp fuer die Playgroup: Ein Mensch kann auf einem Desktop-PC gegen drei Bots mit echten Commander-Decks aus der Gruppe spielen. Die App nutzt eine vorhandene Regel-Engine, bietet eine eigene Hybrid-UI, kann Spielstaende speichern/laden und kann Spielereignisse optional per GLM erklaeren.
@@ -25,7 +27,8 @@ Ein privater Commander-Prototyp fuer die Playgroup: Ein Mensch kann auf einem De
 - Kein sofortiger Manabrew-Fork, solange die Protokoll-Anbindung tragfaehig wirkt.
 - Protokoll-PoC 0 bestaetigt lokal: State + `chooseAction` reichen fuer einen ersten UI-Loop aus Highlighting und `response`.
 - Real-Engine-PoC laeuft lokal mit Docker Desktop/WSL2: Relay healthy, Forge-Backend initialisiert, Raum `MTG-Commander PoC` erstellt, Bot mit 100-Karten-Deck beigetreten.
-- Real-Capture-PoC bestaetigt: Ein eigener Node-Client kann dem Relay beitreten, ein Deck auswaehlen, ready setzen, ein echtes Forge-Spiel starten, `gameView` empfangen und einen ersten Prompt beantworten.
+- Real-Capture-PoC bestaetigt: Ein eigener Node-Client kann dem Relay beitreten, drei Bots in einem Batch anfordern, ein echtes Vier-Spieler-Forge-Spiel starten, `gameView` empfangen und `diceRolled`, Mulligan sowie `chooseAction` beantworten.
+- Real-`act`-PoC bestaetigt: Nach legalen Pass-Antworten auf leere Prioritaetsfenster hat der Client eine Engine-gelieferte `Play Mountain`-Aktion gesendet; dieselbe Spielerperspektive zeigte die Karte danach von der Hand auf dem Battlefield.
 - Forge-backed Manabrew ist die wahrscheinliche Regelbasis.
 - Echte Commander-Decks aus der Playgroup sollen genutzt werden.
 - Solo-vs-Bots ist Teil des ersten Meilensteins: ein Mensch gegen drei Bots.
@@ -59,7 +62,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Type:** research/prototype
 
-**Status:** Local stub done and first real engine capture done. See `docs/protocol-poc.md`, `docs/real-engine-poc.md`, `packages/shared/src/manabrew-protocol.ts`, `packages/shared/fixtures/protocol-session.json`, `scripts/protocol-poc.mjs`, and `scripts/capture-real-session.mjs`.
+**Status:** Beantwortet fuer den belegten MVP-Loop; realer DTO-Abgleich und Runtime-Parser sind abgeschlossen. See `docs/protocol-poc.md`, `docs/real-engine-poc.md`, `packages/shared/src/manabrew-protocol.ts`, `packages/shared/src/manabrew-protocol-parser.mjs`, `packages/shared/fixtures/protocol-session.json`, `scripts/protocol-contract-test.mjs`, `scripts/capture-real-session.mjs`, and `captures/manabrew-real-session-2026-09-17T12-59-23-759Z.summary.json`.
 
 **Why it matters:** Diese Entscheidung bestimmt, ob wir eine saubere eigene App bauen koennen oder ob ein Fork realistischer ist.
 
@@ -70,13 +73,19 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 - Kann eine externe UI genug Informationen bekommen, um ein gutes Board zu rendern?
 - Wie schwer ist es, Aktionen aus der UI zur Engine zurueckzugeben?
 
-**Current answer:** Die Protokollgrenze sieht tragfaehig aus. Das Protokoll liefert volle `gameView`-Snapshots als autoritativen State und separate Prompts fuer Entscheidungen. Ein eigener Node-Client kann bereits ueber den Relay einer echten Forge-Session beitreten, eine Partie starten, `gameView` empfangen und einen ersten Prompt beantworten. `chooseAction` muss als naechstes gegen echte Daten bestaetigt werden.
+**Current answer:** Die Protokollgrenze ist fuer einen echten mehrstufigen UI-Aktionsloop tragfaehig. Der Protocol-v5-Vertrag trennt Relay-`type` von Engine-`kind`, bildet den Shock-Loop inklusive Ziel und Mana ab und wird an der externen Grenze zur Laufzeit validiert. Der Offline-Test validierte sieben sanitiserte Fixture-Nachrichten und alle 228 Nachrichten des lokalen erfolgreichen Captures. `stateDelta`, `error` und `fatal` wurden im erfolgreichen Lauf nicht real emittiert und bleiben als noch nicht capture-bewiesene Vertraege markiert.
 
-**Next proof:** Einen echten `chooseAction`-Prompt mitschneiden und eine legale `act`- oder `pass`-Antwort gegen die echte Engine senden.
+**Next proof:** In `ARCH-001` die Prozess-, Reconnect-, Secret- und Lizenzgrenze zwischen Browser, eigener API, Relay und Forge-Engine festlegen.
+
+**Execution log (2026-09-16):** Der Capture wurde so erweitert, dass leere `chooseAction`-Prompts weiter mit `pass` beantwortet werden. Erfolg wird nur bei einer Engine-gelieferten `actionId` und einem Zustandswechsel derselben Spielerperspektive gemeldet. Der Lauf `manabrew-real-session-2026-09-16T14-36-11-587Z` bestand dieses Kriterium: `Play Mountain`, `hand` -> `battlefield`, gleicher Zug und Schritt, geaenderter Fingerprint, keine Fehler.
+
+**Execution log (2026-09-17):** Der Lauf `manabrew-real-session-2026-09-17T12-59-23-759Z` bestand den mehrstufigen Proof. Prompt-Kette: `chooseAction:act` -> `chooseBoardTargets:boardTargets` -> `payManaCost:act` -> `payManaCost:pay(auto:false)` -> `chooseAction:pass`; Ergebnis: `Shock` im Friedhof, Stack leer, Ziel 40 -> 38 Leben. Der erste Versuch zeigte eine Schleife mit `auto:true`; der Client nutzt jetzt die korrekte Bestaetigung und einen Loop-Guard.
+
+**Execution log (2026-09-17, PROTO-005):** Das synthetische Fixture wurde durch eine sanitiserte reale State-/Prompt-Folge ersetzt. TypeScript-Vertrag, Runtime-Parser und Regressionstest wurden ergaenzt; `node scripts/protocol-contract-test.mjs` bestaetigte das Fixture sowie 228 lokale Raw-Capture-Nachrichten.
 
 **Prepared artifact:** `infra/manabrew-forge-room/compose.yml` und `docs/real-engine-poc.md` beschreiben einen privaten Relay plus Forge-Room auf Docker Compose. Lokal erreichbar unter `ws://localhost:9443`, Health unter `http://localhost:9444/health`.
 
-**Open risk:** Der Capture-Client fordert drei Bots an, aber der erste stabile Spielstart lief nur mit einem self-hosted-node-Bot. Fuer Solo gegen drei Bots muessen wir klaeren, ob ein Node mehrere Bots tragen kann, ob mehrere Node-Services noetig sind oder ob wir eigene Bot-Clients schreiben.
+**Open risk:** Mana und Einzelziel sind bestaetigt; Moduswahl, Mehrfachziele, Trigger-Reihenfolge und Combat-Prompts sind noch nicht Ende-zu-Ende bewiesen.
 
 ### Save/Load-Faehigkeit der Engine
 
@@ -109,7 +118,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Type:** grilling/prototype
 
-**Status:** In progress.
+**Status:** Bot-Topologie beantwortet; Spielstaerke und Langlaufverhalten bleiben in Arbeit.
 
 **Why it matters:** Solo gegen drei Bots ist Teil des ersten Meilensteins.
 
@@ -120,13 +129,13 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 - Wie kann spaeter GLM denselben Aktionsraum nutzen?
 - Wo liegen Latenz- und Kostenrisiken?
 
-**Evidence:** Real-Capture-PoC konnte eine Partie mit einem self-hosted-node-Bot starten. Der Capture-Client fordert drei Bots an, der erste stabile Start hatte aber nur einen Bot in `player_order`.
+**Evidence:** Manabrew-Quellcode auf Commit `a0a490a7bdd3e03ff7f5c0b02198a726536aecfc` zeigt einen Batch-`spawnBot` mit `decks`; jeder neue Request ersetzt die bestehende Bot-Gruppe. Der Real-Capture `captures/manabrew-real-session-2026-09-17T12-59-23-759Z.summary.json` startete mit vier Eintraegen in `player_order` und loeste einen gezielten `Shock` inklusive Mana ohne Fehler auf.
 
-**Current answer:** Legalitaet muss von der Engine kommen. Bots sollten nur aus Engine-gelieferten legalen Prompts/Aktionen waehlen. GLM darf spaeter eine Auswahl aus legalen Optionen bewerten, aber keine freien regeltechnischen Aktionen erfinden.
+**Current answer:** Ein einzelner self-hosted-node Service kann drei Bot-Tasks fuer einen Commander-Pod tragen; mehrere Node-Services oder eigene Bot-Clients sind fuer die reine Sitzanzahl nicht noetig. Die Anfrage muss als ein `spawnBot`-Payload mit drei Decks erfolgen. Legalitaet bleibt Engine-gesteuert; GLM darf spaeter nur Engine-gelieferte Optionen bewerten.
 
-**Next proof:** Klaeren, wie drei Bots stabil in eine Partie kommen: ein Node mit mehreren Bots, mehrere self-hosted-node Services oder eigene Bot-Clients. Danach ersten echten `chooseAction`-Prompt fuer einen Bot beantworten.
+**Next proof:** Den Vier-Spieler-Pod mit einem realistischen Playgroup-Deck ueber mehrere Zuege und groessere Boardstates laufen lassen.
 
-**Open risk:** Drei Commander-Bots koennen mehr Infrastruktur brauchen als der einzelne eingebaute Node-Bot.
+**Open risk:** Vier laufende Forge-Spieler mit realistischen Decks und grossen Boardstates koennen auf der 6-GB-NAS noch Speicher- oder Laufzeitprobleme zeigen.
 
 ### Deckimport und Playgroup-Deckbibliothek
 

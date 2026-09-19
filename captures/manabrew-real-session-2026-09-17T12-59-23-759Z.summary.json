@@ -1,0 +1,2371 @@
+{
+  "relayUrl": "ws://localhost:9443",
+  "roomName": "MTG-Commander PoC",
+  "username": "capture-player-1789649963757",
+  "startedAt": "2026-09-17T12-59-23-759Z",
+  "capturePath": "C:\\Users\\korbi\\Documents\\ChatGPT\\mtg commander\\captures\\manabrew-real-session-2026-09-17T12-59-23-759Z.jsonl",
+  "events": [
+    {
+      "at": "2026-09-17T12:59:23.788Z",
+      "event": "connecting",
+      "relayUrl": "ws://localhost:9443"
+    },
+    {
+      "at": "2026-09-17T12:59:24.077Z",
+      "event": "connected"
+    },
+    {
+      "at": "2026-09-17T12:59:24.086Z",
+      "event": "authenticated",
+      "username": "capture-player-1789649963757"
+    },
+    {
+      "at": "2026-09-17T12:59:24.092Z",
+      "event": "joining-room",
+      "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+      "roomName": "MTG-Commander PoC"
+    },
+    {
+      "at": "2026-09-17T12:59:24.136Z",
+      "event": "spawning-bots",
+      "requested": 3
+    },
+    {
+      "at": "2026-09-17T12:59:24.144Z",
+      "event": "selecting-deck"
+    },
+    {
+      "at": "2026-09-17T12:59:24.173Z",
+      "event": "setting-ready"
+    },
+    {
+      "at": "2026-09-17T12:59:24.213Z",
+      "event": "starting-game",
+      "players": [
+        "capture-player-1789649963757",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 2",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 3"
+      ]
+    },
+    {
+      "at": "2026-09-17T12:59:24.229Z",
+      "event": "game-started",
+      "gameId": "921662ec-3bb0-446b-b881-4cf0adc89901",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-17T12:59:24.608Z",
+      "event": "answering-prompt",
+      "inputType": "diceRolled",
+      "promptResponses": 1,
+      "outputType": "diceRolledAcknowledged"
+    },
+    {
+      "at": "2026-09-17T12:59:24.913Z",
+      "event": "answering-prompt",
+      "inputType": "mulligan",
+      "promptResponses": 2,
+      "outputType": "mulliganDecision"
+    },
+    {
+      "at": "2026-09-17T12:59:25.089Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 3,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:25.245Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 4,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:25.765Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 5,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:25.928Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 6,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:26.017Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 7,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:26.109Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 8,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:26.195Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 9,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:26.279Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 10,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:26.378Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 11,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:26.450Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 12,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:26.519Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 13,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:26.849Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 14,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.009Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 15,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.105Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 16,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.188Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 17,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.272Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 18,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.365Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 19,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.444Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 20,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.494Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 21,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.558Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 22,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:27.614Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 23,
+      "outputType": "act"
+    },
+    {
+      "at": "2026-09-17T12:59:27.673Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 24,
+      "outputType": "act"
+    },
+    {
+      "at": "2026-09-17T12:59:27.673Z",
+      "event": "action-proof-started",
+      "actionId": "prompt-action-1",
+      "actionType": "cast",
+      "actionLabel": "Cast Shock",
+      "baseFingerprint": "767c1270dfbf74a0"
+    },
+    {
+      "at": "2026-09-17T12:59:27.719Z",
+      "event": "answering-prompt",
+      "inputType": "chooseBoardTargets",
+      "promptResponses": 25,
+      "outputType": "boardTargets"
+    },
+    {
+      "at": "2026-09-17T12:59:27.789Z",
+      "event": "answering-prompt",
+      "inputType": "payManaCost",
+      "promptResponses": 26,
+      "outputType": "act"
+    },
+    {
+      "at": "2026-09-17T12:59:27.835Z",
+      "event": "answering-prompt",
+      "inputType": "payManaCost",
+      "promptResponses": 27,
+      "outputType": "pay"
+    },
+    {
+      "at": "2026-09-17T12:59:27.875Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 28,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-17T12:59:28.007Z",
+      "event": "finished",
+      "reason": "captured-multistep-spell-loop"
+    }
+  ],
+  "counts": {
+    "Authenticate": 1,
+    "AuthResult": 1,
+    "ListRooms": 1,
+    "ChatHistory": 2,
+    "PlayerList": 7,
+    "RoomList": 1,
+    "JoinRoom": 1,
+    "PlayerJoined": 4,
+    "RoomUpdate": 13,
+    "BroadcastState": 29,
+    "SetDeckSelection": 1,
+    "SetReady": 1,
+    "ReadyStateChanged": 4,
+    "StartGame": 1,
+    "GameStarted": 2,
+    "RequestResync": 1,
+    "StateUpdate": 158
+  },
+  "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+  "gameId": "921662ec-3bb0-446b-b881-4cf0adc89901",
+  "playerOrder": [
+    "capture-player-1789649963757",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 2",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 3"
+  ],
+  "mySlot": "player-0",
+  "prompts": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "promptId": 1,
+      "inputType": "diceRolled"
+    },
+    {
+      "index": 2,
+      "forPlayer": "player-0",
+      "promptId": 4,
+      "inputType": "mulligan"
+    },
+    {
+      "index": 3,
+      "forPlayer": "player-0",
+      "promptId": 8,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 4,
+      "forPlayer": "player-0",
+      "promptId": 10,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 5,
+      "forPlayer": "player-0",
+      "promptId": 18,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 6,
+      "forPlayer": "player-0",
+      "promptId": 21,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 7,
+      "forPlayer": "player-0",
+      "promptId": 23,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 8,
+      "forPlayer": "player-0",
+      "promptId": 25,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 9,
+      "forPlayer": "player-0",
+      "promptId": 27,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 10,
+      "forPlayer": "player-0",
+      "promptId": 29,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 11,
+      "forPlayer": "player-0",
+      "promptId": 31,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 12,
+      "forPlayer": "player-0",
+      "promptId": 32,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 13,
+      "forPlayer": "player-0",
+      "promptId": 33,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 14,
+      "forPlayer": "player-0",
+      "promptId": 40,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 15,
+      "forPlayer": "player-0",
+      "promptId": 44,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 16,
+      "forPlayer": "player-0",
+      "promptId": 46,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 17,
+      "forPlayer": "player-0",
+      "promptId": 48,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 18,
+      "forPlayer": "player-0",
+      "promptId": 50,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 19,
+      "forPlayer": "player-0",
+      "promptId": 52,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 20,
+      "forPlayer": "player-0",
+      "promptId": 54,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 21,
+      "forPlayer": "player-0",
+      "promptId": 55,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 22,
+      "forPlayer": "player-0",
+      "promptId": 56,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 23,
+      "forPlayer": "player-0",
+      "promptId": 57,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 24,
+      "forPlayer": "player-0",
+      "promptId": 58,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 25,
+      "forPlayer": "player-0",
+      "promptId": 59,
+      "inputType": "chooseBoardTargets"
+    },
+    {
+      "index": 26,
+      "forPlayer": "player-0",
+      "promptId": 60,
+      "inputType": "payManaCost"
+    },
+    {
+      "index": 27,
+      "forPlayer": "player-0",
+      "promptId": 61,
+      "inputType": "payManaCost"
+    },
+    {
+      "index": 28,
+      "forPlayer": "player-0",
+      "promptId": 62,
+      "inputType": "chooseAction"
+    }
+  ],
+  "states": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "d6d12e6895382fbb",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 2,
+      "hasFingerprint": true,
+      "fingerprint": "077e939bbff63e3e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 3,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "55e0599675f9c914",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 4,
+      "hasFingerprint": true,
+      "fingerprint": "204509f26243930e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 5,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "55e0599675f9c914",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 6,
+      "hasFingerprint": true,
+      "fingerprint": "204509f26243930e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 7,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "55e0599675f9c914",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 8,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "55e0599675f9c914",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 9,
+      "hasFingerprint": true,
+      "fingerprint": "204509f26243930e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 10,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "2dd50a3de465d7a5",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 11,
+      "hasFingerprint": true,
+      "fingerprint": "a32b3e2edf8aabe7",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 12,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "859f615b92902f7a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 13,
+      "hasFingerprint": true,
+      "fingerprint": "3dcf4c460309784e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 14,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "11625a9856587a37",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 15,
+      "hasFingerprint": true,
+      "fingerprint": "f24add5fde351de1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 16,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "1160cc5381ee966c",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 17,
+      "hasFingerprint": true,
+      "fingerprint": "01792c75791c6a48",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 18,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9351c4d3ec1e2c42",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 19,
+      "hasFingerprint": true,
+      "fingerprint": "9501f881b1abc486",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 20,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "58620dc595c08d28",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 21,
+      "hasFingerprint": true,
+      "fingerprint": "253c2d32f5c35b7e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 22,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "aa49c46b60035d58",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 23,
+      "hasFingerprint": true,
+      "fingerprint": "5f12cc7431004afc",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 24,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "29f2735bdc3b905f",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 25,
+      "hasFingerprint": true,
+      "fingerprint": "6641a7a8f611710f",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 26,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9d2a1969bc932eda",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 27,
+      "hasFingerprint": true,
+      "fingerprint": "6efcbcff64785ad4",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 28,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "0c27430de2853360",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 29,
+      "hasFingerprint": true,
+      "fingerprint": "cb6629d14f05c314",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 30,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "261869e5290f484c",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 31,
+      "hasFingerprint": true,
+      "fingerprint": "cadec27bb8fb7984",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 32,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "4df4d00833ee8757",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 33,
+      "hasFingerprint": true,
+      "fingerprint": "70135299f2c21a85",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 34,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9747e869e2153a9a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 35,
+      "hasFingerprint": true,
+      "fingerprint": "43189fc36eb2f682",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 36,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "d5bc70f578c059dd",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 37,
+      "hasFingerprint": true,
+      "fingerprint": "60c0d4204441266b",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 38,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "baa0cf9857954893",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 39,
+      "hasFingerprint": true,
+      "fingerprint": "488782a11d5dbac1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 40,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "02ff8e5bab310cc1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 41,
+      "hasFingerprint": true,
+      "fingerprint": "f6cdc988d8095987",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 42,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "f7c3d73f63a3de12",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 43,
+      "hasFingerprint": true,
+      "fingerprint": "628e098cc0253372",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 44,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "bca4b2ce31077804",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 45,
+      "hasFingerprint": true,
+      "fingerprint": "9abd36210e3bd4bc",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 46,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9df4a52ccdacad33",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 47,
+      "hasFingerprint": true,
+      "fingerprint": "a53ab45a9d770ca3",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 48,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "f977b83cb576befd",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 49,
+      "hasFingerprint": true,
+      "fingerprint": "2d762eadacb26c0d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 50,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "aaabb67c8ff38896",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 51,
+      "hasFingerprint": true,
+      "fingerprint": "103e5b9587617bea",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 52,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "28ee3707c4ee2478",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 53,
+      "hasFingerprint": true,
+      "fingerprint": "24b0a8fd4659e83c",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 54,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "a0291e4aeaff1bce",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 55,
+      "hasFingerprint": true,
+      "fingerprint": "11e411b7fa36f21a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 56,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "28685f14e9fc1338",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 57,
+      "hasFingerprint": true,
+      "fingerprint": "cd6b0632973c4b04",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 58,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "c3bb792e7337c014",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 59,
+      "hasFingerprint": true,
+      "fingerprint": "01ee7f01fae90bf8",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 60,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "1a5f80613d1bf732",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 61,
+      "hasFingerprint": true,
+      "fingerprint": "7b38fac632cccca6",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 62,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "aa7fb6fca4e1ab93",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 63,
+      "hasFingerprint": true,
+      "fingerprint": "132355307d6464ad",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 64,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "5f960d698f060db2",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 65,
+      "hasFingerprint": true,
+      "fingerprint": "c3f2a223e3bba93e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 66,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "965f3df3dfeedbbf",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 67,
+      "hasFingerprint": true,
+      "fingerprint": "7ded39e44f9ec097",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 68,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "3e1b99b1e31640e6",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 69,
+      "hasFingerprint": true,
+      "fingerprint": "04299fa100c17e24",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 70,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "078b379d3f21a787",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 71,
+      "hasFingerprint": true,
+      "fingerprint": "17a48d93c0374b89",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 72,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9ba4f4952e16277a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 73,
+      "hasFingerprint": true,
+      "fingerprint": "99c8897da8808f12",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 74,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "28da74da0407268a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 75,
+      "hasFingerprint": true,
+      "fingerprint": "314aa0fb15859408",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 76,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "ce63167b80ff7f4c",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 77,
+      "hasFingerprint": true,
+      "fingerprint": "f675498097b3ba0a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 78,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "ba03fa6d4849e773",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 79,
+      "hasFingerprint": true,
+      "fingerprint": "1e623064674af887",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 80,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "0f58c2f0c60a437a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 81,
+      "hasFingerprint": true,
+      "fingerprint": "2c1032f76933c0d4",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 82,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "f4369ef655addbcd",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 83,
+      "hasFingerprint": true,
+      "fingerprint": "9b501f06c4da7145",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 84,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "fdcfbfa38a46fbd5",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 85,
+      "hasFingerprint": true,
+      "fingerprint": "fe59279fe2dcefc7",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 86,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "5616cdb689fb00fe",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 87,
+      "hasFingerprint": true,
+      "fingerprint": "d691fea687520fc2",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 88,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "8f40ea3ecfbb08fe",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 89,
+      "hasFingerprint": true,
+      "fingerprint": "d209045ae0961d36",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 90,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "c0f29447dd0acef9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 91,
+      "hasFingerprint": true,
+      "fingerprint": "67450d5f95ab15af",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 92,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "e3e6ed0e1480744d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 93,
+      "hasFingerprint": true,
+      "fingerprint": "acb6725d1a30b3dd",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 94,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "3e8479154aec2b74",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 95,
+      "hasFingerprint": true,
+      "fingerprint": "838c5a2d20fca1c6",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 96,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "fd23de63d2a3a77a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 97,
+      "hasFingerprint": true,
+      "fingerprint": "26bb2e0359dae896",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 98,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "218fcdfbfec8dd61",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 99,
+      "hasFingerprint": true,
+      "fingerprint": "93384d55ec16b7ab",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 100,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "b4a0eab3ac8eb6d2",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 101,
+      "hasFingerprint": true,
+      "fingerprint": "57da08ee96aa022e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 102,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "c500c70a4267d0d1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 103,
+      "hasFingerprint": true,
+      "fingerprint": "dcba39a0570bd4ab",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 104,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9a9aebe8b41fd4b8",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 105,
+      "hasFingerprint": true,
+      "fingerprint": "0d95e37544ff7498",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 106,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9c2d819c5210d643",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 107,
+      "hasFingerprint": true,
+      "fingerprint": "6634d3be1f97a821",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 108,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "68c3e7dd13608c1e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 109,
+      "hasFingerprint": true,
+      "fingerprint": "d5485ae37d054cfe",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 110,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "a6366304e78b5f6d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 111,
+      "hasFingerprint": true,
+      "fingerprint": "62dff78bd1f87bfb",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 112,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "6c54e1a94e8a1d67",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 113,
+      "hasFingerprint": true,
+      "fingerprint": "bd23688fdb27f32b",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 114,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "767c1270dfbf74a0",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 115,
+      "hasFingerprint": true,
+      "fingerprint": "f2bf1e82234ff2a5",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 116,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "70f61437b560de79",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 117,
+      "hasFingerprint": true,
+      "fingerprint": "5392a61aa953d62d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 118,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "a1cb4e3abe6c6198",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 119,
+      "hasFingerprint": true,
+      "fingerprint": "602c0dcc5ab28698",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 120,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "8925b688fcc252b8",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 121,
+      "hasFingerprint": true,
+      "fingerprint": "e9bba55b2dd8f846",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 122,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "005cd29ce9df4b48",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 123,
+      "hasFingerprint": true,
+      "fingerprint": "f25c8cf6589a45ca",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 124,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "90b770303c90dcef",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 125,
+      "hasFingerprint": true,
+      "fingerprint": "57707468e074e5c3",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 126,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "a81fc49c940f8f5e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 127,
+      "hasFingerprint": true,
+      "fingerprint": "c075229ce94b0584",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 128,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "779bf76073a769ed",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 129,
+      "hasFingerprint": true,
+      "fingerprint": "d1ab048de5d63c5d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 130,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "4f677a1ce9a2a26a",
+      "keys": [
+        "gameView"
+      ]
+    }
+  ],
+  "chooseActions": [
+    {
+      "promptId": 8,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "11625a9856587a37",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 10,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "9351c4d3ec1e2c42",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "draw",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 18,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "9747e869e2153a9a",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "main1",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 1,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 21,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "02ff8e5bab310cc1",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "main1",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 23,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "bca4b2ce31077804",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "combatBegin",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 25,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "f977b83cb576befd",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "combatDeclareAttackers",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 27,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "28ee3707c4ee2478",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "combatEnd",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 29,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "28685f14e9fc1338",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "main2",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 31,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "1a5f80613d1bf732",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 1,
+        "step": "endOfTurn",
+        "activePlayerId": "player-2",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 32,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "aa7fb6fca4e1ab93",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 33,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "5f960d698f060db2",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "draw",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 40,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "ba03fa6d4849e773",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "main1",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 1,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 44,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "5616cdb689fb00fe",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "main1",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 46,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "c0f29447dd0acef9",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "combatBegin",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 48,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "3e8479154aec2b74",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "combatDeclareAttackers",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 50,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "218fcdfbfec8dd61",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "combatEnd",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 52,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "c500c70a4267d0d1",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "main2",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 54,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "9c2d819c5210d643",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 2,
+        "step": "endOfTurn",
+        "activePlayerId": "player-3",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 55,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "68c3e7dd13608c1e",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 3,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 56,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "a6366304e78b5f6d",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 3,
+        "step": "draw",
+        "activePlayerId": "player-0",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 57,
+      "availableActions": [
+        {
+          "id": "prompt-action-0",
+          "type": "cast",
+          "cardId": "engine-card-44",
+          "label": "Play Mountain",
+          "mode": {
+            "type": "normal"
+          }
+        },
+        {
+          "id": "prompt-action-1",
+          "type": "cast",
+          "cardId": "engine-card-67",
+          "label": "Play Mountain",
+          "mode": {
+            "type": "normal"
+          }
+        },
+        {
+          "id": "prompt-action-2",
+          "type": "cast",
+          "cardId": "engine-card-81",
+          "label": "Play Mountain",
+          "mode": {
+            "type": "normal"
+          }
+        },
+        {
+          "id": "prompt-action-3",
+          "type": "cast",
+          "cardId": "engine-card-90",
+          "label": "Play Mountain",
+          "mode": {
+            "type": "normal"
+          }
+        },
+        {
+          "id": "prompt-action-4",
+          "type": "cast",
+          "cardId": "engine-card-97",
+          "label": "Play Mountain",
+          "mode": {
+            "type": "normal"
+          }
+        }
+      ],
+      "selectedAction": {
+        "id": "prompt-action-0",
+        "type": "cast",
+        "cardId": "engine-card-44",
+        "label": "Play Mountain",
+        "mode": {
+          "type": "normal"
+        }
+      },
+      "response": {
+        "type": "act",
+        "actionId": "prompt-action-0"
+      },
+      "baseFingerprint": "6c54e1a94e8a1d67",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 3,
+        "step": "main1",
+        "activePlayerId": "player-0",
+        "priorityPlayerId": "player-0",
+        "cardId": "engine-card-44",
+        "cardZone": "hand",
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    },
+    {
+      "promptId": 58,
+      "availableActions": [
+        {
+          "id": "tap:engine-card-44:0",
+          "type": "activateAbility",
+          "cardId": "engine-card-44",
+          "label": "{T}: Add {R}.",
+          "mode": null
+        },
+        {
+          "id": "prompt-action-1",
+          "type": "cast",
+          "cardId": "engine-card-62",
+          "label": "Cast Shock",
+          "mode": {
+            "type": "normal"
+          }
+        },
+        {
+          "id": "prompt-action-2",
+          "type": "cast",
+          "cardId": "engine-card-86",
+          "label": "Cast Shock",
+          "mode": {
+            "type": "normal"
+          }
+        },
+        {
+          "id": "prompt-action-3",
+          "type": "cast",
+          "cardId": "engine-card-88",
+          "label": "Cast Shock",
+          "mode": {
+            "type": "normal"
+          }
+        }
+      ],
+      "selectedAction": {
+        "id": "prompt-action-1",
+        "type": "cast",
+        "cardId": "engine-card-62",
+        "label": "Cast Shock",
+        "mode": {
+          "type": "normal"
+        }
+      },
+      "response": {
+        "type": "act",
+        "actionId": "prompt-action-1"
+      },
+      "baseFingerprint": "767c1270dfbf74a0",
+      "confirmedBy": "resolved-state",
+      "resultFingerprint": "4f677a1ce9a2a26a",
+      "stateBeforeAction": {
+        "turn": 3,
+        "step": "main1",
+        "activePlayerId": "player-0",
+        "priorityPlayerId": "player-0",
+        "cardId": "engine-card-62",
+        "cardZone": "hand",
+        "stackDepth": 0,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": {
+        "turn": 3,
+        "step": "main1",
+        "activePlayerId": "player-0",
+        "priorityPlayerId": "player-0",
+        "cardId": "engine-card-62",
+        "cardZone": "graveyard",
+        "stackDepth": 0,
+        "trackedPlayerId": "player-1",
+        "trackedPlayerLife": 38
+      }
+    },
+    {
+      "promptId": 62,
+      "availableActions": [],
+      "selectedAction": null,
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "005cd29ce9df4b48",
+      "confirmedBy": null,
+      "resultFingerprint": null,
+      "stateBeforeAction": {
+        "turn": 3,
+        "step": "main1",
+        "activePlayerId": "player-0",
+        "priorityPlayerId": "player-0",
+        "cardId": null,
+        "cardZone": null,
+        "stackDepth": 1,
+        "trackedPlayerId": null,
+        "trackedPlayerLife": null
+      },
+      "stateAfterAction": null
+    }
+  ],
+  "chooseAction": {
+    "promptId": 62,
+    "availableActions": [],
+    "selectedAction": null,
+    "response": {
+      "type": "pass",
+      "exhaustStack": false
+    },
+    "baseFingerprint": "005cd29ce9df4b48",
+    "confirmedBy": null,
+    "resultFingerprint": null,
+    "stateBeforeAction": {
+      "turn": 3,
+      "step": "main1",
+      "activePlayerId": "player-0",
+      "priorityPlayerId": "player-0",
+      "cardId": null,
+      "cardZone": null,
+      "stackDepth": 1,
+      "trackedPlayerId": null,
+      "trackedPlayerLife": null
+    },
+    "stateAfterAction": null
+  },
+  "multistepAction": {
+    "targetSpellName": "Shock",
+    "status": "resolved",
+    "promptChain": [
+      {
+        "promptId": 58,
+        "inputType": "chooseAction",
+        "output": {
+          "type": "act",
+          "actionId": "prompt-action-1"
+        }
+      },
+      {
+        "promptId": 59,
+        "inputType": "chooseBoardTargets",
+        "output": {
+          "type": "boardTargets",
+          "chosen": [
+            {
+              "id": "player-1",
+              "kind": "player"
+            }
+          ]
+        },
+        "chosenTarget": {
+          "id": "player-1",
+          "kind": "player"
+        }
+      },
+      {
+        "promptId": 60,
+        "inputType": "payManaCost",
+        "output": {
+          "type": "act",
+          "actionId": "tap:engine-card-44:0"
+        },
+        "manaCost": "{R}",
+        "canConfirmFromPool": false
+      },
+      {
+        "promptId": 61,
+        "inputType": "payManaCost",
+        "output": {
+          "type": "pay",
+          "auto": false
+        },
+        "manaCost": "{R}",
+        "canConfirmFromPool": true
+      },
+      {
+        "promptId": 62,
+        "inputType": "chooseAction",
+        "output": {
+          "type": "pass",
+          "exhaustStack": false
+        }
+      }
+    ],
+    "castPromptId": 58,
+    "selectedAction": {
+      "id": "prompt-action-1",
+      "type": "cast",
+      "cardId": "engine-card-62",
+      "label": "Cast Shock",
+      "mode": {
+        "type": "normal"
+      }
+    },
+    "baseFingerprint": "767c1270dfbf74a0",
+    "stateBeforeCast": {
+      "turn": 3,
+      "step": "main1",
+      "activePlayerId": "player-0",
+      "priorityPlayerId": "player-0",
+      "cardId": "engine-card-62",
+      "cardZone": "hand",
+      "stackDepth": 0,
+      "trackedPlayerId": null,
+      "trackedPlayerLife": null
+    },
+    "latestState": {
+      "turn": 3,
+      "step": "main1",
+      "activePlayerId": "player-0",
+      "priorityPlayerId": "player-0",
+      "cardId": "engine-card-62",
+      "cardZone": "graveyard",
+      "stackDepth": 0,
+      "trackedPlayerId": "player-1",
+      "trackedPlayerLife": 38
+    },
+    "target": {
+      "id": "player-1",
+      "kind": "player"
+    },
+    "targetLifeBefore": 40,
+    "resultFingerprint": "4f677a1ce9a2a26a",
+    "stateAfterResolution": {
+      "turn": 3,
+      "step": "main1",
+      "activePlayerId": "player-0",
+      "priorityPlayerId": "player-0",
+      "cardId": "engine-card-62",
+      "cardZone": "graveyard",
+      "stackDepth": 0,
+      "trackedPlayerId": "player-1",
+      "trackedPlayerLife": 38
+    },
+    "lifeLost": 2
+  },
+  "errors": [],
+  "finishedAt": "2026-09-17T12:59:28.007Z",
+  "reason": "captured-multistep-spell-loop"
+}

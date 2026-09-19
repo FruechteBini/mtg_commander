@@ -1,0 +1,1795 @@
+{
+  "relayUrl": "ws://localhost:9443",
+  "roomName": "MTG-Commander PoC",
+  "username": "capture-player-1789569250246",
+  "startedAt": "2026-09-16T14-34-10-246Z",
+  "capturePath": "C:\\Users\\korbi\\Documents\\ChatGPT\\mtg commander\\captures\\manabrew-real-session-2026-09-16T14-34-10-246Z.jsonl",
+  "events": [
+    {
+      "at": "2026-09-16T14:34:10.248Z",
+      "event": "connecting",
+      "relayUrl": "ws://localhost:9443"
+    },
+    {
+      "at": "2026-09-16T14:34:10.383Z",
+      "event": "connected"
+    },
+    {
+      "at": "2026-09-16T14:34:10.392Z",
+      "event": "authenticated",
+      "username": "capture-player-1789569250246"
+    },
+    {
+      "at": "2026-09-16T14:34:10.404Z",
+      "event": "joining-room",
+      "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+      "roomName": "MTG-Commander PoC"
+    },
+    {
+      "at": "2026-09-16T14:34:10.454Z",
+      "event": "spawning-bots",
+      "requested": 3
+    },
+    {
+      "at": "2026-09-16T14:34:10.468Z",
+      "event": "selecting-deck"
+    },
+    {
+      "at": "2026-09-16T14:34:10.531Z",
+      "event": "setting-ready"
+    },
+    {
+      "at": "2026-09-16T14:34:10.580Z",
+      "event": "starting-game",
+      "players": [
+        "capture-player-1789569250246",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 3",
+        "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 2"
+      ]
+    },
+    {
+      "at": "2026-09-16T14:34:10.598Z",
+      "event": "game-started",
+      "gameId": "589999d1-55e5-48ac-a661-8af1ec46248d",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-16T14:34:11.166Z",
+      "event": "answering-prompt",
+      "inputType": "diceRolled",
+      "promptResponses": 1,
+      "outputType": "diceRolledAcknowledged"
+    },
+    {
+      "at": "2026-09-16T14:34:11.936Z",
+      "event": "answering-prompt",
+      "inputType": "mulligan",
+      "promptResponses": 2,
+      "outputType": "mulliganDecision"
+    },
+    {
+      "at": "2026-09-16T14:34:12.203Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 3,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:12.412Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 4,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:12.708Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 5,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:12.819Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 6,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:12.921Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 7,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.041Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 8,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.158Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 9,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.280Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 10,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.411Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 11,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.474Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 12,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.643Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 13,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.731Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 14,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.830Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 15,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:13.943Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 16,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:14.029Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 17,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:14.102Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 18,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:14.157Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 19,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:14.207Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 20,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:14.334Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 21,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:14.521Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 22,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:15.250Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 23,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:16.277Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 24,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:17.371Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 25,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:17.841Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 26,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:17.900Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 27,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:17.967Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 28,
+      "outputType": "pass"
+    },
+    {
+      "at": "2026-09-16T14:34:18.026Z",
+      "event": "answering-prompt",
+      "inputType": "chooseAction",
+      "promptResponses": 29,
+      "outputType": "act"
+    },
+    {
+      "at": "2026-09-16T14:34:18.026Z",
+      "event": "action-proof-started",
+      "actionId": "prompt-action-0",
+      "actionType": "cast",
+      "baseFingerprint": "3f609be7e1cd72a9"
+    },
+    {
+      "at": "2026-09-16T14:34:18.113Z",
+      "event": "finished",
+      "reason": "captured-choose-action-act-loop"
+    }
+  ],
+  "counts": {
+    "Authenticate": 1,
+    "AuthResult": 1,
+    "ListRooms": 1,
+    "ChatHistory": 2,
+    "PlayerList": 7,
+    "RoomList": 1,
+    "JoinRoom": 1,
+    "PlayerJoined": 4,
+    "RoomUpdate": 13,
+    "BroadcastState": 30,
+    "SetDeckSelection": 1,
+    "SetReady": 1,
+    "ReadyStateChanged": 4,
+    "StartGame": 1,
+    "GameStarted": 2,
+    "RequestResync": 1,
+    "StateUpdate": 142
+  },
+  "roomId": "77327913-44fc-43bc-8307-bb19df3233d4",
+  "gameId": "589999d1-55e5-48ac-a661-8af1ec46248d",
+  "playerOrder": [
+    "capture-player-1789569250246",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 3",
+    "self-hosted-node-f2df2ad4-b3c0-4df0-9f2f-dc93a36c0038-bot 2"
+  ],
+  "mySlot": "player-0",
+  "prompts": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "promptId": 1,
+      "inputType": "diceRolled"
+    },
+    {
+      "index": 2,
+      "forPlayer": "player-0",
+      "promptId": 5,
+      "inputType": "mulligan"
+    },
+    {
+      "index": 3,
+      "forPlayer": "player-0",
+      "promptId": 9,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 4,
+      "forPlayer": "player-0",
+      "promptId": 10,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 5,
+      "forPlayer": "player-0",
+      "promptId": 13,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 6,
+      "forPlayer": "player-0",
+      "promptId": 15,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 7,
+      "forPlayer": "player-0",
+      "promptId": 17,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 8,
+      "forPlayer": "player-0",
+      "promptId": 19,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 9,
+      "forPlayer": "player-0",
+      "promptId": 21,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 10,
+      "forPlayer": "player-0",
+      "promptId": 23,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 11,
+      "forPlayer": "player-0",
+      "promptId": 24,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 12,
+      "forPlayer": "player-0",
+      "promptId": 25,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 13,
+      "forPlayer": "player-0",
+      "promptId": 28,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 14,
+      "forPlayer": "player-0",
+      "promptId": 30,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 15,
+      "forPlayer": "player-0",
+      "promptId": 32,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 16,
+      "forPlayer": "player-0",
+      "promptId": 34,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 17,
+      "forPlayer": "player-0",
+      "promptId": 36,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 18,
+      "forPlayer": "player-0",
+      "promptId": 38,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 19,
+      "forPlayer": "player-0",
+      "promptId": 39,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 20,
+      "forPlayer": "player-0",
+      "promptId": 40,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 21,
+      "forPlayer": "player-0",
+      "promptId": 43,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 22,
+      "forPlayer": "player-0",
+      "promptId": 45,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 23,
+      "forPlayer": "player-0",
+      "promptId": 47,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 24,
+      "forPlayer": "player-0",
+      "promptId": 49,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 25,
+      "forPlayer": "player-0",
+      "promptId": 51,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 26,
+      "forPlayer": "player-0",
+      "promptId": 53,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 27,
+      "forPlayer": "player-0",
+      "promptId": 54,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 28,
+      "forPlayer": "player-0",
+      "promptId": 55,
+      "inputType": "chooseAction"
+    },
+    {
+      "index": 29,
+      "forPlayer": "player-0",
+      "promptId": 56,
+      "inputType": "chooseAction"
+    }
+  ],
+  "states": [
+    {
+      "index": 1,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "ecb817d69477af3c",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 2,
+      "hasFingerprint": true,
+      "fingerprint": "5d487a92ddfb8019",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 3,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7c5a62cc14f70000",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 4,
+      "hasFingerprint": true,
+      "fingerprint": "f157575203e34421",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 5,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7c5a62cc14f70000",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 6,
+      "hasFingerprint": true,
+      "fingerprint": "f157575203e34421",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 7,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7c5a62cc14f70000",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 8,
+      "hasFingerprint": true,
+      "fingerprint": "f157575203e34421",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 9,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7c5a62cc14f70000",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 10,
+      "hasFingerprint": true,
+      "fingerprint": "f157575203e34421",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 11,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "22d7f9f33702b51f",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 12,
+      "hasFingerprint": true,
+      "fingerprint": "73148886666a14ce",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 13,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "c764e73b8f9168c0",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 14,
+      "hasFingerprint": true,
+      "fingerprint": "279019a04195ba61",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 15,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7cb9bc9868ac70e1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 16,
+      "hasFingerprint": true,
+      "fingerprint": "36be68b5dc7d06c8",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 17,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "6c5b58b10f3402be",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 18,
+      "hasFingerprint": true,
+      "fingerprint": "d8707a6f42eb4867",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 19,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "76a79c95e6413a2f",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 20,
+      "hasFingerprint": true,
+      "fingerprint": "e75675fc33fb3fae",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 21,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "271239c4b306b178",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 22,
+      "hasFingerprint": true,
+      "fingerprint": "cefa8123f588bdff",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 23,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9357297e55e926a8",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 24,
+      "hasFingerprint": true,
+      "fingerprint": "a4b396e9da585a9f",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 25,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "61e2015888b38efb",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 26,
+      "hasFingerprint": true,
+      "fingerprint": "f45481c580c478ac",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 27,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9906ba8eef35b5d1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 28,
+      "hasFingerprint": true,
+      "fingerprint": "9708320304e6f306",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 29,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "3c8aedef83869ada",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 30,
+      "hasFingerprint": true,
+      "fingerprint": "c00ad5a11adb1f6d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 31,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "70747684607949a0",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 32,
+      "hasFingerprint": true,
+      "fingerprint": "66e82d8d5d56a0a1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 33,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "110b8a2e3b998465",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 34,
+      "hasFingerprint": true,
+      "fingerprint": "15b2679a0d35b524",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 35,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "f134c2b26256451d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 36,
+      "hasFingerprint": true,
+      "fingerprint": "c09b874c5742d756",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 37,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9b416b93fbb8605a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 38,
+      "hasFingerprint": true,
+      "fingerprint": "0212d226f14b4c99",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 39,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7f0293298ad36dd5",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 40,
+      "hasFingerprint": true,
+      "fingerprint": "44a66327019b185e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 41,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7c3696d0e11ab5e2",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 42,
+      "hasFingerprint": true,
+      "fingerprint": "d8e8b68b994f83f1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 43,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "3cdfda45b3b05a33",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 44,
+      "hasFingerprint": true,
+      "fingerprint": "70abfb2bd003fdac",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 45,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "91efc90a35619ba8",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 46,
+      "hasFingerprint": true,
+      "fingerprint": "72588c4d61193a17",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 47,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "e0161071faa447a5",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 48,
+      "hasFingerprint": true,
+      "fingerprint": "fdad3f5eae7a1a0e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 49,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "fccd1a132449bd0e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 50,
+      "hasFingerprint": true,
+      "fingerprint": "51b27981824bc3a1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 51,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "0d02b6522114357a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 52,
+      "hasFingerprint": true,
+      "fingerprint": "169cf547e05676e7",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 53,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7aa862cfdef47070",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 54,
+      "hasFingerprint": true,
+      "fingerprint": "41a1fb232c22345d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 55,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "02d90fd047b1b376",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 56,
+      "hasFingerprint": true,
+      "fingerprint": "ccee8477b8dac087",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 57,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "4bc590812e6429d9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 58,
+      "hasFingerprint": true,
+      "fingerprint": "75ad4210844578d8",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 59,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "10e57df5a486c3a3",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 60,
+      "hasFingerprint": true,
+      "fingerprint": "89dc07064bb340b6",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 61,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "1d89e1e95971344c",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 62,
+      "hasFingerprint": true,
+      "fingerprint": "d282042ee8bad99b",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 63,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "7dbca99938f2817e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 64,
+      "hasFingerprint": true,
+      "fingerprint": "43ac4e3da1b990c1",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 65,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "58f25921b8f1bb15",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 66,
+      "hasFingerprint": true,
+      "fingerprint": "3183902430c20d58",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 67,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "d350677c7f37eacf",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 68,
+      "hasFingerprint": true,
+      "fingerprint": "cb21e208735a777e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 69,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "0cefa0ac895a2d15",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 70,
+      "hasFingerprint": true,
+      "fingerprint": "0a7b7d517a200850",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 71,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "3e5729269f112fb7",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 72,
+      "hasFingerprint": true,
+      "fingerprint": "43517de39e8d3aee",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 73,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "52886d98c7aa0783",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 74,
+      "hasFingerprint": true,
+      "fingerprint": "e095b5bafc2edc62",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 75,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "81246ae3998cecf9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 76,
+      "hasFingerprint": true,
+      "fingerprint": "aaaff71d3ab3236c",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 77,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "3fc5c2130710168e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 78,
+      "hasFingerprint": true,
+      "fingerprint": "45d41d3de67ebd9b",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 79,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "8503514babbc97b7",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 80,
+      "hasFingerprint": true,
+      "fingerprint": "57759bf873611b3a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 81,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "193639c8a979031e",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 82,
+      "hasFingerprint": true,
+      "fingerprint": "0c2908e5522016e9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 83,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "bd2b4e343e7b9176",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 84,
+      "hasFingerprint": true,
+      "fingerprint": "af395e302cb91181",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 85,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "cc60d21b7f0f0da3",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 86,
+      "hasFingerprint": true,
+      "fingerprint": "4df54af1a2476c80",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 87,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "0e0da4281efdc463",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 88,
+      "hasFingerprint": true,
+      "fingerprint": "5776ea8cf7962cc4",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 89,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "a8d9d8ef1e25ffda",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 90,
+      "hasFingerprint": true,
+      "fingerprint": "801b936c751fc039",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 91,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "90b5a33648e002ee",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 92,
+      "hasFingerprint": true,
+      "fingerprint": "98aeef36f1f00563",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 93,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "fb36aaead52e2561",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 94,
+      "hasFingerprint": true,
+      "fingerprint": "21e469f80f5824ac",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 95,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "4afa9cface9176bf",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 96,
+      "hasFingerprint": true,
+      "fingerprint": "3f87f33096d85c94",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 97,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "0a2c929829a57162",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 98,
+      "hasFingerprint": true,
+      "fingerprint": "85311f9647628825",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 99,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "828817fa7e9150b7",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 100,
+      "hasFingerprint": true,
+      "fingerprint": "e76d2ba3f10d6bbc",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 101,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "a8212d370a9eebf2",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 102,
+      "hasFingerprint": true,
+      "fingerprint": "469d543f19d82065",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 103,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "2e63dc75f94f6cb5",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 104,
+      "hasFingerprint": true,
+      "fingerprint": "80dd4d2cf6d18dda",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 105,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "edd110b127c7b00c",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 106,
+      "hasFingerprint": true,
+      "fingerprint": "4cb274f58d068b5f",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 107,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "5421efc881ee2d0d",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 108,
+      "hasFingerprint": true,
+      "fingerprint": "08d35b9762b6566a",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 109,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "8d122531cafaf89f",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 110,
+      "hasFingerprint": true,
+      "fingerprint": "46aa48472e9d98e7",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 111,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "3f609be7e1cd72a9",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 112,
+      "hasFingerprint": true,
+      "fingerprint": "32fd0b8c1bce5977",
+      "keys": [
+        "gameView"
+      ]
+    },
+    {
+      "index": 113,
+      "forPlayer": "player-0",
+      "hasFingerprint": true,
+      "fingerprint": "9d9a412acaf138c6",
+      "keys": [
+        "gameView"
+      ]
+    }
+  ],
+  "chooseActions": [
+    {
+      "promptId": 9,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "6c5b58b10f3402be",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 10,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "76a79c95e6413a2f",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 13,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "61e2015888b38efb",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 15,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "3c8aedef83869ada",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 17,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "110b8a2e3b998465",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 19,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "9b416b93fbb8605a",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 21,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "7c3696d0e11ab5e2",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 23,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "91efc90a35619ba8",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 24,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "e0161071faa447a5",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 25,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "fccd1a132449bd0e",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 28,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "02d90fd047b1b376",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 30,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "10e57df5a486c3a3",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 32,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "7dbca99938f2817e",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 34,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "d350677c7f37eacf",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 36,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "3e5729269f112fb7",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 38,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "81246ae3998cecf9",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 39,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "3fc5c2130710168e",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 40,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "8503514babbc97b7",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 43,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "cc60d21b7f0f0da3",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 45,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "a8d9d8ef1e25ffda",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 47,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "fb36aaead52e2561",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 49,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "0a2c929829a57162",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 51,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "a8212d370a9eebf2",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 53,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "edd110b127c7b00c",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 54,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "5421efc881ee2d0d",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 55,
+      "availableActions": [],
+      "response": {
+        "type": "pass",
+        "exhaustStack": false
+      },
+      "baseFingerprint": "8d122531cafaf89f",
+      "confirmedBy": null,
+      "resultFingerprint": null
+    },
+    {
+      "promptId": 56,
+      "availableActions": [
+        {
+          "id": "prompt-action-0",
+          "type": "cast",
+          "cardId": "engine-card-17"
+        },
+        {
+          "id": "prompt-action-1",
+          "type": "cast",
+          "cardId": "engine-card-33"
+        },
+        {
+          "id": "prompt-action-2",
+          "type": "cast",
+          "cardId": "engine-card-54"
+        },
+        {
+          "id": "prompt-action-3",
+          "type": "cast",
+          "cardId": "engine-card-56"
+        }
+      ],
+      "response": {
+        "type": "act",
+        "actionId": "prompt-action-0"
+      },
+      "baseFingerprint": "3f609be7e1cd72a9",
+      "confirmedBy": "state",
+      "resultFingerprint": "9d9a412acaf138c6"
+    }
+  ],
+  "chooseAction": {
+    "promptId": 56,
+    "availableActions": [
+      {
+        "id": "prompt-action-0",
+        "type": "cast",
+        "cardId": "engine-card-17"
+      },
+      {
+        "id": "prompt-action-1",
+        "type": "cast",
+        "cardId": "engine-card-33"
+      },
+      {
+        "id": "prompt-action-2",
+        "type": "cast",
+        "cardId": "engine-card-54"
+      },
+      {
+        "id": "prompt-action-3",
+        "type": "cast",
+        "cardId": "engine-card-56"
+      }
+    ],
+    "response": {
+      "type": "act",
+      "actionId": "prompt-action-0"
+    },
+    "baseFingerprint": "3f609be7e1cd72a9",
+    "confirmedBy": "state",
+    "resultFingerprint": "9d9a412acaf138c6"
+  },
+  "errors": [],
+  "finishedAt": "2026-09-16T14:34:18.114Z",
+  "reason": "captured-choose-action-act-loop"
+}

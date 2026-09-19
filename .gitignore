@@ -1,5 +1,9 @@
-infra/manabrew-forge-room/.env
-node_modules/
+# Local secrets
 .env
-.env.*
-!.env.example
+**/.env
+
+# Raw protocol captures can contain private game data and grow very large.
+captures/*.jsonl
+
+# Temporary source checkouts used for protocol research.
+.tmp-*/

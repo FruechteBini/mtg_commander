@@ -8,7 +8,8 @@ const relayUrl = process.env.MANABREW_RELAY_URL ?? "ws://localhost:9443";
 const serverKey = process.env.MANABREW_SERVER_KEY ?? "local-dev-change-me";
 const roomName = process.env.MANABREW_ROOM_NAME ?? "MTG-Commander PoC";
 const roomPassword = process.env.MANABREW_ROOM_PASSWORD ?? "local-dev";
-const minPlayersToStart = Number(process.env.MANABREW_CAPTURE_MIN_PLAYERS ?? 2);
+const minPlayersToStart = Number(process.env.MANABREW_CAPTURE_MIN_PLAYERS ?? 4);
+const targetSpellName = process.env.MANABREW_CAPTURE_SPELL ?? "Shock";
 const username = process.env.MANABREW_CAPTURE_USERNAME ?? `capture-player-${Date.now()}`;
 const captureDir = path.resolve("captures");
 const startedAt = new Date().toISOString().replace(/[:.]/g, "-");
@@ -29,6 +30,13 @@ const summary = {
   mySlot: null,
   prompts: [],
   states: [],
+  chooseActions: [],
+  chooseAction: null,
+  multistepAction: {
+    targetSpellName,
+    status: "seeking-action",
+    promptChain: [],
+  },
   errors: [],
 };
 
@@ -41,18 +49,30 @@ let mySlot = null;
 let promptResponses = 0;
 let stateMessages = 0;
 let promptMessages = 0;
+let payManaPromptMessages = 0;
 let lastPromptKeys = new Set();
+let actionResponseSent = false;
+let actionBaseFingerprint = null;
+let pendingActionProof = null;
+let targetPlayerId = null;
+let targetLifeBefore = null;
+const fingerprintsByPerspective = new Map();
+const gameViewsByPerspective = new Map();
 let botSpawnRequested = false;
 let deckSelectionRequested = false;
 let readyRequested = false;
 let gameStartedSeen = false;
 
 function record(direction, message) {
+  const recordedMessage =
+    direction === "out" && message?.type === "Authenticate"
+      ? { ...message, password: "[redacted]" }
+      : message;
   const entry = {
     at: new Date().toISOString(),
     direction,
-    type: message?.type ?? message?.kind ?? "unknown",
-    message,
+    type: recordedMessage?.type ?? recordedMessage?.kind ?? "unknown",
+    message: recordedMessage,
   };
   fs.appendFileSync(capturePath, `${JSON.stringify(entry)}\n`);
   summary.counts[entry.type] = (summary.counts[entry.type] ?? 0) + 1;
@@ -82,8 +102,8 @@ function basicDeck(name, land, creature) {
 
 function commanderDeck(name) {
   const cards = [];
-  for (let i = 0; i < 49; i += 1) cards.push(card(`mountain-${i}`, "Mountain"));
-  for (let i = 0; i < 50; i += 1) cards.push(card(`hill-giant-${i}`, "Hill Giant"));
+  for (let i = 0; i < 50; i += 1) cards.push(card(`mountain-${i}`, "Mountain"));
+  for (let i = 0; i < 49; i += 1) cards.push(card(`shock-${i}`, targetSpellName));
   const commander = card("neheb-the-worthy", "Neheb, the Worthy");
   return {
     name,
@@ -104,7 +124,12 @@ function card(id, name) {
   };
 }
 
-function spawnBot(roomId, index) {
+function spawnBots(roomId, count) {
+  const decks = Array.from({ length: count }, (_, index) => ({
+    deckName: `Capture Bot ${index + 1}`,
+    deck: commanderDeck(`Capture Bot ${index + 1}`),
+    commanderName: "Neheb, the Worthy",
+  }));
   return {
     type: "BroadcastState",
     state: {
@@ -116,11 +141,11 @@ function spawnBot(roomId, index) {
       roomId,
       payload: {
         type: "spawnBot",
-        deck: {
-          deckName: `Capture Bot ${index}`,
-          deck: commanderDeck(`Capture Bot ${index}`),
-          commanderName: "Neheb, the Worthy",
-        },
+        // Current Manabrew accepts one batch. Sending separate spawnBot
+        // messages replaces the previous bot set because the host stops all
+        // existing bots before applying each request.
+        deck: decks[0],
+        decks,
       },
     },
     target_player: null,
@@ -136,6 +161,48 @@ function setDeckSelection() {
     commander_name: "Neheb, the Worthy",
     avatar_url: null,
   };
+}
+
+function compactStateProof(gameView, cardId, trackedPlayerId = null) {
+  if (!gameView) return null;
+  let cardZone = cardId
+    ? gameView.zones?.find((zone) =>
+        zone.cards?.some(
+          (cardView) => cardView.id === cardId || cardView.card?.id === cardId,
+        ),
+      )?.zone ?? null
+    : null;
+  if (
+    !cardZone &&
+    cardId &&
+    gameView.stack?.some(
+      (item) =>
+        item.source?.id === cardId ||
+        item.source?.card?.id === cardId ||
+        item.card?.id === cardId,
+    )
+  ) {
+    cardZone = "stack";
+  }
+  const trackedPlayer = trackedPlayerId
+    ? gameView.players?.find((player) => player.id === trackedPlayerId)
+    : null;
+  return {
+    turn: gameView.turn ?? gameView.turnNumber ?? null,
+    step: gameView.step ?? null,
+    activePlayerId: gameView.activePlayerId ?? null,
+    priorityPlayerId: gameView.priorityPlayerId ?? null,
+    cardId: cardId ?? null,
+    cardZone,
+    stackDepth: gameView.stack?.length ?? 0,
+    trackedPlayerId,
+    trackedPlayerLife: trackedPlayer?.life ?? null,
+  };
+}
+
+function isTargetSpellAction(action) {
+  const label = action?.label ?? action?.modeLabel ?? action?.description ?? "";
+  return label.toLowerCase().includes(targetSpellName.toLowerCase());
 }
 
 function promptResponse(forPlayer, prompt) {
@@ -163,16 +230,48 @@ function promptResponse(forPlayer, prompt) {
   }
 
   if (type === "chooseAction") {
+    const actions = Array.isArray(input.actions) ? input.actions : [];
+    const firstAction =
+      actions.find(isTargetSpellAction) ??
+      actions.find((action) => action.type === "playLand") ??
+      actions.find((action) => /^Play\s/i.test(action.label ?? "")) ??
+      null;
     return response(forPlayer, promptId, {
       type: "chooseAction",
-      output: { type: "pass", exhaustStack: false },
+      output: firstAction
+        ? { type: "act", actionId: firstAction.id }
+        : { type: "pass", exhaustStack: false },
     });
   }
 
-  if (type === "payManaCost" && input.canConfirmFromPool) {
+  if (type === "payManaCost") {
+    const manaAction = Array.isArray(input.actions) ? input.actions[0] : null;
     return response(forPlayer, promptId, {
       type: "payManaCost",
-      output: { type: "pay", auto: true },
+      output: input.canConfirmFromPool
+        ? { type: "pay", auto: false }
+        : manaAction
+          ? { type: "act", actionId: manaAction.id }
+          : { type: "cancel" },
+    });
+  }
+
+  if (type === "chooseBoardTargets") {
+    const candidates = Array.isArray(input.candidates) ? input.candidates : [];
+    const chosen =
+      candidates.find(
+        (candidate) => candidate.kind === "player" && candidate.id !== mySlot,
+      ) ?? candidates[0];
+    if (!chosen && input.cancellable) {
+      return response(forPlayer, promptId, {
+        type: "chooseBoardTargets",
+        output: { type: "cancel" },
+      });
+    }
+    if (!chosen) return null;
+    return response(forPlayer, promptId, {
+      type: "chooseBoardTargets",
+      output: { type: "boardTargets", chosen: [chosen] },
     });
   }
 
@@ -209,6 +308,31 @@ function maybeStart(room) {
   send({ type: "StartGame", format: "Commander" });
 }
 
+function maybeFinishMultistepProof(gameView, fingerprint) {
+  if (!actionResponseSent || !pendingActionProof || !gameView) return;
+  const after = compactStateProof(
+    gameView,
+    pendingActionProof.selectedAction?.cardId,
+    targetPlayerId,
+  );
+  summary.multistepAction.latestState = after;
+  const targetWasDamaged =
+    typeof targetLifeBefore === "number" &&
+    typeof after?.trackedPlayerLife === "number" &&
+    after.trackedPlayerLife < targetLifeBefore;
+  const spellResolved = after?.cardZone === "graveyard";
+  if (!targetWasDamaged || !spellResolved) return;
+
+  pendingActionProof.confirmedBy = "resolved-state";
+  pendingActionProof.resultFingerprint = fingerprint;
+  pendingActionProof.stateAfterAction = after;
+  summary.multistepAction.status = "resolved";
+  summary.multistepAction.resultFingerprint = fingerprint;
+  summary.multistepAction.stateAfterResolution = after;
+  summary.multistepAction.lifeLost = targetLifeBefore - after.trackedPlayerLife;
+  void finish("captured-multistep-spell-loop");
+}
+
 async function finish(reason) {
   if (done) return;
   done = true;
@@ -228,19 +352,29 @@ function handleStateEnvelope(serverMessage) {
 
   if (envelope.kind === "state") {
     stateMessages += 1;
+    const fingerprint = envelope.fingerprint ?? null;
+    const perspective = envelope.forPlayer ?? null;
+    if (fingerprint) fingerprintsByPerspective.set(perspective, fingerprint);
+    const gameView = envelope.state?.gameView ?? null;
+    if (gameView) gameViewsByPerspective.set(perspective, gameView);
     summary.states.push({
       index: stateMessages,
       forPlayer: envelope.forPlayer,
       hasFingerprint: Boolean(envelope.fingerprint),
+      fingerprint,
       keys: envelope.state ? Object.keys(envelope.state).slice(0, 20) : [],
     });
-    if (stateMessages >= 2 && promptMessages >= 1) {
-      void finish("captured-state-and-prompt");
+    if (perspective === mySlot && fingerprint) {
+      maybeFinishMultistepProof(gameView, fingerprint);
     }
     return;
   }
 
   if (envelope.kind === "stateDelta") {
+    const perspective = envelope.forPlayer ?? null;
+    if (envelope.fingerprint) {
+      fingerprintsByPerspective.set(perspective, envelope.fingerprint);
+    }
     summary.states.push({
       index: stateMessages + 1,
       kind: "stateDelta",
@@ -254,6 +388,18 @@ function handleStateEnvelope(serverMessage) {
   if (envelope.kind === "prompt") {
     promptMessages += 1;
     const inputType = envelope.prompt?.input?.type ?? "unknown";
+    if (inputType === "payManaCost") {
+      payManaPromptMessages += 1;
+      if (payManaPromptMessages > 10) {
+        summary.errors.push({
+          type: "capturePromptLoop",
+          inputType,
+          count: payManaPromptMessages,
+        });
+        void finish("prompt-loop-guard");
+        return;
+      }
+    }
     summary.prompts.push({
       index: promptMessages,
       forPlayer: envelope.forPlayer,
@@ -268,7 +414,81 @@ function handleStateEnvelope(serverMessage) {
         const outbound = promptResponse(envelope.forPlayer, envelope.prompt);
         if (outbound) {
           promptResponses += 1;
-          note("answering-prompt", { inputType, promptResponses });
+          const output = outbound.state.action.output;
+          note("answering-prompt", { inputType, promptResponses, outputType: output?.type });
+          if (inputType === "chooseAction") {
+            const availableActions = (envelope.prompt?.input?.actions ?? []).map((action) => ({
+              id: action.id,
+              type: action.type,
+              cardId: action.cardId ?? null,
+              label: action.label ?? action.modeLabel ?? action.description ?? null,
+              mode: action.mode ?? null,
+            }));
+            const selectedAction = availableActions.find(
+              (action) => action.id === output?.actionId,
+            ) ?? null;
+            const actionProof = {
+              promptId: envelope.prompt?.promptId ?? envelope.prompt?.prompt_id,
+              availableActions,
+              selectedAction,
+              response: output,
+              baseFingerprint: fingerprintsByPerspective.get(mySlot) ?? null,
+              confirmedBy: null,
+              resultFingerprint: null,
+              stateBeforeAction: compactStateProof(
+                gameViewsByPerspective.get(mySlot),
+                selectedAction?.cardId,
+              ),
+              stateAfterAction: null,
+            };
+            summary.chooseActions.push(actionProof);
+            summary.chooseAction = actionProof;
+            if (output?.type === "act" && isTargetSpellAction(selectedAction)) {
+              actionResponseSent = true;
+              actionBaseFingerprint = actionProof.baseFingerprint;
+              pendingActionProof = actionProof;
+              summary.multistepAction.status = "casting";
+              summary.multistepAction.castPromptId = actionProof.promptId;
+              summary.multistepAction.selectedAction = selectedAction;
+              summary.multistepAction.baseFingerprint = actionBaseFingerprint;
+              summary.multistepAction.stateBeforeCast = compactStateProof(
+                gameViewsByPerspective.get(mySlot),
+                selectedAction?.cardId,
+              );
+              note("action-proof-started", {
+                actionId: output.actionId,
+                actionType: selectedAction?.type,
+                actionLabel: selectedAction?.label,
+                baseFingerprint: actionBaseFingerprint,
+              });
+            }
+          }
+          if (actionResponseSent) {
+            const proofStep = {
+              promptId: envelope.prompt?.promptId ?? envelope.prompt?.prompt_id,
+              inputType,
+              output,
+            };
+            if (inputType === "payManaCost") {
+              proofStep.manaCost = envelope.prompt?.input?.manaCost ?? null;
+              proofStep.canConfirmFromPool = Boolean(
+                envelope.prompt?.input?.canConfirmFromPool,
+              );
+            }
+            if (inputType === "chooseBoardTargets") {
+              const chosen = output?.chosen?.[0] ?? null;
+              proofStep.chosenTarget = chosen;
+              if (chosen?.kind === "player") {
+                targetPlayerId = chosen.id;
+                targetLifeBefore = gameViewsByPerspective
+                  .get(mySlot)
+                  ?.players?.find((player) => player.id === targetPlayerId)?.life ?? null;
+                summary.multistepAction.target = chosen;
+                summary.multistepAction.targetLifeBefore = targetLifeBefore;
+              }
+            }
+            summary.multistepAction.promptChain.push(proofStep);
+          }
           send(outbound);
         } else {
           note("unsupported-prompt", { inputType });
@@ -276,14 +496,12 @@ function handleStateEnvelope(serverMessage) {
       }
     }
 
-    if (stateMessages >= 1 && promptMessages >= 1) {
-      void finish("captured-state-and-prompt");
-    }
     return;
   }
 
   if (envelope.kind === "error" || envelope.kind === "fatal") {
     summary.errors.push(envelope);
+    if (actionResponseSent) void finish("multistep-action-rejected");
   }
 }
 
@@ -356,10 +574,9 @@ async function main() {
 
       if (hasMe && botCount < 3 && room.status === "Lobby" && !botSpawnRequested) {
         botSpawnRequested = true;
-        for (let i = botCount + 1; i <= 3; i += 1) {
-          note("spawning-bot", { index: i });
-          send(spawnBot(room.room_id, i));
-        }
+        const requested = 3 - botCount;
+        note("spawning-bots", { requested });
+        send(spawnBots(room.room_id, requested));
       }
 
       const me = room.players.find((player) => player.username === username);
