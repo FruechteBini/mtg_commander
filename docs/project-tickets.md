@@ -29,7 +29,7 @@ Wer das Repository auf einem anderen Rechner klont, sollte zuerst den Abschnitt 
 
 ## Aktueller Checkpoint
 
-Stand: 17. September 2026
+Stand: 19. September 2026
 
 ### Was bereits funktioniert
 
@@ -45,6 +45,7 @@ Stand: 17. September 2026
 - Reale Relay- und Engine-Nachrichten sind als getrennte TypeScript-Vertraege modelliert. Ein dependency-freier Runtime-Parser validiert das sanitisiert gespeicherte Shock-Fixture sowie alle 228 Nachrichten des lokalen erfolgreichen Raw-Captures.
 - Capture-Logs redigieren das Relay-Passwort.
 - Lokale Secrets, rohe Captures und temporaere Source-Checkouts sind von Git ausgeschlossen.
+- Der Projektstand ist auf Branch `main` im GitHub-Remote `origin` versioniert und von einem zweiten Rechner klonbar.
 
 ### Was noch nicht existiert
 
@@ -57,7 +58,6 @@ Stand: 17. September 2026
 - Keine GLM-Tutor-Anbindung.
 - Kein Invite-/Playgroup-Code.
 - Kein getestetes Synology-Deployment.
-- Kein erster Git-Commit und kein dokumentiertes Remote. Der aktuelle Arbeitsstand kann daher noch nicht sinnvoll von einem zweiten Rechner geklont werden.
 
 ### Wichtigste Evidence
 
@@ -67,6 +67,7 @@ Stand: 17. September 2026
 - Minimale Protocol-Typen: `packages/shared/src/manabrew-protocol.ts`
 - Docker-Setup: `infra/manabrew-forge-room/compose.yml`
 - Entscheidungen und Risiken: `docs/wayfinding.md`
+- Git-Baseline: Commit `04f9ee9` auf `origin/main` (`https://github.com/FruechteBini/mtg_commander.git`)
 
 ## Empfohlene Reihenfolge
 
@@ -75,7 +76,7 @@ Stand: 17. September 2026
 3. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
 4. Save/Load mit `SAVE-001` frueh klaeren, bevor die API-Struktur festgezurrt wird.
 5. Danach UI, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
-6. `BOOT-001` bleibt fuer den spaeteren Rechnerwechsel zwingend, ist auf Wunsch des Projektbesitzers vorerst zurueckgestellt.
+6. `BOOT-001` ist abgeschlossen; neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
 
 ## Ticketuebersicht
 
@@ -83,7 +84,7 @@ Stand: 17. September 2026
 
 | ID | Status | Ticket | Ergebnis |
 | --- | --- | --- | --- |
-| `BOOT-001` | `DEFERRED` | Git-Baseline und klonbaren Projektstand herstellen | Erster sauberer Commit und dokumentiertes Remote. |
+| `BOOT-001` | `DONE` | Git-Baseline und klonbaren Projektstand herstellen | Branch `main` ist sauber versioniert, gepusht und klonbar. |
 | `PROTO-004` | `DONE` | Mehrstufige echte Aktion capturen | Spell inklusive Ziel-, Mana-, Prioritaets- und Aufloesungsloop bewiesen. |
 | `PROTO-005` | `DONE` | Reale DTOs gegen TypeScript-Vertrag abgleichen | App nutzt belegte statt angenommene Protocol-Typen. |
 | `ARCH-001` | `NEXT` | Prozess- und Lizenzgrenze festlegen | UI, API, Relay und Engine haben klare Verantwortungen. |
@@ -143,9 +144,9 @@ Stand: 17. September 2026
 
 ### BOOT-001 - Git-Baseline und klonbaren Projektstand herstellen
 
-- **Status:** `DEFERRED` auf Wunsch des Projektbesitzers; vor einem Rechnerwechsel weiterhin zwingend.
+- **Status:** `DONE`
 - **Prioritaet:** P0
-- **Warum:** Der aktuelle Branch `master` besitzt noch keinen Commit. Ohne Commit und Remote kann ein anderer Rechner den dokumentierten Stand nicht klonen.
+- **Warum:** Ein versionierter und gepushter Baseline-Stand ist Voraussetzung fuer sichere Backups und das Weiterarbeiten auf anderen Rechnern.
 - **Aufgaben:**
   - Alle vorgesehenen Dateien und Ignore-Regeln pruefen.
   - Entscheiden, welche Capture-Summaries als dauerhafte Evidence bleiben; rohe JSONL-Captures bleiben ignoriert.
@@ -156,7 +157,9 @@ Stand: 17. September 2026
   - `git status` ist nach dem Commit sauber.
   - Ein frischer Clone enthaelt README, Projektboard, Scripts, Compose und mindestens die neueste erfolgreiche Capture-Summary.
   - Lokale `.env` und rohe JSONL-Captures fehlen im Clone.
-- **Blocker/Entscheidung:** Fuer Remote und Push braucht es die vom Projektbesitzer gewuenschte Git-Plattform und Repository-URL.
+- **Ergebnis (2026-09-19):** Der lokale Branch wurde auf `main` gesetzt, mit `origin/main` verbunden und als Commit `04f9ee9` (`Complete Manabrew protocol capture and validation`) nach GitHub gepusht. `git status` war danach sauber und `HEAD`, `origin/main` sowie `origin/HEAD` zeigten auf denselben Commit.
+- **Remote:** `https://github.com/FruechteBini/mtg_commander.git`
+- **Evidence:** Commit `04f9ee9`; der versionierte Baum enthaelt README, Projektboard, Scripts, Compose-Setup und die erfolgreiche Capture-Summary vom 17. September 2026. `.env` und rohe `captures/*.jsonl` bleiben durch `.gitignore` ausgeschlossen.
 
 ### PROTO-004 - Mehrstufige echte Aktion capturen
 
@@ -420,13 +423,18 @@ Stand: 17. September 2026
 | Reale Commander-Decks enthalten inkompatible Karten/Scripts | Spiele starten nicht oder laufen spaeter fest. | `DECK-002`, `BOT-002` |
 | GLM kann plausible falsche Regeln erklaeren | Tutor verliert Vertrauen. | `GLM-001` |
 | AGPL-/Forge-/Card-Art-Grenzen sind nicht final dokumentiert | Spaetere Verteilung koennte Umbau erfordern. | `LEGAL-001` |
-| Kein Git-Commit/Remote | Kein sicherer Rechnerwechsel oder Backup. | `BOOT-001` |
 
 ## Weiterarbeiten auf einem neuen Rechner
 
-Der folgende Ablauf funktioniert vollstaendig, sobald `BOOT-001` erledigt und eine Remote-URL eingetragen ist.
+Der folgende Ablauf verwendet den mit `BOOT-001` hergestellten Stand auf `origin/main`.
 
-1. Repository klonen und in den Projektordner wechseln.
+1. Repository klonen und in den Projektordner wechseln. Bei einem privaten Repository muss der GitHub-Zugriff auf dem Rechner bereits eingerichtet sein.
+
+   ```powershell
+   git clone https://github.com/FruechteBini/mtg_commander.git
+   Set-Location mtg_commander
+   ```
+
 2. Dieses Dokument lesen und das oberste `NEXT`-Ticket waehlen.
 3. Node.js und Docker Desktop beziehungsweise eine kompatible Docker-/Compose-Umgebung installieren.
 4. `infra/manabrew-forge-room/.env.example` nach `infra/manabrew-forge-room/.env` kopieren und lokale Secrets setzen.

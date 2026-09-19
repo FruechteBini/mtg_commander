@@ -36,7 +36,7 @@ Die Dokumentation ist so aufgeteilt:
 - [docs/protocol-poc.md](docs/protocol-poc.md): Protocol-Grenze, Nachrichtenformen und Capture-Ergebnisse.
 - [docs/real-engine-poc.md](docs/real-engine-poc.md): lokales Docker-/Forge-Runbook.
 
-Wichtiger aktueller Repository-Status: Der Branch `master` hat noch keinen ersten Commit. Das ist als `BOOT-001` im Projektboard erfasst und muss erledigt werden, bevor der Stand wirklich auf einem anderen Rechner geklont werden kann.
+Repository-Status: Die Git-Baseline ist hergestellt. Branch `main` verfolgt `origin/main` unter `https://github.com/FruechteBini/mtg_commander.git`; `BOOT-001` ist abgeschlossen und der dokumentierte Stand kann auf einem anderen Rechner geklont werden.
 
 Der erste lokale Protokoll-PoC liegt in [docs/protocol-poc.md](docs/protocol-poc.md). Er kann ohne Dependencies direkt mit Node ausgefuehrt werden:
 
