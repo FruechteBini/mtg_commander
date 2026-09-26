@@ -52,13 +52,13 @@ Stand: 26. September 2026
 - `UI-001` ist abgeschlossen: Echte `gameView`-States werden deterministisch in das versionierte UI-Modell (`UI_MODEL_VERSION 1`) normalisiert; ein Vier-Spieler-Fixture und alle lokalen Raw-Capture-States laufen durch den Regressionstest.
 - `UI-002` ist abgeschlossen: Die Web-App rendert das UI-Modell als ersten statischen Hybrid-Commander-Board-Slice - grosser eigener Bereich, drei kompakte aufklappbare Gegner-Panels, Stack sichtbar, Capture-Loader zum statischen Rendern echter States.
 - `DECK-001` ist abgeschlossen: Typische Commander-Textlisten (Sektionen wie `Deck`/`Commander`/`Sideboard`, `*CMDR*`-Marker, Anzahl mit/ohne `x`, Printing in Klammern) werden geparst, strukturell validiert (100-Karten-Regel inklusive Commander, 1-2 Commander, Singleton ausser Basiscards) und deterministisch in das capture-bewaehrte Manabrew-Deckformat (`cards`/`commanders` mit `identity`) konvertiert.
+- `DECK-002` ist abgeschlossen: Das erste echte Playgroup-Deck (Golgari-Sacrifice, Commander `Dina, Essence Brewer`, 85 Unique-Karten + 16 Basics) wurde per Textimport geladen, ins Manabrew-Deckformat konvertiert und von Forge in einer echten Vier-Spieler-Partie gestartet; der initiale State zeigt die Commanderin in der Command-Zone und 99 Karten in der Library.
 
 ### Was noch nicht existiert
 
 - Die Commander-Oberflaeche ist noch rein statisch: Interaktion, Prompt-Antworten, Highlighting legaler Aktionen und Live-States aus der API fehlen noch.
 - Noch kein dauerhafter Game-Orchestrator; die API stellt bisher die Relay-Verbindung und Health-/Status-Endpunkte bereit.
-- Keine SQLite-Datenbank oder Deckbibliothek.
-- Kein Import echter Playgroup-Decks; der neutrale Textimport aus `DECK-001` ist noch nicht mit einem realen Deck und einem Forge-Start bewiesen (`DECK-002`).
+- Keine SQLite-Datenbank oder Deckbibliothek; erst ein echtes Deck ist als Textliste plus Import-Modell unter `decks/` abgelegt.
 - Noch kein Proof fuer jede Prompt-Familie; insbesondere Moduswahl, Karten-/Mehrfachzielauswahl, Trigger-Reihenfolge und Combat-Entscheidungen bleiben offen.
 - Kein Save/Load-Proof fuer den internen Engine-Zustand.
 - Keine GLM-Tutor-Anbindung.
@@ -68,6 +68,7 @@ Stand: 26. September 2026
 ### Wichtigste Evidence
 
 - Letzter erfolgreicher Real-Capture: `captures/manabrew-real-session-2026-09-17T12-59-23-759Z.summary.json`
+- Letzter erfolgreicher Real-Deck-Start: `captures/deck-forge-start-2026-09-26T12-41-15-366Z.summary.json` (Skript `scripts/deck-forge-start.mjs`, Deck `decks/dina-sacrifice.txt`)
 - Capture-Client: `scripts/capture-real-session.mjs`
 - Lokaler Fixture-PoC: `scripts/protocol-poc.mjs`
 - Minimale Protocol-Typen: `packages/shared/src/manabrew-protocol.ts`
@@ -81,9 +82,8 @@ Stand: 26. September 2026
 
 ## Empfohlene Reihenfolge
 
-1. `DECK-002` umsetzen: erstes echtes Playgroup-Deck ueber den neutralen Import aus `DECK-001` laden und in Forge starten.
-2. Save/Load mit `SAVE-001` frueh klaeren, bevor persistente Spiel-APIs als stabil gelten.
-3. Danach UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
+1. `SAVE-001` frueh klaeren (RESEARCH), bevor persistente Spiel-APIs als stabil gelten.
+2. Danach `BOT-002`-Langlauf mit realistischen Decks, UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
 4. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
 5. Erkenntnisse fliessen zurueck in Ticketstatus, Evidence und Wayfinding.
 
@@ -102,8 +102,8 @@ Stand: 26. September 2026
 | `UI-001` | `DONE` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
 | `UI-002` | `DONE` | Ersten Hybrid-Commander-Board-Slice bauen | Statisches Board rendert Fixture- und Capture-States; Rollen, Prioritaet und Stack sind sichtbar. |
 | `DECK-001` | `DONE` | Neutralen Commander-Decklistenimport definieren | Textliste wird geparst, validiert und ins Manabrew-Deckformat konvertiert. |
-| `DECK-002` | `NEXT` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
-| `BOT-002` | `BLOCKED` | Vier-Spieler-Langlauf mit realistischen Decks testen | Bots spielen mehrere Zuege ohne Stillstand oder Protokollfehler. |
+| `DECK-002` | `DONE` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
+| `BOT-002` | `READY` | Vier-Spieler-Langlauf mit realistischen Decks testen | Bots spielen mehrere Zuege ohne Stillstand oder Protokollfehler. |
 | `SAVE-001` | `RESEARCH` | Engine-Snapshot/Save/Resume untersuchen | Harte Go/No-Go-Antwort fuer echtes Pause/Fortsetzen. |
 
 ### P1: Fuer Milestone 1 erforderlich
@@ -288,13 +288,17 @@ Stand: 26. September 2026
 
 ### DECK-002 - Erstes echtes Playgroup-Deck
 
-- **Status:** `NEXT` (entblockt durch `DECK-001`)
+- **Status:** `DONE` (2026-09-26)
 - **Prioritaet:** P0
 - **Akzeptanzkriterien:** Ein echtes mythic.tools-/Export-Deck wird importiert, von Forge akzeptiert und startet in einem Vier-Spieler-Spiel.
+- **Ergebnis:** Das erste echte Playgroup-Deck (Golgari-Sacrifice, Commander `Dina, Essence Brewer`) liegt als exportierte Textliste unter `decks/dina-sacrifice.txt`, wurde ueber `importCommanderDeck` (Meta-Commander, da kein `*CMDR*`-Marker) in ein valides 100-Karten-Modell ueberfuehrt (85 Unique-Karten, 16 Basics, Import-Modell `decks/dina-sacrifice.json`) und per `toManabrewDeckSelection` konvertiert. Das Beweisskript `scripts/deck-forge-start.mjs` startete damit eine echte Vier-Spieler-Partie (Mensch + 3 Bots, alle mit dem echten Deck); der initiale State zeigt fuer Spieler 1 die Commanderin in der Command-Zone und 99 Karten in der Library.
+- **Evidence:** `captures/deck-forge-start-2026-09-26T12-41-15-366Z.summary.json` (Exit 0, `proof-complete: commanderInCommand true, libraryCount 99`); Verbindung mit lokalem Server-Key/Raum-Passwort aus `infra/manabrew-forge-room/.env`.
+- **Erkenntnisse:** Forge loest alle 85 Karten (inkl. neuer Karten wie `Dina, Essence Brewer`, Set `SOC`) sauber per Namen auf - auch ohne Printing-Angaben. `gameView.zones` ist pro Spieler (`ownerId`) modelliert; verdeckte Zonen liefern `count` ohne `cards`, Kartennamen liegen in `cardView.identity.name`. Nach einem beendeten Spiel ist der Raum belegt (`game_already_started`, `MAX_GAMES=1`); ein Compose-Restart setzt den Raum zurueck.
+- **Naechster Schritt:** `BOT-002`-Langlauf mit dem echten Deck oder `SAVE-001`-Forschung.
 
 ### BOT-002 - Vier-Spieler-Langlauf
 
-- **Status:** `BLOCKED` durch `DECK-002` und `PROTO-004`
+- **Status:** `READY` (entblockt durch `DECK-002` und `PROTO-004`)
 - **Prioritaet:** P0
 - **Akzeptanzkriterien:** Mindestens eine festgelegte Anzahl Zuege mit einem Menschen-/Capture-Client und drei Bots; keine Deadlocks, ungestuetzten Prompts oder unkontrollierten Speicheranstiege.
 

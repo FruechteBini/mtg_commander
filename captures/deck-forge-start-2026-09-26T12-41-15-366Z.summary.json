@@ -1,0 +1,141 @@
+{
+  "relayUrl": "ws://localhost:9443",
+  "roomName": "MTG-Commander PoC",
+  "username": "deck-proof-1790426475366",
+  "deckFile": "decks/dina-sacrifice.txt",
+  "deckOwner": "Korbi",
+  "deckName": "Dina Sacrifice",
+  "commanderName": "Dina, Essence Brewer",
+  "startedAt": "2026-09-26T12-41-15-366Z",
+  "import": {
+    "ok": true,
+    "deckModelPath": "decks\\dina-sacrifice.json",
+    "commander": "Dina, Essence Brewer",
+    "uniqueCards": 85,
+    "totalCards": 100
+  },
+  "manabrew": {
+    "deckName": "Dina Sacrifice",
+    "commanderName": "Dina, Essence Brewer",
+    "cardCount": 100
+  },
+  "roomId": "79f3bc16-197e-4193-a1c6-3a0c875a46aa",
+  "gameId": "65eddc2f-4ff8-4383-9776-58e6b614e0e0",
+  "playerOrder": [
+    "deck-proof-1790426475366",
+    "self-hosted-node-9039c888-0359-4275-bb17-101bb3205f49-bot",
+    "self-hosted-node-9039c888-0359-4275-bb17-101bb3205f49-bot 2",
+    "self-hosted-node-9039c888-0359-4275-bb17-101bb3205f49-bot 3"
+  ],
+  "mySlot": "player-0",
+  "events": [
+    {
+      "at": "2026-09-26T12:41:15.373Z",
+      "event": "import-ok",
+      "commander": "Dina, Essence Brewer",
+      "uniqueCards": 85,
+      "totalCards": 100
+    },
+    {
+      "at": "2026-09-26T12:41:15.376Z",
+      "event": "manabrew-conversion-ok",
+      "cards": 99,
+      "commanders": 1
+    },
+    {
+      "at": "2026-09-26T12:41:15.376Z",
+      "event": "connecting",
+      "relayUrl": "ws://localhost:9443",
+      "roomName": "MTG-Commander PoC"
+    },
+    {
+      "at": "2026-09-26T12:41:15.410Z",
+      "event": "authenticated",
+      "username": "deck-proof-1790426475366"
+    },
+    {
+      "at": "2026-09-26T12:41:15.411Z",
+      "event": "joining-room",
+      "roomId": "79f3bc16-197e-4193-a1c6-3a0c875a46aa",
+      "roomName": "MTG-Commander PoC",
+      "players": 1
+    },
+    {
+      "at": "2026-09-26T12:41:15.455Z",
+      "event": "spawning-bots",
+      "requested": 2
+    },
+    {
+      "at": "2026-09-26T12:41:15.457Z",
+      "event": "selecting-deck",
+      "deckName": "Dina Sacrifice"
+    },
+    {
+      "at": "2026-09-26T12:41:15.464Z",
+      "event": "setting-ready"
+    },
+    {
+      "at": "2026-09-26T12:41:15.466Z",
+      "event": "starting-game",
+      "players": [
+        "deck-proof-1790426475366",
+        "self-hosted-node-9039c888-0359-4275-bb17-101bb3205f49-bot",
+        "self-hosted-node-9039c888-0359-4275-bb17-101bb3205f49-bot 2",
+        "self-hosted-node-9039c888-0359-4275-bb17-101bb3205f49-bot 3"
+      ]
+    },
+    {
+      "at": "2026-09-26T12:41:15.469Z",
+      "event": "game-started",
+      "gameId": "65eddc2f-4ff8-4383-9776-58e6b614e0e0",
+      "mySlot": "player-0"
+    },
+    {
+      "at": "2026-09-26T12:41:15.550Z",
+      "event": "proof-complete",
+      "commanderInCommand": true,
+      "libraryCount": 99,
+      "handCount": 0
+    }
+  ],
+  "errors": [],
+  "proof": {
+    "zones": [
+      {
+        "name": "hand",
+        "count": 0
+      },
+      {
+        "name": "graveyard",
+        "count": 0
+      },
+      {
+        "name": "exile",
+        "count": 0
+      },
+      {
+        "name": "command",
+        "count": 1
+      },
+      {
+        "name": "library",
+        "count": 99
+      },
+      {
+        "name": "battlefield",
+        "count": 0
+      }
+    ],
+    "commanderInCommand": true,
+    "commandZoneSize": 1,
+    "commandZoneNames": [
+      "Dina, Essence Brewer"
+    ],
+    "libraryCount": 99,
+    "handCount": 0,
+    "libraryPlusHandOk": true,
+    "turn": 0
+  },
+  "result": "ok",
+  "finishedAt": "2026-09-26T12:41:15.550Z"
+}

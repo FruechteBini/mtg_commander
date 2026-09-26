@@ -150,7 +150,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Type:** research/task
 
-**Status:** Partially proven - neutraler Textimport steht (`DECK-001`), echtes mythic.tools-Deck folgt (`DECK-002`).
+**Status:** Proven - neutraler Textimport (`DECK-001`) und erster echter Playgroup-Import mit Forge-Start (`DECK-002`) sind bewiesen.
 
 **Why it matters:** Der Produktkern ist: gegen die echten Decks von Freunden spielen.
 
@@ -161,9 +161,9 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 - Wie speichern wir Besitzer, Commander, Deckname, Quelle und Importzeitpunkt?
 - Wie validieren wir Decklisten gegen Forge/Manabrew-Kartendaten?
 
-**Evidence:** Produktentscheidung aus Wayfinding: mythic.tools ist gewuenscht, automatische Synchronisierung ist nicht Teil von Milestone 1. `DECK-001` abgeschlossen: `packages/shared/src/deck-list.ts` parst, validiert und konvertiert typische Textlisten (Regressionstest `npm run deck:test`).
+**Evidence:** Produktentscheidung aus Wayfinding: mythic.tools ist gewuenscht, automatische Synchronisierung ist nicht Teil von Milestone 1. `DECK-001` abgeschlossen: `packages/shared/src/deck-list.ts` parst, validiert und konvertiert typische Textlisten (Regressionstest `npm run deck:test`). `DECK-002` abgeschlossen (2026-09-26): Das echte Playgroup-Deck `Dina Sacrifice` (Commander `Dina, Essence Brewer`) wurde importiert und startete in einer echten Vier-Spieler-Partie auf Forge (`captures/deck-forge-start-2026-09-26T12-41-15-366Z.summary.json`).
 
-**Current answer:** MVP startet pragmatisch mit Deck-Link oder exportierter Deckliste. Eine echte mythic.tools-Synchronisierung kommt spaeter, falls es eine stabile API oder ein verlaessliches Exportformat gibt. Der neutrale Textimport parst Sektionen, `*CMDR*`-Marker, Anzahl und Printing, prueft die 100-Karten-Regel (1-2 Commander, Singleton ausser Basiscards) und konvertiert deterministisch in das capture-bewaehrte Manabrew-Deckformat.
+**Current answer:** MVP startet pragmatisch mit Deck-Link oder exportierter Deckliste; der erste echte Beweis lief ueber eine exportierte Textliste ohne Commander-Marker (Commander wurde als Meta-Angabe uebergeben). Eine echte mythic.tools-Synchronisierung kommt spaeter, falls es eine stabile API oder ein verlaessliches Exportformat gibt. Der neutrale Textimport parst Sektionen, `*CMDR*`-Marker, Anzahl und Printing, prueft die 100-Karten-Regel (1-2 Commander, Singleton ausser Basiscards) und konvertiert deterministisch in das capture-bewaehrte Manabrew-Deckformat; Forge loest auch neue Karten wie `Dina, Essence Brewer` (Set `SOC`) korrekt per Namen auf.
 
 **Next proof:** Ein echtes Beispieldeck aus mythic.tools exportieren oder verlinken und in das Deckformat fuer Manabrew/Forge umwandeln.
 
