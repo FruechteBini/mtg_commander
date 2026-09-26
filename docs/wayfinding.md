@@ -82,7 +82,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Current answer:** Die Protokollgrenze ist fuer einen echten mehrstufigen UI-Aktionsloop tragfaehig. Der Protocol-v5-Vertrag trennt Relay-`type` von Engine-`kind`, bildet den Shock-Loop inklusive Ziel und Mana ab und wird an der externen Grenze zur Laufzeit validiert. Der Offline-Test validierte sieben sanitiserte Fixture-Nachrichten und alle 228 Nachrichten des lokalen erfolgreichen Captures. `stateDelta`, `error` und `fatal` wurden im erfolgreichen Lauf nicht real emittiert und bleiben als noch nicht capture-bewiesene Vertraege markiert.
 
-**Next proof:** Erfuellt – `UI-001` normalisiert echte `gameView`-States deterministisch in das versionierte UI-Modell (`docs/ui-model.md`). Der naechste offene Proof ist `UI-002` als erster Render-Slice des Modells.
+**Next proof:** Erfuellt – `UI-001` normalisiert echte `gameView`-States deterministisch in das versionierte UI-Modell (`docs/ui-model.md`), und `UI-002` rendert das Modell als ersten statischen Board-Slice in der Web-App.
 
 **Execution log (2026-09-16):** Der Capture wurde so erweitert, dass leere `chooseAction`-Prompts weiter mit `pass` beantwortet werden. Erfolg wird nur bei einer Engine-gelieferten `actionId` und einem Zustandswechsel derselben Spielerperspektive gemeldet. Der Lauf `manabrew-real-session-2026-09-16T14-36-11-587Z` bestand dieses Kriterium: `Play Mountain`, `hand` -> `battlefield`, gleicher Zug und Schritt, geaenderter Fingerprint, keine Fehler.
 
@@ -190,7 +190,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Current answer:** Die UI soll nicht reiner Vier-Spieler-Tisch und nicht reines Arena-Layout werden, sondern eine Hybridansicht fuer Solo-vs-Bots auf Desktop-PC.
 
-**Next proof:** Das statische Boardmodell steht (`UI-001`, `docs/ui-model.md`); `UI-002` baut daraus die erste Wireframe-/React-Ansicht.
+**Next proof:** Erfuellt – `UI-002` rendert das UI-Modell als ersten React-Board-Slice (grosser eigener Bereich, drei kompakte aufklappbare Gegner-Panels, Stack sichtbar, Capture-Loader fuer echte States). Offen ist die Interaktion: Prompt-Antworten, Highlighting legaler Aktionen und Live-States.
 
 **Open risk:** Commander-Boardstates koennen sehr gross werden; Lesbarkeit und Performance muessen frueh mit echten Boardstates geprueft werden.
 

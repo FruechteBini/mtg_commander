@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { AppStatus } from "@mtg-commander/shared";
+import { GameBoard } from "./game/GameBoard.js";
 
 type ApiState =
   | { kind: "loading" }
@@ -35,8 +36,9 @@ export function App() {
         <p className="eyebrow">PRIVATE PLAYGROUP PROTOTYPE</p>
         <h1>MTG Commander</h1>
         <p className="intro">
-          Ein Mensch, drei Bots und echte Commander-Decks. Dieses Grundgeruest verbindet die
-          eigene React-Oberflaeche ausschliesslich mit der serverseitigen API.
+          Ein Mensch, drei Bots und echte Commander-Decks. Das Spielbrett unten rendert den
+          normalisierten UI-Zustand (UI-Modell v1) und zeigt zuerst einen statischen
+          Vier-Spieler-Fixture-Zustand.
         </p>
       </header>
 
@@ -54,23 +56,7 @@ export function App() {
         {apiState.kind === "error" && <p className="detail error">{apiState.message}</p>}
       </section>
 
-      <section className="grid" aria-label="Architekturstatus">
-        <article>
-          <p className="step">01</p>
-          <h2>Browser</h2>
-          <p>Zeigt den spaeteren Spielzustand und sendet nur Benutzerentscheidungen an die API.</p>
-        </article>
-        <article>
-          <p className="step">02</p>
-          <h2>Eigene API</h2>
-          <p>Haelt Secrets, orchestriert Spiele und wird die Relay-Verbindung verwalten.</p>
-        </article>
-        <article>
-          <p className="step">03</p>
-          <h2>Forge Engine</h2>
-          <p>Bleibt die Autoritaet fuer Regeln, legale Aktionen und den Commander-Spielzustand.</p>
-        </article>
-      </section>
+      <GameBoard />
     </main>
   );
 }

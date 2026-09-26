@@ -95,6 +95,8 @@ npm run gameview:test
 
 Er normalisiert das Vier-Spieler-Fixture und den Shock-Zustandswechsel deterministisch, prueft defensive Fallbacks gegen unvollstaendige Engine-Daten und streamt vorhandene lokale Raw-Captures durch das Modell. Das Modell ist in [docs/ui-model.md](docs/ui-model.md) dokumentiert.
 
+Die Web-App rendert dieses Modell bereits: Unter `npm run dev` zeigt `http://127.0.0.1:5173` das statische Hybrid-Commander-Brett mit grossem eigenen Bereich, drei aufklappbaren Gegner-Panels, Stack-Ansicht und einem Capture-Loader, der echte `StateUpdate`-Nachrichten aus `captures/*.jsonl` statisch rendert.
+
 Der echte Engine-Schritt ist als Docker-Runbook vorbereitet und lokal mit Docker Desktop/WSL2 erfolgreich gestartet:
 [docs/real-engine-poc.md](docs/real-engine-poc.md).
 
