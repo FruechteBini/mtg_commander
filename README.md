@@ -128,3 +128,11 @@ Die wiederverwendbare Client-Bibliothek ist unter [docs/engine-client.md](docs/e
 ```powershell
 npm run engine:smoke
 ```
+
+Vier-Spieler-Langlauf gegen den laufenden Stack (Mensch-/Capture-Client + 3 Bots, echtes Playgroup-Deck, Zielzugzahl, Stall-Watchdog, Grace-Phase und Docker-Speichersampling):
+
+```powershell
+npm run bot:longrun
+```
+
+Der aktuelle Bot-Langlauf (`BOT-002`) bestaetigt eine komplette Partie ueber 66 Turns bis zum natuerlichen GameOver: 758 Prompt-Antworten ohne Deadlock oder Engine-Fehler, Land-Policy inklusive, und ein linear stabiler forge-room-Speicher (246,9 -> 340,5 MiB).

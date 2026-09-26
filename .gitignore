@@ -16,3 +16,5 @@ captures/*.jsonl
 
 # Temporary source checkouts used for protocol research.
 .tmp-*/
+
+captures/*-console*.log

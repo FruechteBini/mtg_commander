@@ -1,0 +1,598 @@
+{
+  "proof": "BOT-002",
+  "config": {
+    "relayUrl": "ws://localhost:9443",
+    "roomName": "MTG-Commander PoC",
+    "username": "bot-longrun-1790429573361",
+    "deckFile": "decks/dina-sacrifice.txt",
+    "deckName": "Dina Sacrifice",
+    "commanderName": "Dina, Essence Brewer",
+    "targetTurns": 12,
+    "timeoutMs": 900000,
+    "stallMs": 180000,
+    "containerName": "manabrew-forge-room-forge-room-1",
+    "castPattern": null
+  },
+  "startedAt": "2026-09-26T13-32-53-361Z",
+  "capturePath": "captures\\bot-long-run-2026-09-26T13-32-53-361Z.jsonl",
+  "import": {
+    "ok": true,
+    "deckFile": "decks/dina-sacrifice.txt",
+    "commander": "Dina, Essence Brewer",
+    "uniqueCards": 85,
+    "totalCards": 100
+  },
+  "game": {
+    "roomId": "722b4154-7682-45b1-bdf2-8ae8896b6eeb",
+    "gameId": "b13956cb-5fe7-4ff8-9c76-bfde56a89df8",
+    "playerOrder": [
+      "bot-longrun-1790429573361",
+      "self-hosted-node-c068ce0e-1669-4c27-a32c-74622eb13d42-bot 3",
+      "self-hosted-node-c068ce0e-1669-4c27-a32c-74622eb13d42-bot",
+      "self-hosted-node-c068ce0e-1669-4c27-a32c-74622eb13d42-bot 2"
+    ],
+    "mySlot": "player-0",
+    "startedAt": "2026-09-26T13:32:55.164Z"
+  },
+  "progress": {
+    "maxTurn": 66,
+    "lastStep": "main1",
+    "lastActivePlayerId": "player-1",
+    "statesSeen": 3871,
+    "promptEnvelopes": 759,
+    "answersSent": 758,
+    "promptTypeCounts": {
+      "diceRolled": 1,
+      "mulligan": 1,
+      "chooseAction": 754,
+      "revealCards": 2,
+      "gameOver": 1
+    },
+    "turnHistory": [
+      {
+        "at": "2026-09-26T13:32:55.444Z",
+        "turn": 1,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:55.742Z",
+        "turn": 2,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:55.889Z",
+        "turn": 3,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:56.095Z",
+        "turn": 4,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:56.294Z",
+        "turn": 5,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:56.617Z",
+        "turn": 6,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:56.777Z",
+        "turn": 7,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:57.098Z",
+        "turn": 8,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:57.318Z",
+        "turn": 9,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:57.561Z",
+        "turn": 10,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:57.749Z",
+        "turn": 11,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:58.161Z",
+        "turn": 12,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:58.411Z",
+        "turn": 13,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:59.051Z",
+        "turn": 14,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:59.250Z",
+        "turn": 15,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:59.632Z",
+        "turn": 16,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:32:59.896Z",
+        "turn": 17,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:00.506Z",
+        "turn": 18,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:00.719Z",
+        "turn": 19,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:01.450Z",
+        "turn": 20,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:01.733Z",
+        "turn": 21,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:02.374Z",
+        "turn": 22,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:02.584Z",
+        "turn": 23,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:03.278Z",
+        "turn": 24,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:03.852Z",
+        "turn": 25,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:04.628Z",
+        "turn": 26,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:04.855Z",
+        "turn": 27,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:05.647Z",
+        "turn": 28,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:06.388Z",
+        "turn": 29,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:07.147Z",
+        "turn": 30,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:07.441Z",
+        "turn": 31,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:08.671Z",
+        "turn": 32,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:09.726Z",
+        "turn": 33,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:11.419Z",
+        "turn": 34,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:11.695Z",
+        "turn": 35,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:12.277Z",
+        "turn": 36,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:13.167Z",
+        "turn": 37,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:14.817Z",
+        "turn": 38,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:15.122Z",
+        "turn": 39,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:15.727Z",
+        "turn": 40,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:17.341Z",
+        "turn": 41,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:18.939Z",
+        "turn": 42,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:19.345Z",
+        "turn": 43,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:21.115Z",
+        "turn": 44,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:22.208Z",
+        "turn": 45,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:23.606Z",
+        "turn": 46,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:23.992Z",
+        "turn": 47,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:25.794Z",
+        "turn": 48,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:26.940Z",
+        "turn": 49,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 2
+      },
+      {
+        "at": "2026-09-26T13:33:29.519Z",
+        "turn": 50,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:29.807Z",
+        "turn": 51,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:31.208Z",
+        "turn": 52,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:32.370Z",
+        "turn": 53,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:32.668Z",
+        "turn": 54,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:35.179Z",
+        "turn": 55,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 2
+      },
+      {
+        "at": "2026-09-26T13:33:36.239Z",
+        "turn": 56,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 2
+      },
+      {
+        "at": "2026-09-26T13:33:36.700Z",
+        "turn": 57,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 1
+      },
+      {
+        "at": "2026-09-26T13:33:37.708Z",
+        "turn": 58,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:39.055Z",
+        "turn": 59,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:39.248Z",
+        "turn": 60,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:40.293Z",
+        "turn": 61,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:40.513Z",
+        "turn": 62,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:41.650Z",
+        "turn": 63,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:41.934Z",
+        "turn": 64,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:42.728Z",
+        "turn": 65,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:33:42.969Z",
+        "turn": 66,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      }
+    ],
+    "answersByOutputType": {
+      "diceRolledAcknowledged": 1,
+      "mulliganDecision": 1,
+      "pass": 746,
+      "act": 8,
+      "revealCardsAcknowledged": 2
+    },
+    "lastActivityAt": "2026-09-26T13:33:43.353Z"
+  },
+  "unsupportedPrompts": [
+    {
+      "at": "2026-09-26T13:33:43.353Z",
+      "promptId": 4294967295,
+      "inputType": "gameOver",
+      "inputKeys": [
+        "type"
+      ],
+      "cancellable": false
+    }
+  ],
+  "errors": [
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.kind: expected state, stateDelta, prompt, error, or fatal"
+    },
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.fingerprint: expected string"
+    },
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.fingerprint: expected string"
+    },
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.kind: expected state, stateDelta, prompt, error, or fatal"
+    }
+  ],
+  "memorySamples": [
+    {
+      "at": "2026-09-26T13:32:55.064Z",
+      "stats": "manabrew-forge-room-forge-room-1 246.9MiB / 15.17GiB 0.13%"
+    },
+    {
+      "at": "2026-09-26T13:33:01.148Z",
+      "stats": "manabrew-forge-room-forge-room-1 312.6MiB / 15.17GiB 126.80%"
+    },
+    {
+      "at": "2026-09-26T13:33:06.209Z",
+      "stats": "manabrew-forge-room-forge-room-1 318.4MiB / 15.17GiB 136.81%"
+    },
+    {
+      "at": "2026-09-26T13:33:11.267Z",
+      "stats": "manabrew-forge-room-forge-room-1 321.2MiB / 15.17GiB 138.12%"
+    },
+    {
+      "at": "2026-09-26T13:33:16.341Z",
+      "stats": "manabrew-forge-room-forge-room-1 323.6MiB / 15.17GiB 138.74%"
+    },
+    {
+      "at": "2026-09-26T13:33:21.405Z",
+      "stats": "manabrew-forge-room-forge-room-1 330.5MiB / 15.17GiB 152.46%"
+    },
+    {
+      "at": "2026-09-26T13:33:26.485Z",
+      "stats": "manabrew-forge-room-forge-room-1 337.7MiB / 15.17GiB 172.01%"
+    },
+    {
+      "at": "2026-09-26T13:33:31.551Z",
+      "stats": "manabrew-forge-room-forge-room-1 339.9MiB / 15.17GiB 171.33%"
+    },
+    {
+      "at": "2026-09-26T13:33:36.629Z",
+      "stats": "manabrew-forge-room-forge-room-1 337.5MiB / 15.17GiB 179.66%"
+    },
+    {
+      "at": "2026-09-26T13:33:41.711Z",
+      "stats": "manabrew-forge-room-forge-room-1 340.5MiB / 15.17GiB 194.55%"
+    }
+  ],
+  "result": "ok",
+  "reason": "turns-reached",
+  "finishedAt": "2026-09-26T13:33:43.727Z"
+}

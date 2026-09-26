@@ -1,0 +1,320 @@
+{
+  "proof": "BOT-002",
+  "config": {
+    "relayUrl": "ws://localhost:9443",
+    "roomName": "MTG-Commander PoC",
+    "username": "bot-longrun-1790429185384",
+    "deckFile": "decks/dina-sacrifice.txt",
+    "deckName": "Dina Sacrifice",
+    "commanderName": "Dina, Essence Brewer",
+    "targetTurns": 12,
+    "timeoutMs": 900000,
+    "stallMs": 180000,
+    "containerName": "manabrew-forge-room-forge-room-1",
+    "castPattern": null
+  },
+  "startedAt": "2026-09-26T13-26-25-384Z",
+  "capturePath": "captures\\bot-long-run-2026-09-26T13-26-25-384Z.jsonl",
+  "import": {
+    "ok": true,
+    "deckFile": "decks/dina-sacrifice.txt",
+    "commander": "Dina, Essence Brewer",
+    "uniqueCards": 85,
+    "totalCards": 100
+  },
+  "game": {
+    "roomId": "c3671762-4b95-4614-ba8e-a288289eb195",
+    "gameId": "bf0181bf-e57f-495c-8d44-70d050936894",
+    "playerOrder": [
+      "bot-longrun-1790429185384",
+      "self-hosted-node-72ef2688-55e6-4e4e-85cd-db547a004ae3-bot 2",
+      "self-hosted-node-72ef2688-55e6-4e4e-85cd-db547a004ae3-bot",
+      "self-hosted-node-72ef2688-55e6-4e4e-85cd-db547a004ae3-bot 3"
+    ],
+    "mySlot": "player-0",
+    "startedAt": "2026-09-26T13:26:26.533Z"
+  },
+  "progress": {
+    "maxTurn": 10,
+    "lastStep": "main1",
+    "lastActivePlayerId": "player-3",
+    "statesSeen": 384,
+    "promptEnvelopes": 90,
+    "answersSent": 89,
+    "promptTypeCounts": {
+      "diceRolled": 1,
+      "mulligan": 1,
+      "chooseAction": 87,
+      "revealCards": 1
+    },
+    "turnHistory": [
+      {
+        "at": "2026-09-26T13:26:26.843Z",
+        "turn": 1,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:27.140Z",
+        "turn": 2,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:27.327Z",
+        "turn": 3,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:27.479Z",
+        "turn": 4,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:27.685Z",
+        "turn": 5,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:28.041Z",
+        "turn": 6,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:28.264Z",
+        "turn": 7,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:28.438Z",
+        "turn": 8,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:28.668Z",
+        "turn": 9,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:26:29.394Z",
+        "turn": 10,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      }
+    ],
+    "answersByOutputType": {
+      "diceRolledAcknowledged": 1,
+      "mulliganDecision": 1,
+      "pass": 85,
+      "act": 2
+    },
+    "lastActivityAt": "2026-09-26T13:26:29.516Z"
+  },
+  "unsupportedPrompts": [
+    {
+      "at": "2026-09-26T13:26:29.516Z",
+      "promptId": 194,
+      "inputType": "revealCards",
+      "inputKeys": [
+        "cards",
+        "ownerPlayerId",
+        "presentation",
+        "type",
+        "zone"
+      ],
+      "cancellable": false
+    }
+  ],
+  "errors": [
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.kind: expected state, stateDelta, prompt, error, or fatal"
+    },
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.kind: expected state, stateDelta, prompt, error, or fatal"
+    },
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.kind: expected state, stateDelta, prompt, error, or fatal"
+    },
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.kind: expected state, stateDelta, prompt, error, or fatal"
+    },
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.kind: expected state, stateDelta, prompt, error, or fatal"
+    },
+    {
+      "type": "invalid-message",
+      "message": "Invalid Manabrew message at state.kind: expected state, stateDelta, prompt, error, or fatal"
+    }
+  ],
+  "memorySamples": [
+    {
+      "at": "2026-09-26T13:26:26.440Z",
+      "stats": "manabrew-forge-room-forge-room-1 247.7MiB / 15.17GiB 0.12%"
+    },
+    {
+      "at": "2026-09-26T13:26:32.537Z",
+      "stats": "manabrew-forge-room-forge-room-1 308.1MiB / 15.17GiB 0.77%"
+    },
+    {
+      "at": "2026-09-26T13:26:37.622Z",
+      "stats": "manabrew-forge-room-forge-room-1 308MiB / 15.17GiB 0.76%"
+    },
+    {
+      "at": "2026-09-26T13:26:42.705Z",
+      "stats": "manabrew-forge-room-forge-room-1 308MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:26:47.776Z",
+      "stats": "manabrew-forge-room-forge-room-1 308MiB / 15.17GiB 0.77%"
+    },
+    {
+      "at": "2026-09-26T13:26:52.852Z",
+      "stats": "manabrew-forge-room-forge-room-1 308MiB / 15.17GiB 0.80%"
+    },
+    {
+      "at": "2026-09-26T13:26:57.915Z",
+      "stats": "manabrew-forge-room-forge-room-1 308MiB / 15.17GiB 0.78%"
+    },
+    {
+      "at": "2026-09-26T13:27:03.882Z",
+      "stats": "manabrew-forge-room-forge-room-1 308MiB / 15.17GiB 0.79%"
+    },
+    {
+      "at": "2026-09-26T13:27:08.954Z",
+      "stats": "manabrew-forge-room-forge-room-1 308MiB / 15.17GiB 0.76%"
+    },
+    {
+      "at": "2026-09-26T13:27:14.904Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.84%"
+    },
+    {
+      "at": "2026-09-26T13:27:19.993Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.82%"
+    },
+    {
+      "at": "2026-09-26T13:27:25.909Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.79%"
+    },
+    {
+      "at": "2026-09-26T13:27:30.989Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:27:36.059Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.78%"
+    },
+    {
+      "at": "2026-09-26T13:27:41.148Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.80%"
+    },
+    {
+      "at": "2026-09-26T13:27:46.209Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.76%"
+    },
+    {
+      "at": "2026-09-26T13:27:51.270Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.83%"
+    },
+    {
+      "at": "2026-09-26T13:27:56.342Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.80%"
+    },
+    {
+      "at": "2026-09-26T13:28:01.416Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:28:06.497Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:28:11.575Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.78%"
+    },
+    {
+      "at": "2026-09-26T13:28:16.652Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.85%"
+    },
+    {
+      "at": "2026-09-26T13:28:21.714Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:28:26.780Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.76%"
+    },
+    {
+      "at": "2026-09-26T13:28:31.853Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.82%"
+    },
+    {
+      "at": "2026-09-26T13:28:36.921Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.78%"
+    },
+    {
+      "at": "2026-09-26T13:28:41.979Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:28:47.044Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:28:52.124Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.79%"
+    },
+    {
+      "at": "2026-09-26T13:28:57.185Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.79%"
+    },
+    {
+      "at": "2026-09-26T13:29:02.242Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:29:07.299Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.79%"
+    },
+    {
+      "at": "2026-09-26T13:29:12.378Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.81%"
+    },
+    {
+      "at": "2026-09-26T13:29:17.455Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.85%"
+    },
+    {
+      "at": "2026-09-26T13:29:22.522Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.83%"
+    },
+    {
+      "at": "2026-09-26T13:29:27.586Z",
+      "stats": "manabrew-forge-room-forge-room-1 305.5MiB / 15.17GiB 0.76%"
+    }
+  ],
+  "result": "failed",
+  "reason": "stall-detected-at-turn-10",
+  "finishedAt": "2026-09-26T13:29:29.596Z"
+}

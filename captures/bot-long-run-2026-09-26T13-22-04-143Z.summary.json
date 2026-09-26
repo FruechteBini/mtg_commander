@@ -1,0 +1,120 @@
+{
+  "proof": "BOT-002",
+  "config": {
+    "relayUrl": "ws://localhost:9443",
+    "roomName": "MTG-Commander PoC",
+    "username": "bot-longrun-1790428924143",
+    "deckFile": "decks/dina-sacrifice.txt",
+    "deckName": "Dina Sacrifice",
+    "commanderName": "Dina, Essence Brewer",
+    "targetTurns": 8,
+    "timeoutMs": 900000,
+    "stallMs": 180000,
+    "containerName": "manabrew-forge-room-forge-room-1",
+    "castPattern": null
+  },
+  "startedAt": "2026-09-26T13-22-04-143Z",
+  "capturePath": "captures\\bot-long-run-2026-09-26T13-22-04-143Z.jsonl",
+  "import": {
+    "ok": true,
+    "deckFile": "decks/dina-sacrifice.txt",
+    "commander": "Dina, Essence Brewer",
+    "uniqueCards": 85,
+    "totalCards": 100
+  },
+  "game": {
+    "roomId": "163c162b-9361-4366-809d-bd86a7181203",
+    "gameId": "0ec7aee6-28be-4862-85f1-8d83a276a8e3",
+    "playerOrder": [
+      "bot-longrun-1790428924143",
+      "self-hosted-node-83267c45-84a6-4e4e-a193-8c2b7c0da07d-bot 2",
+      "self-hosted-node-83267c45-84a6-4e4e-a193-8c2b7c0da07d-bot",
+      "self-hosted-node-83267c45-84a6-4e4e-a193-8c2b7c0da07d-bot 3"
+    ],
+    "mySlot": "player-0",
+    "startedAt": "2026-09-26T13:22:05.794Z"
+  },
+  "progress": {
+    "maxTurn": 8,
+    "lastStep": "upkeep",
+    "lastActivePlayerId": "player-0",
+    "statesSeen": 288,
+    "promptEnvelopes": 64,
+    "answersSent": 64,
+    "promptTypeCounts": {
+      "diceRolled": 1,
+      "mulligan": 1,
+      "chooseAction": 62
+    },
+    "turnHistory": [
+      {
+        "at": "2026-09-26T13:22:06.302Z",
+        "turn": 1,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:22:06.617Z",
+        "turn": 2,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:22:06.818Z",
+        "turn": 3,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:22:07.125Z",
+        "turn": 4,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:22:07.282Z",
+        "turn": 5,
+        "step": "upkeep",
+        "activePlayerId": "player-1",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:22:07.554Z",
+        "turn": 6,
+        "step": "upkeep",
+        "activePlayerId": "player-2",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:22:07.931Z",
+        "turn": 7,
+        "step": "upkeep",
+        "activePlayerId": "player-3",
+        "stackDepth": 0
+      },
+      {
+        "at": "2026-09-26T13:22:08.274Z",
+        "turn": 8,
+        "step": "upkeep",
+        "activePlayerId": "player-0",
+        "stackDepth": 0
+      }
+    ],
+    "lastActivityAt": "2026-09-26T13:22:08.273Z"
+  },
+  "unsupportedPrompts": [],
+  "errors": [],
+  "memorySamples": [
+    {
+      "at": "2026-09-26T13:22:05.699Z",
+      "stats": "manabrew-forge-room-forge-room-1 237.8MiB / 15.17GiB 0.15%"
+    }
+  ],
+  "result": "ok",
+  "reason": "turns-reached",
+  "finishedAt": "2026-09-26T13:22:08.274Z"
+}

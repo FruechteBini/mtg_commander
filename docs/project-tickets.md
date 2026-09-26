@@ -69,7 +69,9 @@ Stand: 26. September 2026
 
 - Letzter erfolgreicher Real-Capture: `captures/manabrew-real-session-2026-09-17T12-59-23-759Z.summary.json`
 - Letzter erfolgreicher Real-Deck-Start: `captures/deck-forge-start-2026-09-26T12-41-15-366Z.summary.json` (Skript `scripts/deck-forge-start.mjs`, Deck `decks/dina-sacrifice.txt`)
+- Letzter erfolgreicher Bot-Langlauf: `captures/bot-long-run-2026-09-26T13-32-53-361Z.summary.json` (Skript `scripts/bot-long-run.mjs`, `npm run bot:longrun`)
 - Capture-Client: `scripts/capture-real-session.mjs`
+- Bot-Langlauf-Client: `scripts/bot-long-run.mjs`
 - Lokaler Fixture-PoC: `scripts/protocol-poc.mjs`
 - Minimale Protocol-Typen: `packages/shared/src/manabrew-protocol.ts`
 - Docker-Setup: `infra/manabrew-forge-room/compose.yml`
@@ -82,9 +84,9 @@ Stand: 26. September 2026
 
 ## Empfohlene Reihenfolge
 
-1. `BOT-002`-Langlauf mit realistischen Decks (jetzt oben; `SAVE-001` ist abgeschlossen).
-2. Danach Produktentscheidung `SAVE-002`: Replay-Journal (Option B) vs. Fork/Upstream (Option C), siehe `docs/save-resume-research.md`; danach UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
-4. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
+1. Produktentscheidung `SAVE-002`: Replay-Journal (Option B) vs. Fork/Upstream (Option C), siehe `docs/save-resume-research.md` (`BOT-002` ist abgeschlossen).
+2. Danach UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
+3. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
 5. Erkenntnisse fliessen zurueck in Ticketstatus, Evidence und Wayfinding.
 
 ## Ticketuebersicht
@@ -103,7 +105,7 @@ Stand: 26. September 2026
 | `UI-002` | `DONE` | Ersten Hybrid-Commander-Board-Slice bauen | Statisches Board rendert Fixture- und Capture-States; Rollen, Prioritaet und Stack sind sichtbar. |
 | `DECK-001` | `DONE` | Neutralen Commander-Decklistenimport definieren | Textliste wird geparst, validiert und ins Manabrew-Deckformat konvertiert. |
 | `DECK-002` | `DONE` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
-| `BOT-002` | `READY` | Vier-Spieler-Langlauf mit realistischen Decks testen | Bots spielen mehrere Zuege ohne Stillstand oder Protokollfehler. |
+| `BOT-002` | `DONE` | Vier-Spieler-Langlauf mit realistischen Decks testen | 66 Turns Mensch + 3 Bots ohne Deadlock/Stall; Speicher linear stabil. |
 | `SAVE-001` | `DONE` | Engine-Snapshot/Save/Resume untersuchen | No-Go dokumentiert: Upstream-Node hat keinen Save/Restore; Alternativen A/B/C in `docs/save-resume-research.md`. |
 
 ### P1: Fuer Milestone 1 erforderlich
@@ -294,13 +296,17 @@ Stand: 26. September 2026
 - **Ergebnis:** Das erste echte Playgroup-Deck (Golgari-Sacrifice, Commander `Dina, Essence Brewer`) liegt als exportierte Textliste unter `decks/dina-sacrifice.txt`, wurde ueber `importCommanderDeck` (Meta-Commander, da kein `*CMDR*`-Marker) in ein valides 100-Karten-Modell ueberfuehrt (85 Unique-Karten, 16 Basics, Import-Modell `decks/dina-sacrifice.json`) und per `toManabrewDeckSelection` konvertiert. Das Beweisskript `scripts/deck-forge-start.mjs` startete damit eine echte Vier-Spieler-Partie (Mensch + 3 Bots, alle mit dem echten Deck); der initiale State zeigt fuer Spieler 1 die Commanderin in der Command-Zone und 99 Karten in der Library.
 - **Evidence:** `captures/deck-forge-start-2026-09-26T12-41-15-366Z.summary.json` (Exit 0, `proof-complete: commanderInCommand true, libraryCount 99`); Verbindung mit lokalem Server-Key/Raum-Passwort aus `infra/manabrew-forge-room/.env`.
 - **Erkenntnisse:** Forge loest alle 85 Karten (inkl. neuer Karten wie `Dina, Essence Brewer`, Set `SOC`) sauber per Namen auf - auch ohne Printing-Angaben. `gameView.zones` ist pro Spieler (`ownerId`) modelliert; verdeckte Zonen liefern `count` ohne `cards`, Kartennamen liegen in `cardView.identity.name`. Nach einem beendeten Spiel ist der Raum belegt (`game_already_started`, `MAX_GAMES=1`); ein Compose-Restart setzt den Raum zurueck.
-- **Naechster Schritt:** `BOT-002`-Langlauf mit dem echten Deck oder `SAVE-001`-Forschung.
+- **Naechster Schritt:** Erfuellt - der `BOT-002`-Langlauf lief 66 Turns mit dem echten Deck; offener Punkt ist nur die `SAVE-002`-Produktentscheidung.
 
 ### BOT-002 - Vier-Spieler-Langlauf
 
-- **Status:** `READY` (entblockt durch `DECK-002` und `PROTO-004`)
+- **Status:** `DONE` (2026-09-26)
 - **Prioritaet:** P0
 - **Akzeptanzkriterien:** Mindestens eine festgelegte Anzahl Zuege mit einem Menschen-/Capture-Client und drei Bots; keine Deadlocks, ungestuetzten Prompts oder unkontrollierten Speicheranstiege.
+- **Ergebnis:** Das Beweisskript `scripts/bot-long-run.mjs` (`npm run bot:longrun`; Zielzugzahl, Timeout, Stall-Watchdog, Grace-Phase und Docker-Speichersampling per Env konfigurierbar) fuehrte eine echte Vier-Spieler-Partie (1 Capture-Mensch + 3 Bots auf einem self-hosted node, alle mit dem echten Deck `decks/dina-sacrifice.txt`) ueber **66 Turns bis zum natuerlichen GameOver** ohne Deadlock oder Engine-Fehler: 3.871 States, 759 Prompt-Envelopes, 758 Antworten (`diceRolledAcknowledged` 1, `mulliganDecision` 1, `pass` 746, `act` 8 - Land-Policy nach `Play <Land>`-Label/`playLand`-Typ, `revealCardsAcknowledged` 2). Speicher des forge-room-Containers: 246,9 -> 340,5 MiB ueber 66 Turns (10 Samples, linear mit Spielhistorie, kein unkontrollierter Anstieg; CPU-Peaks ~195 % beim Bot-Ticken). Der finale GameOver-Prompt kommt mit `promptId` u32::MAX (4294967295) und erwartet keine Antwort.
+- **Evidence:** `captures/bot-long-run-2026-09-26T13-32-53-361Z.summary.json` (Exit 0, `turns-reached`, `maxTurn: 66`); Vorlaeufe: `bot-long-run-2026-09-26T13-22-04-143Z` (8 Turns, erste Land-`act`-Antwort), `bot-long-run-2026-09-26T13-26-25-384Z` (Deckte `revealCards`-Blockade bei Turn 10 auf), `bot-long-run-2026-09-26T13-30-59-112Z` (12 Turns + Grace, deckte `chooseCards` auf). Antwortstrukturen gegen manabrew-rs Commit `3586834` belegt (`crates/manabrew-protocol/src/prompts/reveal.rs`, `choose_cards.rs`, `choose_boolean.rs`, `scry.rs`, `reorder.rs`).
+- **Erkenntnisse:** (1) Die bewaehrten Prompt-Familien reichen fuer einen passiven Sitz nicht: Reale Decks erzeugen zusaetzlich mindestens `revealCards` (nicht abbrechbar, blockiert sonst die Engine) und `chooseCards`; der Client kennt jetzt beide plus `chooseBoolean`, `scry`, `reorder` präventiv. (2) Der self-hosted node sendet `roomRelay`-Heartbeats als `StateUpdate` mit `kind: "roomRelay"` - der Shared-Parser lehnt sie als invalid ab (harmlos, aber Protokoll-Luecke). (3) Zwei Live-Nachrichten wurden wegen `state.fingerprint: expected string` abgelehnt - der Parser braucht Toleranz fuer fehlende/anders getypte Fingerprints. (4) Nach Node-Restart dauert die Raumregistrierung ~50-70 s, und mehrere Raeume gleichen Namens koennen existieren - der Langlauf-Client wartet auf den Raum und waehlt den mit `status: "Lobby"`. (5) Nach wie vor gilt: Ein Spiel belegt den Raum bis zum Stack-Neustart (`MAX_GAMES=1`), und der Relay haelt den Raum auch nach Node-Restart. (6) Noch nie gesehene Familien (`chooseColor`, `chooseNumber`, `chooseAttackers`/`chooseBlockers`, Combat-Damage-Zuordnung, `chooseFromSelection`) bleiben PROTO-Backlog.
+- **Naechster Schritt:** `SAVE-002`-Produktentscheidung (Option B vs. C); optional Parser-Toleranz fuer `roomRelay`/Fingerprint als kleines PROTO-Ticket.
 
 ### SAVE-001 - Save/Resume-Faehigkeit erforschen
 

@@ -1,0 +1,58 @@
+{
+  "proof": "BOT-002",
+  "config": {
+    "relayUrl": "ws://localhost:9443",
+    "roomName": "MTG-Commander PoC",
+    "username": "bot-longrun-1790429104423",
+    "deckFile": "decks/dina-sacrifice.txt",
+    "deckName": "Dina Sacrifice",
+    "commanderName": "Dina, Essence Brewer",
+    "targetTurns": 12,
+    "timeoutMs": 900000,
+    "stallMs": 180000,
+    "containerName": "manabrew-forge-room-forge-room-1",
+    "castPattern": null
+  },
+  "startedAt": "2026-09-26T13-25-04-423Z",
+  "capturePath": "captures\\bot-long-run-2026-09-26T13-25-04-423Z.jsonl",
+  "import": {
+    "ok": true,
+    "deckFile": "decks/dina-sacrifice.txt",
+    "commander": "Dina, Essence Brewer",
+    "uniqueCards": 85,
+    "totalCards": 100
+  },
+  "game": {
+    "roomId": null,
+    "gameId": null,
+    "playerOrder": null,
+    "mySlot": null,
+    "startedAt": null
+  },
+  "progress": {
+    "maxTurn": 0,
+    "lastStep": null,
+    "lastActivePlayerId": null,
+    "statesSeen": 0,
+    "promptEnvelopes": 0,
+    "answersSent": 0,
+    "promptTypeCounts": {},
+    "turnHistory": [],
+    "lastActivityAt": "2026-09-26T13:25:04.424Z"
+  },
+  "unsupportedPrompts": [],
+  "errors": [
+    {
+      "message": "Room not found: MTG-Commander PoC"
+    }
+  ],
+  "memorySamples": [
+    {
+      "at": "2026-09-26T13:25:04.622Z",
+      "stats": "manabrew-forge-room-forge-room-1 0B / 0B 0.00%"
+    }
+  ],
+  "result": "failed",
+  "reason": "room-not-found",
+  "finishedAt": "2026-09-26T13:25:04.659Z"
+}

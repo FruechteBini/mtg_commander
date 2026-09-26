@@ -123,7 +123,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Type:** grilling/prototype
 
-**Status:** Bot-Topologie beantwortet; Spielstaerke und Langlaufverhalten bleiben in Arbeit.
+**Status:** Beantwortet - Topologie und Langlaufverhalten sind bewiesen; Spielstaerke-Verbesserung durch GLM bleibt spaeter.
 
 **Why it matters:** Solo gegen drei Bots ist Teil des ersten Meilensteins.
 
@@ -134,13 +134,13 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 - Wie kann spaeter GLM denselben Aktionsraum nutzen?
 - Wo liegen Latenz- und Kostenrisiken?
 
-**Evidence:** Manabrew-Quellcode auf Commit `a0a490a7bdd3e03ff7f5c0b02198a726536aecfc` zeigt einen Batch-`spawnBot` mit `decks`; jeder neue Request ersetzt die bestehende Bot-Gruppe. Der Real-Capture `captures/manabrew-real-session-2026-09-17T12-59-23-759Z.summary.json` startete mit vier Eintraegen in `player_order` und loeste einen gezielten `Shock` inklusive Mana ohne Fehler auf.
+**Evidence:** Manabrew-Quellcode auf Commit `a0a490a7bdd3e03ff7f5c0b02198a726536aecfc` zeigt einen Batch-`spawnBot` mit `decks`; jeder neue Request ersetzt die bestehende Bot-Gruppe. Der Real-Capture `captures/manabrew-real-session-2026-09-17T12-59-23-759Z.summary.json` startete mit vier Eintraegen in `player_order` und loeste einen gezielten `Shock` inklusive Mana ohne Fehler auf. `BOT-002` abgeschlossen (2026-09-26): `scripts/bot-long-run.mjs` lief eine echte Vier-Spieler-Partie mit dem Playgroup-Deck 66 Turns bis zum natuerlichen GameOver ohne Deadlock/Stall bei stabilem, linearem Speicher (246,9 -> 340,5 MiB; `captures/bot-long-run-2026-09-26T13-32-53-361Z.summary.json`).
 
 **Current answer:** Ein einzelner self-hosted-node Service kann drei Bot-Tasks fuer einen Commander-Pod tragen; mehrere Node-Services oder eigene Bot-Clients sind fuer die reine Sitzanzahl nicht noetig. Die Anfrage muss als ein `spawnBot`-Payload mit drei Decks erfolgen. Legalitaet bleibt Engine-gesteuert; GLM darf spaeter nur Engine-gelieferte Optionen bewerten.
 
-**Next proof:** Den Vier-Spieler-Pod mit einem realistischen Playgroup-Deck ueber mehrere Zuege und groessere Boardstates laufen lassen.
+**Next proof:** Erfuellt - `BOT-002` lief den Vier-Spieler-Pod mit dem realistischen Playgroup-Deck ueber 66 Turns und grosse Boardstates ohne Stillstand. Offen bleibt die Spielstaerke-/GLM-Verbesserung auf demselben Aktionsraum.
 
-**Open risk:** Vier laufende Forge-Spieler mit realistischen Decks und grossen Boardstates koennen auf der 6-GB-NAS noch Speicher- oder Laufzeitprobleme zeigen.
+**Open risk:** Vier laufende Forge-Spieler mit realistischen Decks und grossen Boardstates koennen auf der 6-GB-NAS noch Speicher- oder Laufzeitprobleme zeigen. Lokale Entlastung aus `BOT-002`: Der Node verbrauchte nach 66 Turns nur ~340 MiB RAM; kritischer sind CPU-Peaks (~195 % beim Bot-Ticken) - auf der NAS bleibt das `OPS-002`-Lastprofil offen.
 
 ### Deckimport und Playgroup-Deckbibliothek
 

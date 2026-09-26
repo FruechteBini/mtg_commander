@@ -1,0 +1,60 @@
+{
+  "proof": "BOT-002",
+  "config": {
+    "relayUrl": "ws://localhost:9443",
+    "roomName": "MTG-Commander PoC",
+    "username": "bot-longrun-1790429530157",
+    "deckFile": "decks/dina-sacrifice.txt",
+    "deckName": "Dina Sacrifice",
+    "commanderName": "Dina, Essence Brewer",
+    "targetTurns": 12,
+    "timeoutMs": 900000,
+    "stallMs": 180000,
+    "containerName": "manabrew-forge-room-forge-room-1",
+    "castPattern": null
+  },
+  "startedAt": "2026-09-26T13-32-10-157Z",
+  "capturePath": "captures\\bot-long-run-2026-09-26T13-32-10-157Z.jsonl",
+  "import": {
+    "ok": true,
+    "deckFile": "decks/dina-sacrifice.txt",
+    "commander": "Dina, Essence Brewer",
+    "uniqueCards": 85,
+    "totalCards": 100
+  },
+  "game": {
+    "roomId": "cd619ffc-beb9-4465-9c63-e6764f112b1d",
+    "gameId": null,
+    "playerOrder": null,
+    "mySlot": null,
+    "startedAt": null
+  },
+  "progress": {
+    "maxTurn": 0,
+    "lastStep": null,
+    "lastActivePlayerId": null,
+    "statesSeen": 0,
+    "promptEnvelopes": 0,
+    "answersSent": 0,
+    "promptTypeCounts": {},
+    "turnHistory": [],
+    "lastActivityAt": "2026-09-26T13:32:10.157Z"
+  },
+  "unsupportedPrompts": [],
+  "errors": [
+    {
+      "type": "Error",
+      "code": "game_already_started",
+      "message": "Game has already started"
+    }
+  ],
+  "memorySamples": [
+    {
+      "at": "2026-09-26T13:32:11.214Z",
+      "stats": "manabrew-forge-room-forge-room-1 46.66MiB / 15.17GiB 0.00%"
+    }
+  ],
+  "result": "failed",
+  "reason": "game-already-started-restart-forge-room",
+  "finishedAt": "2026-09-26T13:32:11.294Z"
+}
