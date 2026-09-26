@@ -39,6 +39,39 @@ Die Dokumentation ist so aufgeteilt:
 
 Repository-Status: Die Git-Baseline ist hergestellt. Branch `main` verfolgt `origin/main` unter `https://github.com/FruechteBini/mtg_commander.git`; `BOOT-001` ist abgeschlossen und der dokumentierte Stand kann auf einem anderen Rechner geklont werden.
 
+## Web-/API-Grundgeruest starten
+
+Voraussetzung: Node.js 22.12 oder neuer und npm 10 oder neuer.
+
+```powershell
+npm install
+npm run dev
+```
+
+Danach sind erreichbar:
+
+- Web-App: `http://127.0.0.1:5173`
+- Web-Healthcheck: `http://127.0.0.1:5173/healthz`
+- API: `http://127.0.0.1:8787`
+- API-Liveness: `http://127.0.0.1:8787/healthz`
+- API-Readiness: `http://127.0.0.1:8787/readyz`
+
+Die Web-App ruft die API lokal ueber den Vite-Proxy unter `/api` auf. Relay-, Raum- und GLM-Secrets gehoeren ausschliesslich in die serverseitige Konfiguration; eine Vorlage liegt unter `apps/api/.env.example`.
+
+Pruefen und fuer Produktion bauen:
+
+```powershell
+npm run typecheck
+npm test
+npm run build
+```
+
+Workspace-Struktur:
+
+- `apps/web`: React-/Vite-Oberflaeche.
+- `apps/api`: Node-/TypeScript-API.
+- `packages/shared`: gemeinsame Domain- und Manabrew-Protokolltypen.
+
 Der erste lokale Protokoll-PoC liegt in [docs/protocol-poc.md](docs/protocol-poc.md). Er kann ohne Dependencies direkt mit Node ausgefuehrt werden:
 
 ```sh
@@ -51,7 +84,7 @@ Der reale Protocol-v5-Vertrag und der sanitiserte Shock-Regressionsloop werden e
 node scripts/protocol-contract-test.mjs
 ```
 
-Der Test validiert Relay- und Engine-Envelopes, State, Ziel-/Mana-Prompts, die erzeugten Antworten und den abschliessenden Zustandswechsel. Liegt der ignorierte lokale Raw-Capture vor, werden auch alle seine Nachrichten gestreamt und validiert. Bei einer normalen Node-Installation steht derselbe Lauf auch als `npm run protocol:test` bereit; in der aktuellen Codex-Runtime ist nur der direkte Node-Befehl verfuegbar.
+Der Test validiert Relay- und Engine-Envelopes, State, Ziel-/Mana-Prompts, die erzeugten Antworten und den abschliessenden Zustandswechsel. Liegt der ignorierte lokale Raw-Capture vor, werden auch alle seine Nachrichten gestreamt und validiert. Derselbe Lauf steht als `npm run protocol:test` bereit.
 
 Der echte Engine-Schritt ist als Docker-Runbook vorbereitet und lokal mit Docker Desktop/WSL2 erfolgreich gestartet:
 [docs/real-engine-poc.md](docs/real-engine-poc.md).

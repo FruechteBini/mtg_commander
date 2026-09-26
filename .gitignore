@@ -2,6 +2,15 @@
 .env
 **/.env
 
+# JavaScript/TypeScript build output and dependencies.
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+**/.vite/
+*.tsbuildinfo
+coverage/
+
 # Raw protocol captures can contain private game data and grow very large.
 captures/*.jsonl
 

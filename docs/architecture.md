@@ -140,7 +140,7 @@ Primaerquellen:
 
 ## Konsequenzen und offene Nachweise
 
-Mit dieser Entscheidung sind `APP-001` und `ENGINE-001` nicht mehr durch `ARCH-001` blockiert. Die naechste Arbeit ist das Web-/API-Grundgeruest (`APP-001`); danach beziehungsweise in demselben vertikalen Slice wird der Relay-Client extrahiert.
+Mit dieser Entscheidung wurden `APP-001` und `ENGINE-001` von `ARCH-001` entblockt. `APP-001` ist inzwischen abgeschlossen. Als naechstes wird der serverseitige Relay-Client in `ENGINE-001` extrahiert und an das API-Grundgeruest angebunden.
 
 Folgende Punkte sind bewusst noch kein bewiesenes Verhalten:
 

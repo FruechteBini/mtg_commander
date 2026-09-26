@@ -47,11 +47,12 @@ Stand: 26. September 2026
 - Lokale Secrets, rohe Captures und temporaere Source-Checkouts sind von Git ausgeschlossen.
 - Der Projektstand ist auf Branch `main` im GitHub-Remote `origin` versioniert und von einem zweiten Rechner klonbar.
 - `ARCH-001` ist abgeschlossen: Browser, eigene API, Relay und Forge-node haben dokumentierte Prozess-, Secret-, Reconnect-, Deployment- und Lizenzgrenzen.
+- `APP-001` ist abgeschlossen: npm-Workspace, React-/Vite-Web-App, Node-/TypeScript-API und Shared-Package starten und bauen gemeinsam; getrennte Healthchecks sind erreichbar.
 
 ### Was noch nicht existiert
 
-- Keine React-Oberflaeche.
-- Keine Node/TypeScript-API und kein dauerhafter Game-Orchestrator.
+- Noch keine spielbare Commander-Oberflaeche; bisher existiert das React-Grundgeruest mit API-Status.
+- Noch kein dauerhafter Game-Orchestrator; bisher existiert die Node/TypeScript-API mit Health-/Status-Endpunkten.
 - Keine SQLite-Datenbank oder Deckbibliothek.
 - Kein Import echter Playgroup-Decks.
 - Noch kein Proof fuer jede Prompt-Familie; insbesondere Moduswahl, Karten-/Mehrfachzielauswahl, Trigger-Reihenfolge und Combat-Entscheidungen bleiben offen.
@@ -73,13 +74,12 @@ Stand: 26. September 2026
 
 ## Empfohlene Reihenfolge
 
-1. `APP-001` als naechsten vertikalen Schritt erledigen: startbares React-/API-/Shared-Grundgeruest mit getrennten Healthchecks und ohne Browser-Secrets.
-2. `ENGINE-001` umsetzen und die Relay-/Game-Logik aus dem Capture-Skript in einen wiederverwendbaren serverseitigen Client extrahieren.
-3. `UI-001` und `UI-002` auf dem echten `gameView`-Vertrag aufbauen.
-4. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
-5. Save/Load mit `SAVE-001` frueh klaeren, bevor persistente Spiel-APIs als stabil gelten.
-6. Danach UI, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
-7. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
+1. `ENGINE-001` umsetzen und die Relay-/Game-Logik aus dem Capture-Skript in einen wiederverwendbaren serverseitigen Client extrahieren.
+2. `UI-001` und `UI-002` auf dem echten `gameView`-Vertrag aufbauen.
+3. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
+4. Save/Load mit `SAVE-001` frueh klaeren, bevor persistente Spiel-APIs als stabil gelten.
+5. Danach UI, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
+6. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
 
 ## Ticketuebersicht
 
@@ -91,9 +91,9 @@ Stand: 26. September 2026
 | `PROTO-004` | `DONE` | Mehrstufige echte Aktion capturen | Spell inklusive Ziel-, Mana-, Prioritaets- und Aufloesungsloop bewiesen. |
 | `PROTO-005` | `DONE` | Reale DTOs gegen TypeScript-Vertrag abgleichen | App nutzt belegte statt angenommene Protocol-Typen. |
 | `ARCH-001` | `DONE` | Prozess- und Lizenzgrenze festlegen | UI, API, Relay und Engine haben klare Verantwortungen. |
-| `APP-001` | `NEXT` | React/TypeScript- und API-Grundgeruest erstellen | Startbare Web-App plus API- und Shared-Packages. |
-| `ENGINE-001` | `READY` | Wiederverwendbaren Manabrew-Client bauen | Relay/Lobby/Game-Protokoll steckt nicht mehr nur im Capture-Skript. |
-| `UI-001` | `BLOCKED` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
+| `APP-001` | `DONE` | React/TypeScript- und API-Grundgeruest erstellen | Startbare Web-App plus API- und Shared-Packages. |
+| `ENGINE-001` | `NEXT` | Wiederverwendbaren Manabrew-Client bauen | Relay/Lobby/Game-Protokoll steckt nicht mehr nur im Capture-Skript. |
+| `UI-001` | `READY` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
 | `UI-002` | `BLOCKED` | Ersten Hybrid-Commander-Board-Slice bauen | Menschlicher Bereich, drei Bot-Panels und Prompt-Aktionen sind sichtbar. |
 | `DECK-001` | `READY` | Neutralen Commander-Decklistenimport definieren | Textliste wird in ein internes Deckmodell umgewandelt. |
 | `DECK-002` | `BLOCKED` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
@@ -226,7 +226,7 @@ Stand: 26. September 2026
 
 ### APP-001 - Web-/API-Grundgeruest erstellen
 
-- **Status:** `NEXT`
+- **Status:** `DONE`
 - **Prioritaet:** P0
 - **Zielstruktur:** React/TypeScript-Web-App, Node/TypeScript-API und Shared-Package in einem Workspace.
 - **Akzeptanzkriterien:**
@@ -234,17 +234,21 @@ Stand: 26. September 2026
   - Web und API haben Healthchecks.
   - Shared Protocol-/Domain-Typen werden von beiden verwendet.
   - Keine Secrets landen im Browser-Bundle.
+- **Ergebnis (2026-09-26):** npm-Workspaces verbinden `apps/web`, `apps/api` und `packages/shared`. Die React-/Vite-App zeigt den API-Status ueber den lokalen `/api`-Proxy. Die Node-/TypeScript-API bietet `/healthz`, `/readyz` und den oeffentlichen `/api/status`. Gemeinsame Health-/Statusvertraege liegen im Shared-Package; die bestehenden Manabrew-Protokolltypen werden dort weitergefuehrt.
+- **Start:** `npm install`, danach `npm run dev`; Web unter `http://127.0.0.1:5173`, API unter `http://127.0.0.1:8787`.
+- **Evidence:** `npm run typecheck`, `npm test` und `npm run build` bestanden. Drei API-Tests pruefen Liveness/Readiness, den oeffentlichen Status ohne serverseitige Test-Secrets und JSON-404. Im realen gemeinsamen Dev-Lauf lieferten Web- und API-Healthchecks HTTP 200; der Web-Proxy erreichte Protocol-Version 5 der API.
+- **Abgrenzung:** Die Engine-Verbindung ist bewusst `false`; Relay-Orchestrierung folgt in `ENGINE-001`. SQLite, Auth und GLM sind eigene Folgetickets.
 
 ### ENGINE-001 - Wiederverwendbaren Manabrew-Client bauen
 
-- **Status:** `READY`; `PROTO-005` und `ARCH-001` sind abgeschlossen
+- **Status:** `NEXT`; `PROTO-005`, `ARCH-001` und `APP-001` sind abgeschlossen
 - **Prioritaet:** P0
 - **Aufgaben:** Auth, Room-Liste, Join, Deckwahl, Ready, Bot-Batch, Start, Resync, State/Delta, Prompt/Response, Reconnect und Fehlerbehandlung aus dem Capture-Skript in eine testbare Bibliothek extrahieren.
 - **Akzeptanzkriterien:** Das Capture-Skript und spaeter die API koennen denselben Client verwenden; keine duplizierte Protocol-Logik.
 
 ### UI-001 - `gameView` normalisieren
 
-- **Status:** `BLOCKED` durch `PROTO-005` und `APP-001`
+- **Status:** `READY`; `PROTO-005` und `APP-001` sind abgeschlossen
 - **Prioritaet:** P0
 - **Aufgaben:** Normalisiertes Modell fuer Spieler, Zonen, sichtbare/verdeckte Karten, Stack, Zug/Phase, Prioritaet, Combat, Commander-Schaden und aktive Sonderrollen definieren.
 - **Akzeptanzkriterien:** Ein echter Capture-State wird deterministisch in ein UI-Modell fuer vier Spieler transformiert.
