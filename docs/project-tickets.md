@@ -49,10 +49,11 @@ Stand: 26. September 2026
 - `ARCH-001` ist abgeschlossen: Browser, eigene API, Relay und Forge-node haben dokumentierte Prozess-, Secret-, Reconnect-, Deployment- und Lizenzgrenzen.
 - `APP-001` ist abgeschlossen: npm-Workspace, React-/Vite-Web-App, Node-/TypeScript-API und Shared-Package starten und bauen gemeinsam; getrennte Healthchecks sind erreichbar.
 - `ENGINE-001` ist abgeschlossen: API und Capture-Skript verwenden denselben getesteten Manabrew-Client fuer Auth, Raum-, Spiel-, Prompt- und Reconnect-Ablauf.
+- `UI-001` ist abgeschlossen: Echte `gameView`-States werden deterministisch in das versionierte UI-Modell (`UI_MODEL_VERSION 1`) normalisiert; ein Vier-Spieler-Fixture und alle lokalen Raw-Capture-States laufen durch den Regressionstest.
 
 ### Was noch nicht existiert
 
-- Noch keine spielbare Commander-Oberflaeche; bisher existiert das React-Grundgeruest mit API-Status.
+- Noch keine gerenderte Commander-Oberflaeche; das stabile UI-Modell aus `UI-001` wartet auf den ersten Board-Slice in `UI-002`.
 - Noch kein dauerhafter Game-Orchestrator; die API stellt bisher die Relay-Verbindung und Health-/Status-Endpunkte bereit.
 - Keine SQLite-Datenbank oder Deckbibliothek.
 - Kein Import echter Playgroup-Decks.
@@ -72,16 +73,17 @@ Stand: 26. September 2026
 - Architekturentscheidung: `docs/architecture.md`
 - Relay-Client und Betriebsbeschreibung: `packages/manabrew-client`, `docs/engine-client.md`
 - Entscheidungen und Risiken: `docs/wayfinding.md`
+- UI-Modell: `packages/shared/src/game-view.ts`, Test `npm run gameview:test`, Doku `docs/ui-model.md`
 - Git-Baseline: Commit `04f9ee9` auf `origin/main` (`https://github.com/FruechteBini/mtg_commander.git`)
 
 ## Empfohlene Reihenfolge
 
-1. `UI-001` umsetzen und den echten `gameView`-Vertrag in ein stabiles UI-Modell normalisieren.
-2. `UI-002` auf diesem Modell aufbauen.
-3. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
-4. Save/Load mit `SAVE-001` frueh klaeren, bevor persistente Spiel-APIs als stabil gelten.
-5. Danach UI, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
-6. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
+1. `UI-002` umsetzen und den ersten Hybrid-Commander-Board-Slice auf dem stabilen UI-Modell aus `UI-001` aufbauen.
+2. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
+3. Save/Load mit `SAVE-001` frueh klaeren, bevor persistente Spiel-APIs als stabil gelten.
+4. Danach UI, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
+5. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
+6. Erkenntnisse fliessen zurueck in Ticketstatus, Evidence und Wayfinding.
 
 ## Ticketuebersicht
 
@@ -95,8 +97,8 @@ Stand: 26. September 2026
 | `ARCH-001` | `DONE` | Prozess- und Lizenzgrenze festlegen | UI, API, Relay und Engine haben klare Verantwortungen. |
 | `APP-001` | `DONE` | React/TypeScript- und API-Grundgeruest erstellen | Startbare Web-App plus API- und Shared-Packages. |
 | `ENGINE-001` | `DONE` | Wiederverwendbaren Manabrew-Client bauen | API und Capture nutzen dieselbe validierte Relay-/Game-Bibliothek. |
-| `UI-001` | `NEXT` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
-| `UI-002` | `BLOCKED` | Ersten Hybrid-Commander-Board-Slice bauen | Menschlicher Bereich, drei Bot-Panels und Prompt-Aktionen sind sichtbar. |
+| `UI-001` | `DONE` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
+| `UI-002` | `NEXT` | Ersten Hybrid-Commander-Board-Slice bauen | Menschlicher Bereich, drei Bot-Panels und Prompt-Aktionen sind sichtbar. |
 | `DECK-001` | `READY` | Neutralen Commander-Decklistenimport definieren | Textliste wird in ein internes Deckmodell umgewandelt. |
 | `DECK-002` | `BLOCKED` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
 | `BOT-002` | `BLOCKED` | Vier-Spieler-Langlauf mit realistischen Decks testen | Bots spielen mehrere Zuege ohne Stillstand oder Protokollfehler. |
@@ -249,18 +251,21 @@ Stand: 26. September 2026
 - **Akzeptanzkriterien:** Das Capture-Skript und spaeter die API koennen denselben Client verwenden; keine duplizierte Protocol-Logik.
 - **Ergebnis (2026-09-26):** `packages/manabrew-client` kapselt die komplette Relay-Verbindung und validiert eingehende Nachrichten mit dem gemeinsamen Protocol-Parser. Das Capture-Skript nutzt die Bibliothek fuer Auth, Raum, Deck, Ready, Bot-Batch, Start, Resync und Antworten. Die API startet denselben Client serverseitig aus `.env`, meldet seinen Status ueber `/api/status` und reconnectet nach Verbindungsabbruechen mit begrenztem exponentiellem Backoff. Authentifizierungsfehler werden nicht endlos wiederholt.
 - **Evidence:** Fuenf Client-Tests pruefen Befehlsformen, State/Delta/Prompt/Fehler, ungueltige Nachrichten, Reconnect und abgelehnte Authentifizierung. `npm run typecheck`, `npm test` und `npm run build` bestehen. `npm run engine:smoke` authentifiziert den neuen Client am echten lokalen Relay und findet den konfigurierten Forge-Raum. Der bestehende Vier-Spieler-Capture belegt die verwendeten realen Nachrichtenformen.
-- **Naechster Schritt:** `UI-001` normalisiert einen echten `gameView`-State fuer die React-Oberflaeche.
+- **Naechster Schritt:** Keiner offen aus diesem Ticket; `UI-001` hat auf diesem Client aufgebaut und ist abgeschlossen.
 
 ### UI-001 - `gameView` normalisieren
 
-- **Status:** `NEXT`; `PROTO-005`, `APP-001` und `ENGINE-001` sind abgeschlossen
+- **Status:** `DONE`
 - **Prioritaet:** P0
 - **Aufgaben:** Normalisiertes Modell fuer Spieler, Zonen, sichtbare/verdeckte Karten, Stack, Zug/Phase, Prioritaet, Combat, Commander-Schaden und aktive Sonderrollen definieren.
 - **Akzeptanzkriterien:** Ein echter Capture-State wird deterministisch in ein UI-Modell fuer vier Spieler transformiert.
+- **Ergebnis (2026-09-26):** `packages/shared/src/game-view.ts` definiert das versionierte UI-Modell (`UI_MODEL_VERSION 1`) und projiziert echte Engine-`gameView`-Objekte rein und total: Spieler mit Leben, Sitz, Prioritaet und Mana-Pool; pro Spieler sechs Zonen in fester Reihenfolge (battlefield, hand, library, graveyard, exile, command; unbekannte Rohzonen wie sideboard landen als `unknown` hinten); Karten mit Sichtbarkeit, Farben, Kreaturenwerten (Strings wegen `*`) und Markern; Stack, Zug/Phase inklusive `displayTurn`, Combat-Flag, Sonderrollen sowie Commander-Casts/-Schaden als sortierte Arrays. `normalizeStateEnvelope` akzeptiert nur echte State-Envelopes und uebernimmt deren Perspektive.
+- **Evidence:** `scripts/game-view-normalizer-test.mjs` prueft das Vier-Spieler-Fixture `packages/shared/fixtures/game-view-four-player.json`, den Shock-Vorher/Nachher-Wechsel (Leben 40 -> 38, hand -> graveyard), Determinismus unter Schluesselumordnung, defensive Fallbacks und streamt optional alle lokalen Raw-Capture-States durch das Modell (aktuell 2). `npm run gameview:test`, `npm run typecheck`, `npm test` und `npm run build` bestehen. Modell-Doku: [docs/ui-model.md](ui-model.md).
+- **Naechster Schritt:** `UI-002` rendert das Modell als ersten Hybrid-Commander-Board-Slice.
 
 ### UI-002 - Hybrid-Commander-Board-Slice
 
-- **Status:** `BLOCKED` durch `UI-001`
+- **Status:** `NEXT`; entblockt durch abgeschlossenes `UI-001`
 - **Prioritaet:** P0
 - **Layout:** Eigener Bereich gross; drei Gegner kompakt und aufklappbar; Stack/Prompt gut sichtbar; Desktop zuerst.
 - **Akzeptanzkriterien:** Fixture und Real-Capture koennen statisch gerendert werden; aktive/legale Karten und aktueller Spieler sind erkennbar.

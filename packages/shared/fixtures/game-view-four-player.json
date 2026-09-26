@@ -1,0 +1,459 @@
+{
+  "source": "Sanitized four-seat game start state. Field shapes and values are taken verbatim from the real capture manabrew-real-session-2026-09-16T13-44-43-024Z.jsonl (two seats observed there); seats three and four mirror the identical bot player/card shapes proven by manabrew-real-session-2026-09-17T12-59-23-759Z.summary.json (player_order with four seats). Only usernames were replaced.",
+  "protocolVersion": 5,
+  "messages": [
+    {
+      "type": "GameStarted",
+      "room_id": "capture-room-sanitized",
+      "game_id": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+      "player_order": ["seat-human", "seat-bot-1", "seat-bot-2", "seat-bot-3"],
+      "starting_life": 40
+    },
+    {
+      "type": "StateUpdate",
+      "state": {
+        "kind": "state",
+        "forPlayer": "player-0",
+        "fingerprint": "70d8f4129edb1146",
+        "emitMs": 2,
+        "state": {
+          "gameView": {
+            "activePlaneNames": null,
+            "activePlayerId": "player-0",
+            "combatAssignments": [],
+            "dayTime": "neither",
+            "gameId": "f8d53c1d-f6e3-4039-bdb9-d9863878c174",
+            "gameOver": false,
+            "initiativeHolderId": null,
+            "monarchId": null,
+            "players": [
+              {
+                "activeSchemeNames": null,
+                "cardsDrawnThisTurn": 0,
+                "commanderCasts": { "engine-card-199": 0 },
+                "commanderDamage": {},
+                "controlledBy": null,
+                "counters": {},
+                "damagePrevention": 0,
+                "dungeonState": null,
+                "extraTurnCount": 0,
+                "hasCityBlessing": false,
+                "hasEnduringStory": false,
+                "id": "player-0",
+                "isExtraTurn": false,
+                "isHuman": true,
+                "landsPlayedThisTurn": 0,
+                "life": 40,
+                "manaPool": { "B": 0, "C": 0, "G": 0, "R": 0, "U": 0, "W": 0 },
+                "maxHandSize": 7,
+                "maxLandPlaysPerTurn": 1,
+                "name": "seat-human",
+                "playerKeywords": [],
+                "ringLevel": 0,
+                "speed": 0,
+                "status": "playing",
+                "teamNumber": null,
+                "unlimitedHandSize": false,
+                "unlimitedLandPlays": false
+              },
+              {
+                "activeSchemeNames": null,
+                "cardsDrawnThisTurn": 0,
+                "commanderCasts": { "engine-card-200": 0 },
+                "commanderDamage": {},
+                "controlledBy": null,
+                "counters": {},
+                "damagePrevention": 0,
+                "dungeonState": null,
+                "extraTurnCount": 0,
+                "hasCityBlessing": false,
+                "hasEnduringStory": false,
+                "id": "player-1",
+                "isExtraTurn": false,
+                "isHuman": false,
+                "landsPlayedThisTurn": 0,
+                "life": 40,
+                "manaPool": { "B": 0, "C": 0, "G": 0, "R": 0, "U": 0, "W": 0 },
+                "maxHandSize": 7,
+                "maxLandPlaysPerTurn": 1,
+                "name": "seat-bot-1",
+                "playerKeywords": [],
+                "ringLevel": 0,
+                "speed": 0,
+                "status": "playing",
+                "teamNumber": null,
+                "unlimitedHandSize": false,
+                "unlimitedLandPlays": false
+              },
+              {
+                "activeSchemeNames": null,
+                "cardsDrawnThisTurn": 0,
+                "commanderCasts": { "engine-card-201": 0 },
+                "commanderDamage": {},
+                "controlledBy": null,
+                "counters": {},
+                "damagePrevention": 0,
+                "dungeonState": null,
+                "extraTurnCount": 0,
+                "hasCityBlessing": false,
+                "hasEnduringStory": false,
+                "id": "player-2",
+                "isExtraTurn": false,
+                "isHuman": false,
+                "landsPlayedThisTurn": 0,
+                "life": 40,
+                "manaPool": { "B": 0, "C": 0, "G": 0, "R": 0, "U": 0, "W": 0 },
+                "maxHandSize": 7,
+                "maxLandPlaysPerTurn": 1,
+                "name": "seat-bot-2",
+                "playerKeywords": [],
+                "ringLevel": 0,
+                "speed": 0,
+                "status": "playing",
+                "teamNumber": null,
+                "unlimitedHandSize": false,
+                "unlimitedLandPlays": false
+              },
+              {
+                "activeSchemeNames": null,
+                "cardsDrawnThisTurn": 0,
+                "commanderCasts": { "engine-card-202": 0 },
+                "commanderDamage": {},
+                "controlledBy": null,
+                "counters": {},
+                "damagePrevention": 0,
+                "dungeonState": null,
+                "extraTurnCount": 0,
+                "hasCityBlessing": false,
+                "hasEnduringStory": false,
+                "id": "player-3",
+                "isExtraTurn": false,
+                "isHuman": false,
+                "landsPlayedThisTurn": 0,
+                "life": 40,
+                "manaPool": { "B": 0, "C": 0, "G": 0, "R": 0, "U": 0, "W": 0 },
+                "maxHandSize": 7,
+                "maxLandPlaysPerTurn": 1,
+                "name": "seat-bot-3",
+                "playerKeywords": [],
+                "ringLevel": 0,
+                "speed": 0,
+                "status": "playing",
+                "teamNumber": null,
+                "unlimitedHandSize": false,
+                "unlimitedLandPlays": false
+              }
+            ],
+            "priorityPlayerId": "player-0",
+            "stack": [],
+            "step": "untap",
+            "turn": 0,
+            "winnerId": null,
+            "zones": [
+              {
+                "cards": [],
+                "count": 0,
+                "ownerId": "player-0",
+                "zone": "hand"
+              },
+              {
+                "cards": [],
+                "count": 0,
+                "ownerId": "player-0",
+                "zone": "graveyard"
+              },
+              {
+                "cards": [],
+                "count": 0,
+                "ownerId": "player-0",
+                "zone": "exile"
+              },
+              {
+                "cards": [
+                  {
+                    "basePower": 2,
+                    "baseToughness": 2,
+                    "choices": [],
+                    "classLevels": [],
+                    "cmc": 3,
+                    "color": "BR",
+                    "commanderTax": 0,
+                    "controllerId": "player-0",
+                    "counters": {},
+                    "damage": 0,
+                    "exerted": false,
+                    "id": "engine-card-199",
+                    "identity": {
+                      "cardNumber": "246",
+                      "isToken": false,
+                      "name": "Neheb, the Worthy",
+                      "setCode": "AKR"
+                    },
+                    "isBestowed": false,
+                    "isDoubleFaced": false,
+                    "isFaceDown": false,
+                    "isTransformed": false,
+                    "keywords": [
+                      "First Strike"
+                    ],
+                    "manaCost": "{1}{B}{R}",
+                    "ownerId": "player-0",
+                    "phasedOut": false,
+                    "power": "2",
+                    "sagaChapters": [],
+                    "subtypes": [
+                      "Minotaur",
+                      "Warrior"
+                    ],
+                    "summoningSick": true,
+                    "supertypes": [
+                      "Legendary"
+                    ],
+                    "tapped": false,
+                    "text": "First strike\nOther Minotaurs you control have first strike.\nAs long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.\nWhenever Neheb, the Worthy deals combat damage to a player, each player discards a card.",
+                    "toughness": "2",
+                    "types": [
+                      "Creature"
+                    ],
+                    "visibility": "visible"
+                  }
+                ],
+                "count": 1,
+                "ownerId": "player-0",
+                "zone": "command"
+              },
+              {
+                "cards": [],
+                "count": 99,
+                "ownerId": "player-0",
+                "zone": "library"
+              },
+              {
+                "cards": [],
+                "count": 0,
+                "ownerId": "player-1",
+                "zone": "hand"
+              },
+              {
+                "cards": [],
+                "count": 0,
+                "ownerId": "player-1",
+                "zone": "graveyard"
+              },
+              {
+                "cards": [],
+                "count": 0,
+                "ownerId": "player-1",
+                "zone": "exile"
+              },
+              {
+                "cards": [
+                  {
+                    "basePower": 2,
+                    "baseToughness": 2,
+                    "choices": [],
+                    "classLevels": [],
+                    "cmc": 3,
+                    "color": "BR",
+                    "commanderTax": 0,
+                    "controllerId": "player-1",
+                    "counters": {},
+                    "damage": 0,
+                    "exerted": false,
+                    "id": "engine-card-200",
+                    "identity": {
+                      "cardNumber": "246",
+                      "isToken": false,
+                      "name": "Neheb, the Worthy",
+                      "setCode": "AKR"
+                    },
+                    "isBestowed": false,
+                    "isDoubleFaced": false,
+                    "isFaceDown": false,
+                    "isTransformed": false,
+                    "keywords": [
+                      "First Strike"
+                    ],
+                    "manaCost": "{1}{B}{R}",
+                    "ownerId": "player-1",
+                    "phasedOut": false,
+                    "power": "2",
+                    "sagaChapters": [],
+                    "subtypes": [
+                      "Minotaur",
+                      "Warrior"
+                    ],
+                    "summoningSick": true,
+                    "supertypes": [
+                      "Legendary"
+                    ],
+                    "tapped": false,
+                    "text": "First strike\nOther Minotaurs you control have first strike.\nAs long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.\nWhenever Neheb, the Worthy deals combat damage to a player, each player discards a card.",
+                    "toughness": "2",
+                    "types": [
+                      "Creature"
+                    ],
+                    "visibility": "visible"
+                  }
+                ],
+                "count": 1,
+                "ownerId": "player-1",
+                "zone": "command"
+              },
+              {
+                "cards": [],
+                "count": 99,
+                "ownerId": "player-1",
+                "zone": "library"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-2", "zone": "hand"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-2", "zone": "graveyard"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-2", "zone": "exile"
+              },
+              {
+                "cards": [
+                  {
+                    "basePower": 2,
+                    "baseToughness": 2,
+                    "choices": [],
+                    "classLevels": [],
+                    "cmc": 3,
+                    "color": "BR",
+                    "commanderTax": 0,
+                    "controllerId": "player-2",
+                    "counters": {},
+                    "damage": 0,
+                    "exerted": false,
+                    "id": "engine-card-201",
+                    "identity": {
+                      "cardNumber": "246",
+                      "isToken": false,
+                      "name": "Neheb, the Worthy",
+                      "setCode": "AKR"
+                    },
+                    "isBestowed": false,
+                    "isDoubleFaced": false,
+                    "isFaceDown": false,
+                    "isTransformed": false,
+                    "keywords": [
+                      "First Strike"
+                    ],
+                    "manaCost": "{1}{B}{R}",
+                    "ownerId": "player-2",
+                    "phasedOut": false,
+                    "power": "2",
+                    "sagaChapters": [],
+                    "subtypes": [
+                      "Minotaur",
+                      "Warrior"
+                    ],
+                    "summoningSick": true,
+                    "supertypes": [
+                      "Legendary"
+                    ],
+                    "tapped": false,
+                    "text": "First strike\nOther Minotaurs you control have first strike.\nAs long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.\nWhenever Neheb, the Worthy deals combat damage to a player, each player discards a card.",
+                    "toughness": "2",
+                    "types": [
+                      "Creature"
+                    ],
+                    "visibility": "visible"
+                  }
+                ],
+                "count": 1,
+                "ownerId": "player-2",
+                "zone": "command"
+              },
+              {
+                "cards": [], "count": 99, "ownerId": "player-2", "zone": "library"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-3", "zone": "hand"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-3", "zone": "graveyard"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-3", "zone": "exile"
+              },
+              {
+                "cards": [
+                  {
+                    "basePower": 2,
+                    "baseToughness": 2,
+                    "choices": [],
+                    "classLevels": [],
+                    "cmc": 3,
+                    "color": "BR",
+                    "commanderTax": 0,
+                    "controllerId": "player-3",
+                    "counters": {},
+                    "damage": 0,
+                    "exerted": false,
+                    "id": "engine-card-202",
+                    "identity": {
+                      "cardNumber": "246",
+                      "isToken": false,
+                      "name": "Neheb, the Worthy",
+                      "setCode": "AKR"
+                    },
+                    "isBestowed": false,
+                    "isDoubleFaced": false,
+                    "isFaceDown": false,
+                    "isTransformed": false,
+                    "keywords": [
+                      "First Strike"
+                    ],
+                    "manaCost": "{1}{B}{R}",
+                    "ownerId": "player-3",
+                    "phasedOut": false,
+                    "power": "2",
+                    "sagaChapters": [],
+                    "subtypes": [
+                      "Minotaur",
+                      "Warrior"
+                    ],
+                    "summoningSick": true,
+                    "supertypes": [
+                      "Legendary"
+                    ],
+                    "tapped": false,
+                    "text": "First strike\nOther Minotaurs you control have first strike.\nAs long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.\nWhenever Neheb, the Worthy deals combat damage to a player, each player discards a card.",
+                    "toughness": "2",
+                    "types": [
+                      "Creature"
+                    ],
+                    "visibility": "visible"
+                  }
+                ],
+                "count": 1,
+                "ownerId": "player-3",
+                "zone": "command"
+              },
+              {
+                "cards": [], "count": 99, "ownerId": "player-3", "zone": "library"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-0", "zone": "battlefield"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-1", "zone": "battlefield"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-2", "zone": "battlefield"
+              },
+              {
+                "cards": [], "count": 0, "ownerId": "player-3", "zone": "battlefield"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

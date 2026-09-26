@@ -87,6 +87,14 @@ node scripts/protocol-contract-test.mjs
 
 Der Test validiert Relay- und Engine-Envelopes, State, Ziel-/Mana-Prompts, die erzeugten Antworten und den abschliessenden Zustandswechsel. Liegt der ignorierte lokale Raw-Capture vor, werden auch alle seine Nachrichten gestreamt und validiert. Derselbe Lauf steht als `npm run protocol:test` bereit.
 
+Das stabile UI-Modell fuer echte `gameView`-States hat einen eigenen Regressionstest:
+
+```sh
+npm run gameview:test
+```
+
+Er normalisiert das Vier-Spieler-Fixture und den Shock-Zustandswechsel deterministisch, prueft defensive Fallbacks gegen unvollstaendige Engine-Daten und streamt vorhandene lokale Raw-Captures durch das Modell. Das Modell ist in [docs/ui-model.md](docs/ui-model.md) dokumentiert.
+
 Der echte Engine-Schritt ist als Docker-Runbook vorbereitet und lokal mit Docker Desktop/WSL2 erfolgreich gestartet:
 [docs/real-engine-poc.md](docs/real-engine-poc.md).
 
