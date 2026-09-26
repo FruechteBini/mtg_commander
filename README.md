@@ -71,7 +71,7 @@ Workspace-Struktur:
 - `apps/web`: React-/Vite-Oberflaeche.
 - `apps/api`: Node-/TypeScript-API.
 - `packages/manabrew-client`: wiederverwendbarer serverseitiger Relay-/Game-Client.
-- `packages/shared`: gemeinsame Domain- und Manabrew-Protokolltypen.
+- `packages/shared`: gemeinsame Domain- und Manabrew-Protokolltypen sowie den neutralen Commander-Decklistenimport (`deck-list.ts`, Test via `npm run deck:test`).
 
 Der erste lokale Protokoll-PoC liegt in [docs/protocol-poc.md](docs/protocol-poc.md). Er kann ohne Dependencies direkt mit Node ausgefuehrt werden:
 

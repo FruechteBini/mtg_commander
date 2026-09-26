@@ -51,13 +51,14 @@ Stand: 26. September 2026
 - `ENGINE-001` ist abgeschlossen: API und Capture-Skript verwenden denselben getesteten Manabrew-Client fuer Auth, Raum-, Spiel-, Prompt- und Reconnect-Ablauf.
 - `UI-001` ist abgeschlossen: Echte `gameView`-States werden deterministisch in das versionierte UI-Modell (`UI_MODEL_VERSION 1`) normalisiert; ein Vier-Spieler-Fixture und alle lokalen Raw-Capture-States laufen durch den Regressionstest.
 - `UI-002` ist abgeschlossen: Die Web-App rendert das UI-Modell als ersten statischen Hybrid-Commander-Board-Slice - grosser eigener Bereich, drei kompakte aufklappbare Gegner-Panels, Stack sichtbar, Capture-Loader zum statischen Rendern echter States.
+- `DECK-001` ist abgeschlossen: Typische Commander-Textlisten (Sektionen wie `Deck`/`Commander`/`Sideboard`, `*CMDR*`-Marker, Anzahl mit/ohne `x`, Printing in Klammern) werden geparst, strukturell validiert (100-Karten-Regel inklusive Commander, 1-2 Commander, Singleton ausser Basiscards) und deterministisch in das capture-bewaehrte Manabrew-Deckformat (`cards`/`commanders` mit `identity`) konvertiert.
 
 ### Was noch nicht existiert
 
 - Die Commander-Oberflaeche ist noch rein statisch: Interaktion, Prompt-Antworten, Highlighting legaler Aktionen und Live-States aus der API fehlen noch.
 - Noch kein dauerhafter Game-Orchestrator; die API stellt bisher die Relay-Verbindung und Health-/Status-Endpunkte bereit.
 - Keine SQLite-Datenbank oder Deckbibliothek.
-- Kein Import echter Playgroup-Decks.
+- Kein Import echter Playgroup-Decks; der neutrale Textimport aus `DECK-001` ist noch nicht mit einem realen Deck und einem Forge-Start bewiesen (`DECK-002`).
 - Noch kein Proof fuer jede Prompt-Familie; insbesondere Moduswahl, Karten-/Mehrfachzielauswahl, Trigger-Reihenfolge und Combat-Entscheidungen bleiben offen.
 - Kein Save/Load-Proof fuer den internen Engine-Zustand.
 - Keine GLM-Tutor-Anbindung.
@@ -80,7 +81,7 @@ Stand: 26. September 2026
 
 ## Empfohlene Reihenfolge
 
-1. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
+1. `DECK-002` umsetzen: erstes echtes Playgroup-Deck ueber den neutralen Import aus `DECK-001` laden und in Forge starten.
 2. Save/Load mit `SAVE-001` frueh klaeren, bevor persistente Spiel-APIs als stabil gelten.
 3. Danach UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
 4. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
@@ -100,8 +101,8 @@ Stand: 26. September 2026
 | `ENGINE-001` | `DONE` | Wiederverwendbaren Manabrew-Client bauen | API und Capture nutzen dieselbe validierte Relay-/Game-Bibliothek. |
 | `UI-001` | `DONE` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
 | `UI-002` | `DONE` | Ersten Hybrid-Commander-Board-Slice bauen | Statisches Board rendert Fixture- und Capture-States; Rollen, Prioritaet und Stack sind sichtbar. |
-| `DECK-001` | `NEXT` | Neutralen Commander-Decklistenimport definieren | Textliste wird in ein internes Deckmodell umgewandelt. |
-| `DECK-002` | `BLOCKED` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
+| `DECK-001` | `DONE` | Neutralen Commander-Decklistenimport definieren | Textliste wird geparst, validiert und ins Manabrew-Deckformat konvertiert. |
+| `DECK-002` | `NEXT` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
 | `BOT-002` | `BLOCKED` | Vier-Spieler-Langlauf mit realistischen Decks testen | Bots spielen mehrere Zuege ohne Stillstand oder Protokollfehler. |
 | `SAVE-001` | `RESEARCH` | Engine-Snapshot/Save/Resume untersuchen | Harte Go/No-Go-Antwort fuer echtes Pause/Fortsetzen. |
 
@@ -276,15 +277,18 @@ Stand: 26. September 2026
 
 ### DECK-001 - Neutraler Decklistenimport
 
-- **Status:** `NEXT`
+- **Status:** `DONE` (2026-09-26)
 - **Prioritaet:** P0
 - **Scope:** Text-/Dateiimport zuerst, keine automatische mythic.tools-Synchronisierung.
 - **Daten:** Besitzer, Deckname, Commander, Karten mit Anzahl/Printing, Quelle, Quell-URL und Importzeitpunkt.
 - **Akzeptanzkriterien:** Eine typische Commander-Textliste wird in ein 100-Karten-Modell geparst, validiert und in das Manabrew-Deckformat konvertiert.
+- **Ergebnis:** `packages/shared/src/deck-list.ts` parst typische Exporte (Sektionen `Deck`/`Commander`/`Sideboard`/`Maybeboard`, `*CMDR*`-Marker, Anzahl mit/ohne `x`, Printing `(SET) 123`, Zeilen ohne Anzahl als 1x), validiert strukturell (genau 100 inklusive 1-2 Commander, Singleton ausser Basiscards, Commander nicht doppelt im 99) und liefert ein Import-Modell mit Besitzer, Quelle, Quell-URL und Importzeitpunkt (Zeit wird vom Aufrufer uebergeben, Modul bleibt pur). `toManabrewDeckSelection()` erzeugt deterministisch das capture-bewaehrte Deckformat (`{ name, format: "commander", cards, commanders }` mit `identity`, Mengen expandiert, Ids als Slugs).
+- **Evidence:** Regressionstest `npm run deck:test` (`scripts/deck-import-test.mjs`): Happy Path (100er-Liste mit Printing und Sideboard), Manabrew-Konvertierung inkl. Determinismus, Fehlerfaelle (99 statt 100, Singleton-Verstoss, Commander doppelt, kein/zu vieler Commander), Partner-Commander, Commander nur via Meta-Angabe, defensible Eingaben. Laeuft in der `npm test`-Kette.
+- **Naechster Schritt:** `DECK-002` - erstes echtes Playgroup-Deck importieren und in Forge starten.
 
 ### DECK-002 - Erstes echtes Playgroup-Deck
 
-- **Status:** `BLOCKED` durch `DECK-001`
+- **Status:** `NEXT` (entblockt durch `DECK-001`)
 - **Prioritaet:** P0
 - **Akzeptanzkriterien:** Ein echtes mythic.tools-/Export-Deck wird importiert, von Forge akzeptiert und startet in einem Vier-Spieler-Spiel.
 

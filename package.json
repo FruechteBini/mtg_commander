@@ -17,13 +17,14 @@
     "dev:api": "npm run dev -w @mtg-commander/api",
     "dev:web": "npm run dev -w @mtg-commander/web",
     "start:api": "npm run start -w @mtg-commander/api",
-    "test": "npm run build -w @mtg-commander/shared && npm run protocol:test && npm run gameview:test && npm run test -w @mtg-commander/manabrew-client && npm run test -w @mtg-commander/web && npm run test -w @mtg-commander/api",
+    "test": "npm run build -w @mtg-commander/shared && npm run protocol:test && npm run gameview:test && npm run deck:test && npm run test -w @mtg-commander/manabrew-client && npm run test -w @mtg-commander/web && npm run test -w @mtg-commander/api",
     "typecheck": "npm run build -w @mtg-commander/shared && npm run typecheck -w @mtg-commander/api && npm run typecheck -w @mtg-commander/web",
     "protocol:capture": "node scripts/capture-real-session.mjs",
     "engine:smoke": "node scripts/relay-client-smoke.mjs",
     "protocol:poc": "node scripts/protocol-poc.mjs",
     "protocol:test": "node scripts/protocol-contract-test.mjs",
-    "gameview:test": "node scripts/game-view-normalizer-test.mjs"
+    "gameview:test": "node scripts/game-view-normalizer-test.mjs",
+    "deck:test": "node scripts/deck-import-test.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

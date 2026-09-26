@@ -150,7 +150,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Type:** research/task
 
-**Status:** Open.
+**Status:** Partially proven - neutraler Textimport steht (`DECK-001`), echtes mythic.tools-Deck folgt (`DECK-002`).
 
 **Why it matters:** Der Produktkern ist: gegen die echten Decks von Freunden spielen.
 
@@ -161,9 +161,9 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 - Wie speichern wir Besitzer, Commander, Deckname, Quelle und Importzeitpunkt?
 - Wie validieren wir Decklisten gegen Forge/Manabrew-Kartendaten?
 
-**Evidence:** Produktentscheidung aus Wayfinding: mythic.tools ist gewuenscht, automatische Synchronisierung ist nicht Teil von Milestone 1.
+**Evidence:** Produktentscheidung aus Wayfinding: mythic.tools ist gewuenscht, automatische Synchronisierung ist nicht Teil von Milestone 1. `DECK-001` abgeschlossen: `packages/shared/src/deck-list.ts` parst, validiert und konvertiert typische Textlisten (Regressionstest `npm run deck:test`).
 
-**Current answer:** MVP startet pragmatisch mit Deck-Link oder exportierter Deckliste. Eine echte mythic.tools-Synchronisierung kommt spaeter, falls es eine stabile API oder ein verlaessliches Exportformat gibt.
+**Current answer:** MVP startet pragmatisch mit Deck-Link oder exportierter Deckliste. Eine echte mythic.tools-Synchronisierung kommt spaeter, falls es eine stabile API oder ein verlaessliches Exportformat gibt. Der neutrale Textimport parst Sektionen, `*CMDR*`-Marker, Anzahl und Printing, prueft die 100-Karten-Regel (1-2 Commander, Singleton ausser Basiscards) und konvertiert deterministisch in das capture-bewaehrte Manabrew-Deckformat.
 
 **Next proof:** Ein echtes Beispieldeck aus mythic.tools exportieren oder verlinken und in das Deckformat fuer Manabrew/Forge umwandeln.
 
