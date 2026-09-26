@@ -276,7 +276,7 @@ Stand: 26. September 2026
 
 ### DECK-001 - Neutraler Decklistenimport
 
-- **Status:** `READY`
+- **Status:** `NEXT`
 - **Prioritaet:** P0
 - **Scope:** Text-/Dateiimport zuerst, keine automatische mythic.tools-Synchronisierung.
 - **Daten:** Besitzer, Deckname, Commander, Karten mit Anzahl/Printing, Quelle, Quell-URL und Importzeitpunkt.
