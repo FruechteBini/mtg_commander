@@ -48,7 +48,7 @@ export function App() {
         <span className={`status-dot ${apiReady ? "online" : "offline"}`} aria-hidden="true" />
         {apiState.kind === "ready" && (
           <p className="detail">
-            Protocol v{apiState.status.protocolVersion} · Engine-Verbindung folgt in ENGINE-001
+            Protocol v{apiState.status.protocolVersion} · Engine: {apiState.status.engineStatus}
           </p>
         )}
         {apiState.kind === "error" && <p className="detail error">{apiState.message}</p>}

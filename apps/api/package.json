@@ -11,6 +11,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@mtg-commander/manabrew-client": "*",
     "@mtg-commander/shared": "*"
   },
   "devDependencies": {

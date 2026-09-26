@@ -51,6 +51,7 @@ Ein privater Commander-Prototyp fuer die Playgroup: Ein Mensch kann auf einem De
 - Relay und Forge bleiben getrennte Drittanbieterprozesse. Die eigene Protokollimplementierung folgt der CC-BY-4.0-Spezifikation; AGPL-/GPL- und Asset-Fragen werden entlang dieser Grenze dokumentiert.
 - Reconnect ist nach Ausfallstufe getrennt: Browser-Reconnect nutzt API-Cache, API/Relay brauchen Retake/Resync-Proofs, Engine-Neustart braucht weiterhin `SAVE-001`.
 - `APP-001` ist umgesetzt: npm-Workspace mit React/Vite-Web-App, Node/TypeScript-API und Shared-Package; Browserzugriff auf die API erfolgt lokal ueber `/api`, beide Dienste besitzen Healthchecks.
+- `ENGINE-001` ist umgesetzt: Capture-Skript und API nutzen denselben serverseitigen Manabrew-Client fuer Relay-, Raum-, Spiel-, Prompt- und Reconnect-Ablauf.
 
 ## Frontier Tickets
 
@@ -81,7 +82,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Current answer:** Die Protokollgrenze ist fuer einen echten mehrstufigen UI-Aktionsloop tragfaehig. Der Protocol-v5-Vertrag trennt Relay-`type` von Engine-`kind`, bildet den Shock-Loop inklusive Ziel und Mana ab und wird an der externen Grenze zur Laufzeit validiert. Der Offline-Test validierte sieben sanitiserte Fixture-Nachrichten und alle 228 Nachrichten des lokalen erfolgreichen Captures. `stateDelta`, `error` und `fatal` wurden im erfolgreichen Lauf nicht real emittiert und bleiben als noch nicht capture-bewiesene Vertraege markiert.
 
-**Next proof:** `ENGINE-001` extrahiert den wiederverwendbaren serverseitigen Relay-Client aus dem Capture-Skript und bindet ihn an das fertige API-Grundgeruest an.
+**Next proof:** `UI-001` normalisiert einen echten `gameView`-State in ein stabiles Modell fuer vier Spieler, Zonen, Stack, Zug und Prioritaet.
 
 **Execution log (2026-09-16):** Der Capture wurde so erweitert, dass leere `chooseAction`-Prompts weiter mit `pass` beantwortet werden. Erfolg wird nur bei einer Engine-gelieferten `actionId` und einem Zustandswechsel derselben Spielerperspektive gemeldet. Der Lauf `manabrew-real-session-2026-09-16T14-36-11-587Z` bestand dieses Kriterium: `Play Mountain`, `hand` -> `battlefield`, gleicher Zug und Schritt, geaenderter Fingerprint, keine Fehler.
 

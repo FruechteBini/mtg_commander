@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
+import { ManabrewRelayClient } from "@mtg-commander/manabrew-client";
 
 const relayUrl = process.env.MANABREW_RELAY_URL ?? "ws://localhost:9443";
 const serverKey = process.env.MANABREW_SERVER_KEY ?? "local-dev-change-me";
@@ -42,7 +43,7 @@ const summary = {
 
 fs.mkdirSync(captureDir, { recursive: true });
 
-let ws;
+let client;
 let done = false;
 let sentStart = false;
 let mySlot = null;
@@ -84,22 +85,6 @@ function note(event, data = {}) {
   console.log(`[capture] ${event}${Object.keys(data).length ? ` ${JSON.stringify(data)}` : ""}`);
 }
 
-function send(message) {
-  record("out", message);
-  ws.send(JSON.stringify(message));
-}
-
-function messageId() {
-  return crypto.randomUUID();
-}
-
-function basicDeck(name, land, creature) {
-  const cards = [];
-  for (let i = 0; i < 40; i += 1) cards.push(card(`${land.toLowerCase()}-${i}`, land));
-  for (let i = 0; i < 20; i += 1) cards.push(card(`creature-${i}`, creature));
-  return { name, cards };
-}
-
 function commanderDeck(name) {
   const cards = [];
   for (let i = 0; i < 50; i += 1) cards.push(card(`mountain-${i}`, "Mountain"));
@@ -124,42 +109,21 @@ function card(id, name) {
   };
 }
 
-function spawnBots(roomId, count) {
-  const decks = Array.from({ length: count }, (_, index) => ({
+function botDeckSelections(count) {
+  return Array.from({ length: count }, (_, index) => ({
     deckName: `Capture Bot ${index + 1}`,
     deck: commanderDeck(`Capture Bot ${index + 1}`),
     commanderName: "Neheb, the Worthy",
   }));
-  return {
-    type: "BroadcastState",
-    state: {
-      kind: "roomRelay",
-      protocol: "self-hosted-node",
-      version: 1,
-      messageId: messageId(),
-      fromPlayer: username,
-      roomId,
-      payload: {
-        type: "spawnBot",
-        // Current Manabrew accepts one batch. Sending separate spawnBot
-        // messages replaces the previous bot set because the host stops all
-        // existing bots before applying each request.
-        deck: decks[0],
-        decks,
-      },
-    },
-    target_player: null,
-  };
 }
 
-function setDeckSelection() {
+function captureDeckSelection() {
   return {
-    type: "SetDeckSelection",
-    deck_name: "Capture Player",
+    deckName: "Capture Player",
     deck: commanderDeck("Capture Player"),
-    published_deck_id: null,
-    commander_name: "Neheb, the Worthy",
-    avatar_url: null,
+    publishedDeckId: null,
+    commanderName: "Neheb, the Worthy",
+    avatarUrl: null,
   };
 }
 
@@ -287,14 +251,10 @@ function promptResponse(forPlayer, prompt) {
 
 function response(fromPlayer, promptId, action) {
   return {
-    type: "BroadcastState",
-    state: {
-      kind: "response",
-      fromPlayer,
-      promptId,
-      action,
-    },
-    target_player: null,
+    fromPlayer,
+    promptId,
+    actionType: action.type,
+    output: action.output,
   };
 }
 
@@ -305,7 +265,7 @@ function maybeStart(room) {
 
   sentStart = true;
   note("starting-game", { players: room.players.map((player) => player.username) });
-  send({ type: "StartGame", format: "Commander" });
+  client.startGame("Commander");
 }
 
 function maybeFinishMultistepProof(gameView, fingerprint) {
@@ -341,7 +301,7 @@ async function finish(reason) {
   summary.reason = reason;
   fs.writeFileSync(summaryPath, `${JSON.stringify(summary, null, 2)}\n`);
   try {
-    ws.close();
+    client.close();
   } catch {}
   setTimeout(() => process.exit(0), 25).unref();
 }
@@ -414,7 +374,7 @@ function handleStateEnvelope(serverMessage) {
         const outbound = promptResponse(envelope.forPlayer, envelope.prompt);
         if (outbound) {
           promptResponses += 1;
-          const output = outbound.state.action.output;
+          const output = outbound.output;
           note("answering-prompt", { inputType, promptResponses, outputType: output?.type });
           if (inputType === "chooseAction") {
             const availableActions = (envelope.prompt?.input?.actions ?? []).map((action) => ({
@@ -489,7 +449,7 @@ function handleStateEnvelope(serverMessage) {
             }
             summary.multistepAction.promptChain.push(proofStep);
           }
-          send(outbound);
+          client.respond(outbound);
         } else {
           note("unsupported-prompt", { inputType });
         }
@@ -507,31 +467,20 @@ function handleStateEnvelope(serverMessage) {
 
 async function main() {
   note("connecting", { relayUrl });
-  ws = new WebSocket(relayUrl);
-
-  ws.addEventListener("open", () => {
-    note("connected");
-    send({
-      type: "Authenticate",
-      username,
-      password: serverKey,
-      service: false,
-      identity: null,
-      client_platform: "unknown",
-      client_version: null,
-    });
+  client = new ManabrewRelayClient({
+    url: relayUrl,
+    username,
+    password: serverKey,
+    clientPlatform: "mtg-commander-capture",
+    clientVersion: "0.1.0",
+    reconnect: true,
+    reconnectMinDelayMs: 250,
+    reconnectMaxDelayMs: 2_000,
+    reconnectMaxAttempts: 3,
   });
 
-  ws.addEventListener("message", (event) => {
-    const raw = typeof event.data === "string" ? event.data : Buffer.from(event.data).toString("utf8");
-    let message;
-    try {
-      message = JSON.parse(raw);
-    } catch {
-      record("in", { type: "unparsed", raw });
-      return;
-    }
-
+  client.on("send", (message) => record("out", message));
+  client.on("message", (message) => {
     record("in", message);
 
     if (message.type === "AuthResult") {
@@ -541,7 +490,7 @@ async function main() {
         return;
       }
       note("authenticated", { username: message.username ?? username });
-      send({ type: "ListRooms" });
+      client.listRooms();
       return;
     }
 
@@ -554,11 +503,8 @@ async function main() {
       }
       summary.roomId = room.room_id;
       note("joining-room", { roomId: room.room_id, roomName: room.room_name });
-      send({
-        type: "JoinRoom",
-        room_id: room.room_id,
-        observe: false,
-        as_bot: false,
+      client.joinRoom({
+        roomId: room.room_id,
         password: roomPassword,
       });
       return;
@@ -576,19 +522,22 @@ async function main() {
         botSpawnRequested = true;
         const requested = 3 - botCount;
         note("spawning-bots", { requested });
-        send(spawnBots(room.room_id, requested));
+        client.spawnBots({
+          roomId: room.room_id,
+          decks: botDeckSelections(requested),
+        });
       }
 
       const me = room.players.find((player) => player.username === username);
       if (me && !me.selected_deck_name && !deckSelectionRequested) {
         deckSelectionRequested = true;
         note("selecting-deck");
-        send(setDeckSelection());
+        client.setDeckSelection(captureDeckSelection());
       }
       if (me && !me.ready && !readyRequested && me.selected_deck_name) {
         readyRequested = true;
         note("setting-ready");
-        send({ type: "SetReady", ready: true });
+        client.setReady(true);
       }
 
       maybeStart(room);
@@ -604,7 +553,7 @@ async function main() {
       mySlot = mySlot >= 0 ? `player-${mySlot}` : null;
       summary.mySlot = mySlot;
       note("game-started", { gameId: message.game_id, mySlot });
-      send({ type: "RequestResync" });
+      client.requestResync();
       return;
     }
 
@@ -619,13 +568,21 @@ async function main() {
     }
   });
 
-  ws.addEventListener("error", (error) => {
-    summary.errors.push({ type: "websocket-error", message: String(error.message ?? error) });
+  client.on("invalidMessage", ({ raw, error }) => {
+    record("in", { type: "unparsed", raw });
+    summary.errors.push({ type: "invalid-message", message: String(error?.message ?? error) });
+  });
+  client.on("error", (error) => {
+    summary.errors.push({ type: "websocket-error", message: String(error?.message ?? error) });
+  });
+  client.on("reconnectScheduled", ({ attempt, delayMs }) => {
+    note("reconnect-scheduled", { attempt, delayMs });
+  });
+  client.on("status", ({ status }) => {
+    if (status === "failed" && !done) void finish("reconnect-exhausted");
   });
 
-  ws.addEventListener("close", () => {
-    if (!done) void finish("socket-closed");
-  });
+  client.connect();
 
   await delay(Number(process.env.MANABREW_CAPTURE_TIMEOUT_MS ?? 90000));
   await finish("timeout");

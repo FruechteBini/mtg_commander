@@ -99,7 +99,7 @@ Run `node scripts/protocol-contract-test.mjs` for the dependency-free regression
 
 ## Next proof
 
-`ARCH-001` is complete in `docs/architecture.md`, and `APP-001` now provides the Web/API/shared workspace. The next engineering step is extracting the reusable server-side relay client in `ENGINE-001`. Remaining prompt families such as modes, multiple targets, trigger ordering, and combat stay as focused future regression fixtures.
+`ARCH-001`, `APP-001`, and the reusable server-side relay client in `ENGINE-001` are complete. The next engineering step is normalizing a real `gameView` into the stable UI model in `UI-001`. Remaining prompt families such as modes, multiple targets, trigger ordering, and combat stay as focused future regression fixtures.
 
 Open questions:
 

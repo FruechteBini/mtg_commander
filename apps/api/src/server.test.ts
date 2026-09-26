@@ -46,7 +46,28 @@ test("browser status contains public state and no server secrets", async () => {
   assert.equal(body.architectureVersion, 1);
   assert.equal(body.protocolVersion, 5);
   assert.equal(body.engineConnected, false);
+  assert.equal(body.engineStatus, "disabled");
   assert.doesNotMatch(text, /test-relay-secret|test-zai-secret/);
+});
+
+test("browser status reflects an authenticated engine connection", async () => {
+  const authenticatedServer = createApiServer({ engineStatus: () => "authenticated" });
+  await new Promise<void>((resolve, reject) => {
+    authenticatedServer.once("error", reject);
+    authenticatedServer.listen(0, "127.0.0.1", resolve);
+  });
+
+  try {
+    const address = authenticatedServer.address() as AddressInfo;
+    const response = await fetch(`http://127.0.0.1:${address.port}/api/status`);
+    const body = (await response.json()) as AppStatus;
+    assert.equal(body.engineConnected, true);
+    assert.equal(body.engineStatus, "authenticated");
+  } finally {
+    await new Promise<void>((resolve, reject) => {
+      authenticatedServer.close((error) => (error ? reject(error) : resolve()));
+    });
+  }
 });
 
 test("unknown routes return a JSON 404", async () => {

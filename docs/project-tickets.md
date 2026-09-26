@@ -48,11 +48,12 @@ Stand: 26. September 2026
 - Der Projektstand ist auf Branch `main` im GitHub-Remote `origin` versioniert und von einem zweiten Rechner klonbar.
 - `ARCH-001` ist abgeschlossen: Browser, eigene API, Relay und Forge-node haben dokumentierte Prozess-, Secret-, Reconnect-, Deployment- und Lizenzgrenzen.
 - `APP-001` ist abgeschlossen: npm-Workspace, React-/Vite-Web-App, Node-/TypeScript-API und Shared-Package starten und bauen gemeinsam; getrennte Healthchecks sind erreichbar.
+- `ENGINE-001` ist abgeschlossen: API und Capture-Skript verwenden denselben getesteten Manabrew-Client fuer Auth, Raum-, Spiel-, Prompt- und Reconnect-Ablauf.
 
 ### Was noch nicht existiert
 
 - Noch keine spielbare Commander-Oberflaeche; bisher existiert das React-Grundgeruest mit API-Status.
-- Noch kein dauerhafter Game-Orchestrator; bisher existiert die Node/TypeScript-API mit Health-/Status-Endpunkten.
+- Noch kein dauerhafter Game-Orchestrator; die API stellt bisher die Relay-Verbindung und Health-/Status-Endpunkte bereit.
 - Keine SQLite-Datenbank oder Deckbibliothek.
 - Kein Import echter Playgroup-Decks.
 - Noch kein Proof fuer jede Prompt-Familie; insbesondere Moduswahl, Karten-/Mehrfachzielauswahl, Trigger-Reihenfolge und Combat-Entscheidungen bleiben offen.
@@ -69,13 +70,14 @@ Stand: 26. September 2026
 - Minimale Protocol-Typen: `packages/shared/src/manabrew-protocol.ts`
 - Docker-Setup: `infra/manabrew-forge-room/compose.yml`
 - Architekturentscheidung: `docs/architecture.md`
+- Relay-Client und Betriebsbeschreibung: `packages/manabrew-client`, `docs/engine-client.md`
 - Entscheidungen und Risiken: `docs/wayfinding.md`
 - Git-Baseline: Commit `04f9ee9` auf `origin/main` (`https://github.com/FruechteBini/mtg_commander.git`)
 
 ## Empfohlene Reihenfolge
 
-1. `ENGINE-001` umsetzen und die Relay-/Game-Logik aus dem Capture-Skript in einen wiederverwendbaren serverseitigen Client extrahieren.
-2. `UI-001` und `UI-002` auf dem echten `gameView`-Vertrag aufbauen.
+1. `UI-001` umsetzen und den echten `gameView`-Vertrag in ein stabiles UI-Modell normalisieren.
+2. `UI-002` auf diesem Modell aufbauen.
 3. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
 4. Save/Load mit `SAVE-001` frueh klaeren, bevor persistente Spiel-APIs als stabil gelten.
 5. Danach UI, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
@@ -92,8 +94,8 @@ Stand: 26. September 2026
 | `PROTO-005` | `DONE` | Reale DTOs gegen TypeScript-Vertrag abgleichen | App nutzt belegte statt angenommene Protocol-Typen. |
 | `ARCH-001` | `DONE` | Prozess- und Lizenzgrenze festlegen | UI, API, Relay und Engine haben klare Verantwortungen. |
 | `APP-001` | `DONE` | React/TypeScript- und API-Grundgeruest erstellen | Startbare Web-App plus API- und Shared-Packages. |
-| `ENGINE-001` | `NEXT` | Wiederverwendbaren Manabrew-Client bauen | Relay/Lobby/Game-Protokoll steckt nicht mehr nur im Capture-Skript. |
-| `UI-001` | `READY` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
+| `ENGINE-001` | `DONE` | Wiederverwendbaren Manabrew-Client bauen | API und Capture nutzen dieselbe validierte Relay-/Game-Bibliothek. |
+| `UI-001` | `NEXT` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
 | `UI-002` | `BLOCKED` | Ersten Hybrid-Commander-Board-Slice bauen | Menschlicher Bereich, drei Bot-Panels und Prompt-Aktionen sind sichtbar. |
 | `DECK-001` | `READY` | Neutralen Commander-Decklistenimport definieren | Textliste wird in ein internes Deckmodell umgewandelt. |
 | `DECK-002` | `BLOCKED` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
@@ -221,7 +223,7 @@ Stand: 26. September 2026
 - **Akzeptanzkriterien:** Ein kleines Architekturdiagramm und eine Entscheidung mit Konsequenzen fuer Deployment, Lizenz, Secrets und Reconnects liegen vor.
 - **Ergebnis (2026-09-26):** Der Browser spricht ausschliesslich per HTTPS/WSS mit der eigenen Node-API. Die API ist Backend-for-Frontend, Relay-Client und Spiel-Orchestrator. Relay und Forge-backed node bleiben getrennte interne Container; SQLite, Decks, Saves und GLM-Secrets bleiben serverseitig. Ausfall- und Reconnect-Verhalten ist fuer Browser, API, Relay, Engine und Z.AI getrennt beschrieben. Die eigene Protokollimplementierung stuetzt sich auf die CC-BY-4.0-Spezifikation; Manabrew-/Forge-Komponenten und deren AGPL-/GPL-Pflichten bleiben getrennt sichtbar. Vollstaendige Asset-/Lizenzpruefung bleibt `LEGAL-001`.
 - **Evidence:** `docs/architecture.md`; Manabrew `LICENSE.md` am festgehaltenen Commit `cfaf2431c872b87fc8a7208e873a92140755f47d`; Manabrew-Protokolldokumentation; GNU AGPL 3.0 Abschnitt 13; CC-BY-4.0 Abschnitt 3.
-- **Konsequenz:** `APP-001` ist der naechste Schritt. `ENGINE-001` ist startklar. Direkte Browser-Relay-Kommunikation und Secrets im Browser sind fuer Milestone 1 ausgeschlossen.
+- **Konsequenz:** `APP-001` und `ENGINE-001` konnten auf dieser Grenze umgesetzt werden. Direkte Browser-Relay-Kommunikation und Secrets im Browser sind fuer Milestone 1 ausgeschlossen.
 - **Offene Nachweise:** Menschlichen Sitz nach API-/Relay-Neustart wiederaufnehmen, echten Engine-Restore beweisen sowie Projekt-/Asset-Lizenzen in `LEGAL-001` abschliessen.
 
 ### APP-001 - Web-/API-Grundgeruest erstellen
@@ -237,18 +239,21 @@ Stand: 26. September 2026
 - **Ergebnis (2026-09-26):** npm-Workspaces verbinden `apps/web`, `apps/api` und `packages/shared`. Die React-/Vite-App zeigt den API-Status ueber den lokalen `/api`-Proxy. Die Node-/TypeScript-API bietet `/healthz`, `/readyz` und den oeffentlichen `/api/status`. Gemeinsame Health-/Statusvertraege liegen im Shared-Package; die bestehenden Manabrew-Protokolltypen werden dort weitergefuehrt.
 - **Start:** `npm install`, danach `npm run dev`; Web unter `http://127.0.0.1:5173`, API unter `http://127.0.0.1:8787`.
 - **Evidence:** `npm run typecheck`, `npm test` und `npm run build` bestanden. Drei API-Tests pruefen Liveness/Readiness, den oeffentlichen Status ohne serverseitige Test-Secrets und JSON-404. Im realen gemeinsamen Dev-Lauf lieferten Web- und API-Healthchecks HTTP 200; der Web-Proxy erreichte Protocol-Version 5 der API.
-- **Abgrenzung:** Die Engine-Verbindung ist bewusst `false`; Relay-Orchestrierung folgt in `ENGINE-001`. SQLite, Auth und GLM sind eigene Folgetickets.
+- **Abgrenzung:** Das Grundgeruest enthielt noch keine Relay-Verbindung; diese wurde in `ENGINE-001` ergaenzt. SQLite, Auth und GLM sind eigene Folgetickets.
 
 ### ENGINE-001 - Wiederverwendbaren Manabrew-Client bauen
 
-- **Status:** `NEXT`; `PROTO-005`, `ARCH-001` und `APP-001` sind abgeschlossen
+- **Status:** `DONE`
 - **Prioritaet:** P0
 - **Aufgaben:** Auth, Room-Liste, Join, Deckwahl, Ready, Bot-Batch, Start, Resync, State/Delta, Prompt/Response, Reconnect und Fehlerbehandlung aus dem Capture-Skript in eine testbare Bibliothek extrahieren.
 - **Akzeptanzkriterien:** Das Capture-Skript und spaeter die API koennen denselben Client verwenden; keine duplizierte Protocol-Logik.
+- **Ergebnis (2026-09-26):** `packages/manabrew-client` kapselt die komplette Relay-Verbindung und validiert eingehende Nachrichten mit dem gemeinsamen Protocol-Parser. Das Capture-Skript nutzt die Bibliothek fuer Auth, Raum, Deck, Ready, Bot-Batch, Start, Resync und Antworten. Die API startet denselben Client serverseitig aus `.env`, meldet seinen Status ueber `/api/status` und reconnectet nach Verbindungsabbruechen mit begrenztem exponentiellem Backoff. Authentifizierungsfehler werden nicht endlos wiederholt.
+- **Evidence:** Fuenf Client-Tests pruefen Befehlsformen, State/Delta/Prompt/Fehler, ungueltige Nachrichten, Reconnect und abgelehnte Authentifizierung. `npm run typecheck`, `npm test` und `npm run build` bestehen. `scripts/relay-client-smoke.mjs` prueft bei laufendem Compose-Stack Authentifizierung und Raumliste gegen den echten Relay. Der bestehende Vier-Spieler-Capture belegt die verwendeten realen Nachrichtenformen; der aktuelle lokale Echtlauf war nicht moeglich, weil Docker Desktop in dieser Sitzung keinen laufenden Dienst bereitstellte.
+- **Naechster Schritt:** `UI-001` normalisiert einen echten `gameView`-State fuer die React-Oberflaeche.
 
 ### UI-001 - `gameView` normalisieren
 
-- **Status:** `READY`; `PROTO-005` und `APP-001` sind abgeschlossen
+- **Status:** `NEXT`; `PROTO-005`, `APP-001` und `ENGINE-001` sind abgeschlossen
 - **Prioritaet:** P0
 - **Aufgaben:** Normalisiertes Modell fuer Spieler, Zonen, sichtbare/verdeckte Karten, Stack, Zug/Phase, Prioritaet, Combat, Commander-Schaden und aktive Sonderrollen definieren.
 - **Akzeptanzkriterien:** Ein echter Capture-State wird deterministisch in ein UI-Modell fuer vier Spieler transformiert.

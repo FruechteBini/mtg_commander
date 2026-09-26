@@ -7,10 +7,22 @@ export interface ServiceHealth {
   timestamp: string;
 }
 
+export type EngineConnectionStatus =
+  | "disabled"
+  | "idle"
+  | "connecting"
+  | "authenticating"
+  | "authenticated"
+  | "reconnecting"
+  | "authFailed"
+  | "failed"
+  | "closed";
+
 export interface AppStatus extends ServiceHealth {
   architectureVersion: 1;
   protocolVersion: 5;
   engineConnected: boolean;
+  engineStatus: EngineConnectionStatus;
 }
 
 export function createServiceHealth(

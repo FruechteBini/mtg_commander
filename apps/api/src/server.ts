@@ -2,6 +2,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 import {
   createServiceHealth,
   type AppStatus,
+  type EngineConnectionStatus,
   type ServiceHealth,
 } from "@mtg-commander/shared";
 
@@ -20,16 +21,23 @@ function health(): ServiceHealth {
   return createServiceHealth("api", API_VERSION);
 }
 
-function appStatus(): AppStatus {
+export interface ApiServerOptions {
+  engineStatus?: () => EngineConnectionStatus;
+}
+
+function appStatus(engineStatus: EngineConnectionStatus): AppStatus {
   return {
     ...health(),
     architectureVersion: 1,
     protocolVersion: 5,
-    engineConnected: false,
+    engineConnected: engineStatus === "authenticated",
+    engineStatus,
   };
 }
 
-export function createApiServer() {
+export function createApiServer(options: ApiServerOptions = {}) {
+  const engineStatus = options.engineStatus ?? (() => "disabled");
+
   return createServer((request: IncomingMessage, response: ServerResponse) => {
     const method = request.method ?? "GET";
     const pathname = new URL(request.url ?? "/", "http://api.local").pathname;
@@ -40,7 +48,7 @@ export function createApiServer() {
     }
 
     if (method === "GET" && pathname === "/api/status") {
-      json(response, 200, appStatus());
+      json(response, 200, appStatus(engineStatus()));
       return;
     }
 

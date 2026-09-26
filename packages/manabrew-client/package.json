@@ -1,0 +1,19 @@
+{
+  "name": "@mtg-commander/manabrew-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.mjs"
+    }
+  },
+  "files": ["src"],
+  "scripts": {
+    "test": "node --test test/**/*.test.mjs"
+  },
+  "dependencies": {
+    "@mtg-commander/shared": "*"
+  }
+}

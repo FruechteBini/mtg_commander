@@ -77,7 +77,7 @@ SQLite speichert zunaechst Nutzer-/Playgroup-Sitzungen, Deckbibliothek, Spielmet
 6. Die API verwirft alte, doppelte oder sitzfremde Antworten. Eine gueltige Antwort wird in das Manabrew-Format uebersetzt und ueber den Relay gesendet.
 7. Nur ein nachfolgender Engine-State bestaetigt, dass die Aktion wirksam wurde.
 
-Das vorhandene Capture-Skript bleibt ein Diagnosewerkzeug. `ENGINE-001` extrahiert daraus den wiederverwendbaren Relay-Client; die React-App importiert diesen Client nicht.
+Das vorhandene Capture-Skript bleibt ein Diagnosewerkzeug. `ENGINE-001` hat daraus den wiederverwendbaren Relay-Client extrahiert; die React-App importiert diesen Client nicht.
 
 ## Reconnect- und Ausfallverhalten
 
@@ -140,7 +140,7 @@ Primaerquellen:
 
 ## Konsequenzen und offene Nachweise
 
-Mit dieser Entscheidung wurden `APP-001` und `ENGINE-001` von `ARCH-001` entblockt. `APP-001` ist inzwischen abgeschlossen. Als naechstes wird der serverseitige Relay-Client in `ENGINE-001` extrahiert und an das API-Grundgeruest angebunden.
+Mit dieser Entscheidung wurden `APP-001` und `ENGINE-001` von `ARCH-001` entblockt. Beide Tickets sind inzwischen abgeschlossen. Als naechstes normalisiert `UI-001` echte `gameView`-Daten fuer die Oberflaeche.
 
 Folgende Punkte sind bewusst noch kein bewiesenes Verhalten:
 

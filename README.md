@@ -70,6 +70,7 @@ Workspace-Struktur:
 
 - `apps/web`: React-/Vite-Oberflaeche.
 - `apps/api`: Node-/TypeScript-API.
+- `packages/manabrew-client`: wiederverwendbarer serverseitiger Relay-/Game-Client.
 - `packages/shared`: gemeinsame Domain- und Manabrew-Protokolltypen.
 
 Der erste lokale Protokoll-PoC liegt in [docs/protocol-poc.md](docs/protocol-poc.md). Er kann ohne Dependencies direkt mit Node ausgefuehrt werden:
@@ -109,3 +110,9 @@ node scripts\capture-real-session.mjs
 ```
 
 Der aktuelle Real-Capture bestaetigt einen mehrstufigen MVP-Aktionsloop: Ein eigener Node-Client startet eine Vier-Spieler-Forge-Partie, spielt ein Mountain, wirkt `Shock`, waehlt einen Gegner, aktiviert die Manafaehigkeit, bestaetigt die Zahlung, passt Prioritaet und prueft die Aufloesung. Im Proof wechselte `Shock` von der Hand in den Friedhof, der Stack war danach leer und das Ziel verlor zwei Leben.
+
+Die wiederverwendbare Client-Bibliothek ist unter [docs/engine-client.md](docs/engine-client.md) beschrieben. Gegen einen laufenden lokalen Relay kann ihre Authentifizierung und Raumliste separat geprueft werden:
+
+```powershell
+npm run engine:smoke
+```
