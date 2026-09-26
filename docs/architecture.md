@@ -65,7 +65,7 @@ Die API wird damit Relay-Client **und** Orchestrator. Sie ist nicht selbst die R
 
 ### SQLite
 
-SQLite speichert zunaechst Nutzer-/Playgroup-Sitzungen, Deckbibliothek, Spielmetadaten, Engine-/Deckversionen und strukturierte Logs. Ein sichtbares `gameView` ist kein vollstaendiges Savegame. Interner Engine-Zustand wird erst gespeichert, wenn `SAVE-001` einen belastbaren Export-/Restore-Weg nachweist.
+SQLite speichert zunaechst Nutzer-/Playgroup-Sitzungen, Deckbibliothek, Spielmetadaten, Engine-/Deckversionen und strukturierte Logs. Ein sichtbares `gameView` ist kein vollstaendiges Savegame. `SAVE-001` hat im Upstream-Node keinen belastbaren Export-/Restore-Weg gefunden (`docs/save-resume-research.md`); Persistenz beginnt daher mit Replay-Journal (Startbedingung plus geordnete Prompt-Antworten) und Unterbrechungsmarkierung statt mit internem Engine-Zustand.
 
 ## Laufzeitfluss
 
@@ -88,7 +88,7 @@ Das vorhandene Capture-Skript bleibt ein Diagnosewerkzeug. `ENGINE-001` hat dara
 | API verliert Relay-WebSocket | Exponentieller Reconnect mit Jitter; nach Verbindung Raum-/Spielsitzung wiederherstellen und Resync anfordern. Bis dahin keine Browseraktion annehmen. | `ENGINE-001` muss Retake/Resync gegen den echten Relay beweisen. |
 | API-Prozess startet neu | Persistierte Sitzungs- und Spielmetadaten laden, Relay neu verbinden und Resync versuchen. | Ob ein menschlicher Sitz nach Prozessverlust sicher uebernommen werden kann, ist noch kein abgeschlossener Proof. |
 | Relay startet neu | API und Forge-node verbinden neu. Spiel gilt erst nach erfolgreichem Resync wieder als aktiv. | Gemeinsamer Restart-Test mit laufender Partie. |
-| Forge-node / Engine startet neu | Laufende Partie gilt vorerst als verloren und wird als unterbrochen markiert. | `SAVE-001`/`SAVE-002` muessen echten Engine-Restore nach Prozessneustart beweisen. |
+| Forge-node / Engine startet neu | Laufende Partie gilt vorerst als verloren und wird als unterbrochen markiert. | `SAVE-001`-No-Go dokumentiert; Restore nur via Replay-Journal (B) oder Fork/Upstream (C), siehe `docs/save-resume-research.md`. |
 | Z.AI nicht erreichbar | Partie bleibt spielbar; Explain liefert einen klaren Fehler beziehungsweise lokalen Fallback. | Frist, Retry und Kostenlimit in `GLM-002`. |
 
 Die API darf einen gecachten State nach Verbindungsverlust nur als letzte bekannte Ansicht kennzeichnen. Sie darf daraus keine neuen legalen Aktionen ableiten. Ein alter `promptId` wird nie nach einem neueren State erneut beantwortet.

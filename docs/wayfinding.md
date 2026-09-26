@@ -36,7 +36,7 @@ Ein privater Commander-Prototyp fuer die Playgroup: Ein Mensch kann auf einem De
 - GLM wird zuerst als Tutor/Erklaer-Schicht vorgesehen; starke GLM-Bots kommen spaeter.
 - Deckimport aus mythic.tools startet pragmatisch per Deck-Link oder exportierter Deckliste.
 - Automatische mythic.tools-Synchronisierung ist nicht Teil des ersten Meilensteins.
-- Pause/Fortsetzen wird sauber vorbereitet: versionierte Saves, aber MVP ohne Replay/History/Migration.
+- Pause/Fortsetzen: `SAVE-001` ergab ein Engine-No-Go; MVP plant daher Replay-Journal/Unterbrechungsmarkierung statt echtem Engine-Save (`docs/save-resume-research.md`).
 - UI: Hybrid statt voller Vier-Spieler-Tisch oder reinem Arena-Layout.
 - Interaktion: assistiert by default, Manual Mode fuer erfahrene Spieler und komplexe Lines.
 - Erklaerungen: auf Nachfrage, optionaler Anfaengermodus, komplett abschaltbar.
@@ -49,7 +49,7 @@ Ein privater Commander-Prototyp fuer die Playgroup: Ein Mensch kann auf einem De
 - Die eigene API ist Relay-Client und Spiel-Orchestrator; Browser und React-App erhalten keine Relay-, Raum- oder GLM-Secrets.
 - SQLite, Deckbibliothek, Saves und strukturierte Logs bleiben serverseitig; sichtbares `gameView` gilt nicht als vollstaendiges Savegame.
 - Relay und Forge bleiben getrennte Drittanbieterprozesse. Die eigene Protokollimplementierung folgt der CC-BY-4.0-Spezifikation; AGPL-/GPL- und Asset-Fragen werden entlang dieser Grenze dokumentiert.
-- Reconnect ist nach Ausfallstufe getrennt: Browser-Reconnect nutzt API-Cache, API/Relay brauchen Retake/Resync-Proofs, Engine-Neustart braucht weiterhin `SAVE-001`.
+- Reconnect ist nach Ausfallstufe getrennt: Browser-Reconnect nutzt API-Cache, API/Relay brauchen Retake/Resync-Proofs, Engine-Neustart markiert die Partie als unterbrochen (`SAVE-001`-No-Go; Restore-Strategie in `docs/save-resume-research.md`).
 - `APP-001` ist umgesetzt: npm-Workspace mit React/Vite-Web-App, Node/TypeScript-API und Shared-Package; Browserzugriff auf die API erfolgt lokal ueber `/api`, beide Dienste besitzen Healthchecks.
 - `ENGINE-001` ist umgesetzt: Capture-Skript und API nutzen denselben serverseitigen Manabrew-Client fuer Relay-, Raum-, Spiel-, Prompt- und Reconnect-Ablauf.
 
@@ -100,7 +100,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Type:** research/prototype
 
-**Status:** Open.
+**Status:** Beantwortet (2026-09-26). See `docs/save-resume-research.md` fuer die vollstaendige Beweiskette gegen den Manabrew-Clone `witchesofthehill/manabrew` @ `35868343c77132714e43b6a227092658f956296a` sowie `docker inspect`/`docker logs` des forge-room-Containers.
 
 **Why it matters:** Pause/Fortsetzen ist ein Kernwunsch und bei Magic deutlich komplexer als sichtbare Karten und Lebenspunkte.
 
@@ -111,13 +111,11 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 - Gibt es bestehende Save-/Snapshot-Mechanismen in Manabrew oder Forge?
 - Wie koennen versionierte Saves im MVP aussehen?
 
-**Evidence:** Noch kein technischer Proof. Bisher nur Produktentscheidung: Save/Load soll sauber vorbereitet werden, aber Milestone 1 braucht noch keine Replay-/Migrationshistorie.
+**Current answer:** Nein - der Upstream-Stack bietet keinen vollstaendigen Save/Restore. FFI ohne Save-Entrypoint, Sessions nur im RAM, `restoreSnapshot` im Java-Backend unsupported, Relay persistiert keine Games, Partie-Seed per `rand::random()` nicht steuerbar. Alternativen: A Unterbrechungsmarkierung (Status quo), B Replay-Journal (braucht Determinismus-Beweis + Upstream-Seed-Kontrolle), C Fork/Upstream mit `forge_save_game`/`forge_load_game`.
 
-**Current answer:** Ungeklaert. Wir muessen pruefen, ob Manabrew/Forge einen serialisierbaren Spielzustand oder Snapshots anbietet. Falls nicht, muessen wir Save/Load ueber unseren Orchestrator oder einen kontrollierten Engine-Prozess loesen.
+**Next proof:** SAVE-002-Proof nach Produktentscheidung B vs. C: fuer B ein Replay-Minimaltest (identische Startbedingung + geordnete Prompt-Antworten reproduzieren denselben Spielzustand), fuer C ein forge-harness-Fork-Prototyp.
 
-**Next proof:** In Manabrew/Forge nach Snapshot-, serialize-, save- oder resume-Funktionalitaet suchen und einen Minimaltest definieren: Spiel starten, State sichern, Prozess neu starten, State wiederherstellen.
-
-**Open risk:** Wenn die Engine keinen vollstaendigen internen Zustand exportiert, wird robustes Pause/Fortsetzen deutlich groesser als nur `gameView` speichern.
+**Open risk:** Forge-Determinismus ueber lange Commander-Partien ist unbewiesen; Seed-Kontrolle erfordert ein Upstream-Feature.
 
 ### Bot-Steuerung
 

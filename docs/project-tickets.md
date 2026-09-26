@@ -82,8 +82,8 @@ Stand: 26. September 2026
 
 ## Empfohlene Reihenfolge
 
-1. `SAVE-001` frueh klaeren (RESEARCH), bevor persistente Spiel-APIs als stabil gelten.
-2. Danach `BOT-002`-Langlauf mit realistischen Decks, UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
+1. `BOT-002`-Langlauf mit realistischen Decks (jetzt oben; `SAVE-001` ist abgeschlossen).
+2. Danach Produktentscheidung `SAVE-002`: Replay-Journal (Option B) vs. Fork/Upstream (Option C), siehe `docs/save-resume-research.md`; danach UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
 4. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
 5. Erkenntnisse fliessen zurueck in Ticketstatus, Evidence und Wayfinding.
 
@@ -104,14 +104,14 @@ Stand: 26. September 2026
 | `DECK-001` | `DONE` | Neutralen Commander-Decklistenimport definieren | Textliste wird geparst, validiert und ins Manabrew-Deckformat konvertiert. |
 | `DECK-002` | `DONE` | Erstes echtes Playgroup-Deck importieren | Reales Deck startet in Forge/Manabrew. |
 | `BOT-002` | `READY` | Vier-Spieler-Langlauf mit realistischen Decks testen | Bots spielen mehrere Zuege ohne Stillstand oder Protokollfehler. |
-| `SAVE-001` | `RESEARCH` | Engine-Snapshot/Save/Resume untersuchen | Harte Go/No-Go-Antwort fuer echtes Pause/Fortsetzen. |
+| `SAVE-001` | `DONE` | Engine-Snapshot/Save/Resume untersuchen | No-Go dokumentiert: Upstream-Node hat keinen Save/Restore; Alternativen A/B/C in `docs/save-resume-research.md`. |
 
 ### P1: Fuer Milestone 1 erforderlich
 
 | ID | Status | Ticket | Ergebnis |
 | --- | --- | --- | --- |
 | `API-001` | `BLOCKED` | Node/TypeScript-API und SQLite-Schema bauen | Decks, Spiele, Saves und Logs haben persistente IDs. |
-| `SAVE-002` | `BLOCKED` | Versionierte Saves implementieren | Partie kann nach Prozessneustart fortgesetzt werden. |
+| `SAVE-002` | `BLOCKED` | Versionierte Saves implementieren | Wartet auf Produktentscheidung B vs. C (`docs/save-resume-research.md`); Engine-Restore nur mit Fork/Upstream. |
 | `UI-003` | `BLOCKED` | Assistierte Prompt-Interaktion implementieren | Legale Karten/Aktionen werden hervorgehoben und beantwortet. |
 | `UI-004` | `BLOCKED` | Manual Mode definieren und bauen | Erfahrene Spieler koennen Pass-/Prioritaetsverhalten steuern. |
 | `GLM-001` | `BLOCKED` | Strukturiertes Tutor-Kontextschema definieren | GLM erhaelt nur belegte Engine-Ereignisse und sichtbaren Kontext. |
@@ -304,11 +304,14 @@ Stand: 26. September 2026
 
 ### SAVE-001 - Save/Resume-Faehigkeit erforschen
 
-- **Status:** `RESEARCH`
+- **Status:** `DONE` (2026-09-26)
 - **Prioritaet:** P0
 - **Aufgaben:** In Manabrew/Forge nach Snapshot-, Serialize-, Save-, Replay- und Resume-Pfaden suchen. Minimaltest: Spiel starten, internen Zustand sichern, Engine-Prozess neu starten, Zustand laden und legal fortsetzen.
 - **Wichtig:** Ein `gameView` ist nur eine Spieleransicht und kein ausreichender Save des vollstaendigen versteckten Engine-Zustands.
-- **Akzeptanzkriterien:** Dokumentierte API/Mechanik oder ein klares negatives Ergebnis samt Alternativarchitektur.
+- **Ergebnis:** **No-Go** fuer echten Engine-Restore im Upstream-Stack: Das Forge-Backend-FFI hat keinen Save/Load-Entrypoint, Sessions leben nur im RAM (keine Volumes), `restoreSnapshot` ist im Java-Backend explizit unsupported, die Checkpoint-Mechanik gehoert zur Rust-Engine (In-Memory-Zug-Undo), der Relay persistiert keine Games (nur ChatHistory), und der Partie-Seed wird per `rand::random()` gewaehlt und nicht veroeffentlicht. Der geplante Minimaltest ist damit am unveraenderten Stack gegenstandslos; das dokumentierte No-Go ersetzt ihn.
+- **Alternativarchitektur:** Option A (Partie als unterbrochen markieren, Status quo), Option B (Replay-Journal: Startbedingung + geordnete Prompt-Antworten; braucht Determinismus-Beweis und Upstream-Seed-Kontrolle), Option C (Fork/Upstream: `forge_save_game`/`forge_load_game` in der forge-harness).
+- **Evidence:** `docs/save-resume-research.md` (Beweiskette mit Datei/Zeilen-Referenzen gegen Manabrew-Clone `35868343c77132714e43b6a227092658f956296a`), `docker inspect`/`docker logs` des forge-room-Containers.
+- **Naechster Schritt:** Produktentscheidung fuer `SAVE-002` (B vs. C).
 
 ## Weitere Milestone-1-Tickets
 
@@ -320,7 +323,9 @@ Stand: 26. September 2026
 
 ### SAVE-002 - Versionierte Saves
 
+- **Status:** `BLOCKED` (wartet auf Produktentscheidung Option B vs. C, siehe `docs/save-resume-research.md`)
 - Save-Envelope mit eigener Schema-Version, Engine-/Protocol-Version, Deckversionen und Zeitstempel.
+- SAVE-001-No-Go: "Partie nach Prozessneustart fortsetzen" ist nur mit Fork/Upstream (Option C) erreichbar. Option B (Replay-Journal) liefert versionierte Wiederherstellung ueber deterministischen Replay; dafuer muessen Forge-Determinismus bewiesen und die Seed-Kontrolle upstream geklaert werden.
 - MVP braucht keine beliebigen Langzeitmigrationen, aber inkompatible Saves muessen klar erkannt werden.
 
 ### UI-003 - Assistierte Interaktion
@@ -449,7 +454,7 @@ Stand: 26. September 2026
 
 | Risiko | Auswirkung | Zugehoeriges Ticket |
 | --- | --- | --- |
-| Engine bietet keinen vollstaendigen Save/Resume-State | Pause/Fortsetzen wird deutlich groesser oder braucht Prozess-Persistenz. | `SAVE-001` |
+| Engine bietet keinen vollstaendigen Save/Resume-State | **Bestaetigt (SAVE-001):** Upstream-Node hat keinen Restore-Pfad. Pause/Fortsetzen braucht Replay-Journal (B) oder Fork/Upstream (C); bis dahin gilt Engine-Neustart als Partieverlust. | `SAVE-001`, `SAVE-002` |
 | Protocol-DTOs weichen von der ersten lokalen Annahme ab | UI/API koennen bei realen Nachrichten brechen. | `PROTO-005` |
 | Weitere Prompt-Familien sind noch nicht bewiesen | Modi, Mehrfachziele, Trigger-Reihenfolge oder Combat koennen den Client noch blockieren. | `PROTO-005`, `TEST-002` |
 | Vier Forge-Spieler koennen die 6-GB-NAS ueberlasten | Deployment-Ziel waere nicht tragfaehig. | `OPS-002` |
