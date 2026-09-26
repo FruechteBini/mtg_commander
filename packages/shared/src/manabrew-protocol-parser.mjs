@@ -79,7 +79,9 @@ export function parseEngineEnvelope(value) {
   const envelope = object(value, "state");
   const kind = string(envelope.kind, "state.kind");
   if (kind === "state") {
-    string(envelope.fingerprint, "state.fingerprint");
+    // Full states occasionally arrive without a fingerprint (BOT-002 live run,
+    // e.g. broadcast finals); keep it optional so those states still parse.
+    optional(envelope.fingerprint, string, "state.fingerprint");
     optional(envelope.forPlayer, string, "state.forPlayer");
     const state = object(envelope.state, "state.state");
     validateGameView(state.gameView, "state.state.gameView");
@@ -87,13 +89,23 @@ export function parseEngineEnvelope(value) {
     string(envelope.base, "state.base");
     string(envelope.fingerprint, "state.fingerprint");
     if (!("patch" in envelope)) fail("state.patch", "present value");
+  } else if (kind === "roomRelay") {
+    // Relay-propagated room payloads from self-hosted nodes (heartbeats,
+    // spawnBot broadcasts), observed live in the BOT-002 run. Field checks
+    // stay tolerant because heartbeat variants may omit optional fields.
+    optional(envelope.protocol, string, "state.protocol");
+    optional(envelope.version, number, "state.version");
+    optional(envelope.messageId, string, "state.messageId");
+    optional(envelope.fromPlayer, string, "state.fromPlayer");
+    optional(envelope.roomId, string, "state.roomId");
+    optional(envelope.payload, object, "state.payload");
   } else if (kind === "prompt") {
     string(envelope.forPlayer, "state.forPlayer");
     validatePrompt(envelope.prompt, "state.prompt");
   } else if (kind === "error" || kind === "fatal") {
     string(envelope.message, "state.message");
   } else {
-    fail("state.kind", "state, stateDelta, prompt, error, or fatal");
+    fail("state.kind", "state, stateDelta, prompt, roomRelay, error, or fatal");
   }
   return envelope;
 }

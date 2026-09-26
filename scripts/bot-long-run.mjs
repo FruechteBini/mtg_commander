@@ -101,6 +101,7 @@ let done = false;
 let mySlot = null;
 const answeredPromptIds = new Set();
 let payManaPromptCount = 0;
+let gameOverPromptSeen = false;
 let botSpawnRequested = false;
 let deckSelectionRequested = false;
 let readyRequested = false;
@@ -376,6 +377,12 @@ function handleStateEnvelope(serverMessage) {
     return;
   }
 
+  if (envelope.kind === "roomRelay") {
+    // relay-propagated node heartbeats/payloads; nothing to answer
+    summary.progress.roomRelayEnvelopes = (summary.progress.roomRelayEnvelopes ?? 0) + 1;
+    return;
+  }
+
   if (envelope.kind === "prompt") {
     summary.progress.promptEnvelopes += 1;
     const inputType = envelope.prompt?.input?.type ?? "unknown";
@@ -389,6 +396,18 @@ function handleStateEnvelope(serverMessage) {
         finish("failed", "paymana-prompt-loop");
         return;
       }
+    }
+
+    if (inputType === "gameOver") {
+      // terminal sentinel prompt (promptId u32::MAX) - no response expected
+      if (gameOverPromptSeen) return;
+      gameOverPromptSeen = true;
+      note("game-over-prompt", { turn: summary.progress.maxTurn });
+      finish(
+        summary.progress.maxTurn >= targetTurns ? "ok" : "failed",
+        `game-over-at-turn-${summary.progress.maxTurn}`,
+      );
+      return;
     }
 
     if (!mySlot || envelope.forPlayer !== mySlot) return;

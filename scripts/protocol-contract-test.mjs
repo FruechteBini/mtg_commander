@@ -63,6 +63,33 @@ assert.throws(() => parseRelayMessage({
   state: { kind: "state", fingerprint: "bad", state: { gameView: { turnNumber: 3 } } },
 }), /gameId/);
 
+// The relay forwards self-hosted-node roomRelay broadcasts as StateUpdate (BOT-002 live run).
+const roomRelay = parseRelayMessage({
+  type: "StateUpdate",
+  state: {
+    kind: "roomRelay",
+    protocol: "self-hosted-node",
+    version: 1,
+    messageId: "m-1",
+    fromPlayer: "seat-bot-1",
+    roomId: "room-1",
+    payload: { type: "roomHeartbeat" },
+  },
+});
+assert.equal(roomRelay.state.kind, "roomRelay");
+
+// A minimal heartbeat that omits the optional envelope fields still parses.
+parseRelayMessage({ type: "StateUpdate", state: { kind: "roomRelay", payload: { type: "ping" } } });
+
+// Live engine states can arrive without a fingerprint (BOT-002 live run).
+const withoutFingerprint = structuredClone(
+  messages.find((message) => message.type === "StateUpdate" && message.state.kind === "state"),
+);
+delete withoutFingerprint.state.fingerprint;
+parseRelayMessage(withoutFingerprint);
+
+assert.throws(() => parseRelayMessage({ type: "StateUpdate", state: { kind: "surprise" } }), /state\.kind/);
+
 const rawCapturePath = path.join(root, "captures/manabrew-real-session-2026-09-17T12-59-23-759Z.jsonl");
 let realMessages = 0;
 if (fs.existsSync(rawCapturePath)) {

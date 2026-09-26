@@ -61,7 +61,8 @@ export interface RelayErrorMessage {
   [key: string]: unknown;
 }
 
-export interface StateUpdateMessage { type: "StateUpdate"; state: EngineToClientEnvelope }
+/** The relay also forwards self-hosted-node roomRelay broadcasts as StateUpdate (BOT-002 long-run). */
+export interface StateUpdateMessage { type: "StateUpdate"; state: EngineToClientEnvelope | RoomRelayEnvelope }
 export interface BroadcastStateMessage {
   type: "BroadcastState";
   state: ClientToEngineEnvelope | RoomRelayEnvelope;
@@ -141,7 +142,8 @@ export interface GameViewDto {
 export interface StateEnvelope {
   kind: "state";
   forPlayer?: PlayerId;
-  fingerprint: Fingerprint;
+  /** Observed missing on some live broadcast states (BOT-002 long-run). */
+  fingerprint?: Fingerprint;
   emitMs?: number;
   engineMs?: number;
   state: { gameView: GameViewDto; [key: string]: unknown };

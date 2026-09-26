@@ -98,6 +98,7 @@ Stand: 26. September 2026
 | `BOOT-001` | `DONE` | Git-Baseline und klonbaren Projektstand herstellen | Branch `main` ist sauber versioniert, gepusht und klonbar. |
 | `PROTO-004` | `DONE` | Mehrstufige echte Aktion capturen | Spell inklusive Ziel-, Mana-, Prioritaets- und Aufloesungsloop bewiesen. |
 | `PROTO-005` | `DONE` | Reale DTOs gegen TypeScript-Vertrag abgleichen | App nutzt belegte statt angenommene Protocol-Typen. |
+| `PROTO-006` | `DONE` | Live-Parser-Toleranz roomRelay/Fingerprint | BOT-002-Live-Nachrichten parsen ohne invalidMessage; gameOver-Sentinel beendet den Lauf sauber. |
 | `ARCH-001` | `DONE` | Prozess- und Lizenzgrenze festlegen | UI, API, Relay und Engine haben klare Verantwortungen. |
 | `APP-001` | `DONE` | React/TypeScript- und API-Grundgeruest erstellen | Startbare Web-App plus API- und Shared-Packages. |
 | `ENGINE-001` | `DONE` | Wiederverwendbaren Manabrew-Client bauen | API und Capture nutzen dieselbe validierte Relay-/Game-Bibliothek. |
@@ -215,6 +216,15 @@ Stand: 26. September 2026
 - **Regression:** `node scripts/protocol-contract-test.mjs` validiert das sanitisiert gespeicherte State -> Prompt -> Response -> State-Fixture, alle vier Schritte des Shock-Loops, den Lebensverlust und zwei negative Parserfaelle. Wenn der lokale Raw-Capture vorhanden ist, werden zusaetzlich alle 228 Relay-Nachrichten daraus gestreamt und validiert. `npm run protocol:test` ist als Alias hinterlegt; im aktuellen Codex-Runtime-Pfad ist `npm` selbst nicht verfuegbar.
 - **Abgrenzung:** Der erfolgreiche Capture enthielt 130 volle `state`- und 28 `prompt`-Envelopes, aber kein reales `stateDelta`, `error` oder `fatal`. Deren Contract ist inventarisiert und bewusst noch nicht als real beobachtet behauptet.
 - **Evidence:** `packages/shared/src/manabrew-protocol.ts`, `packages/shared/src/manabrew-protocol-parser.mjs`, `packages/shared/fixtures/protocol-session.json`, `scripts/protocol-contract-test.mjs`, `captures/manabrew-real-session-2026-09-17T12-59-23-759Z.jsonl` (lokal/ignoriert).
+
+### PROTO-006 - Live-Parser-Toleranz fuer roomRelay und Fingerprint
+
+- **Status:** `DONE` (2026-09-26, Follow-up aus `BOT-002`)
+- **Prioritaet:** P2
+- **Akzeptanzkriterien:** Die vier invalidMessage-Funde aus dem BOT-002-Langlauf (2x `roomRelay`-Heartbeat als `StateUpdate`, 2x State ohne String-Fingerprint) parsen klaglos; bekannte Fehler bleiben Fehler; der terminale `gameOver`-Prompt beendet einen Langlauf aktiv.
+- **Ergebnis:** `parseEngineEnvelope` akzeptiert jetzt `kind: "roomRelay"` mit toleranter Feldpruefung (`protocol`/`version`/`messageId`/`fromPlayer`/`roomId`/`payload` optional, da Heartbeat-Varianten Felder weglassen koennen) und toleriert fehlende Fingerprints bei `kind: "state"` (beobachtet bei Broadcast-Final-States); `stateDelta` bleibt strikt, weil `base`/`fingerprint` dort semantisch Patch-Basis sind. TypeScript-Seite: `StateUpdateMessage.state` um `RoomRelayEnvelope` erweitert und `StateEnvelope.fingerprint` optional. `scripts/bot-long-run.mjs` zaehlt roomRelay-Envelopes in der Summary (statt invalid) und beendet den Lauf beim `gameOver`-Prompt (Sentinel-`promptId` u32::MAX, keine Antwort erwartet) aktiv mit `game-over-at-turn-N`, statt ihn als unsupported zu fuehren.
+- **Regression:** `scripts/protocol-contract-test.mjs` prueft neu: vollstaendiger und minimaler roomRelay-StateUpdate, ein aus dem Fixture abgeleiteter State ohne Fingerprint sowie negativ weiterhin unbekannte `kind`-Werte.
+- **Evidence:** Funde in `captures/bot-long-run-2026-09-26T13-32-53-361Z.summary.json` (`errors[0..3]`); Aenderungen in `packages/shared/src/manabrew-protocol-parser.mjs`, `packages/shared/src/manabrew-protocol.ts`, `scripts/bot-long-run.mjs`, `scripts/protocol-contract-test.mjs`.
 
 ### ARCH-001 - Prozess- und Lizenzgrenze festlegen
 
