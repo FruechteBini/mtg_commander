@@ -32,6 +32,7 @@ Diese Datei ist das laufende Projektboard. Nach einem Clone auf einem anderen Re
 Die Dokumentation ist so aufgeteilt:
 
 - [docs/project-tickets.md](docs/project-tickets.md): zentrale Ticketliste, aktueller Stand, Historie, Risiken und Reihenfolge.
+- [docs/architecture.md](docs/architecture.md): beschlossene Prozess-, Netzwerk-, Secret-, Reconnect- und Lizenzgrenzen.
 - [docs/wayfinding.md](docs/wayfinding.md): Produktentscheidungen und Forschungsfragen.
 - [docs/protocol-poc.md](docs/protocol-poc.md): Protocol-Grenze, Nachrichtenformen und Capture-Ergebnisse.
 - [docs/real-engine-poc.md](docs/real-engine-poc.md): lokales Docker-/Forge-Runbook.

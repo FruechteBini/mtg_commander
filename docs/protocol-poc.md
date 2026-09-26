@@ -99,7 +99,7 @@ Run `node scripts/protocol-contract-test.mjs` for the dependency-free regression
 
 ## Next proof
 
-Define the process and license boundary in `ARCH-001`: decide whether the browser talks only to the own API/WebSocket layer and which service owns relay sessions, reconnects, saves and secrets. Remaining prompt families such as modes, multiple targets, trigger ordering, and combat stay as focused future regression fixtures.
+`ARCH-001` is complete in `docs/architecture.md`: the browser talks only to the own API/WebSocket layer, and the API owns the human relay session, orchestration, secrets and server-side persistence. The next engineering step is `APP-001`, followed by extracting the reusable relay client in `ENGINE-001`. Remaining prompt families such as modes, multiple targets, trigger ordering, and combat stay as focused future regression fixtures.
 
 Open questions:
 

@@ -45,6 +45,11 @@ Ein privater Commander-Prototyp fuer die Playgroup: Ein Mensch kann auf einem De
 - Desktop-Browser zuerst; Tauri-Desktop-App ist ein Stretch Goal, falls der Zusatzaufwand klein bleibt.
 - Stack: React/TypeScript, Node/TypeScript, SQLite, Docker Compose.
 - Zugriff: privater Invite-/Playgroup-Code statt Accounts.
+- Prozessgrenze fuer Milestone 1: Browser -> eigene Node-API/WebSocket-Schicht -> interner Manabrew-Relay -> separater Forge-backed node.
+- Die eigene API ist Relay-Client und Spiel-Orchestrator; Browser und React-App erhalten keine Relay-, Raum- oder GLM-Secrets.
+- SQLite, Deckbibliothek, Saves und strukturierte Logs bleiben serverseitig; sichtbares `gameView` gilt nicht als vollstaendiges Savegame.
+- Relay und Forge bleiben getrennte Drittanbieterprozesse. Die eigene Protokollimplementierung folgt der CC-BY-4.0-Spezifikation; AGPL-/GPL- und Asset-Fragen werden entlang dieser Grenze dokumentiert.
+- Reconnect ist nach Ausfallstufe getrennt: Browser-Reconnect nutzt API-Cache, API/Relay brauchen Retake/Resync-Proofs, Engine-Neustart braucht weiterhin `SAVE-001`.
 
 ## Frontier Tickets
 
@@ -75,7 +80,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Current answer:** Die Protokollgrenze ist fuer einen echten mehrstufigen UI-Aktionsloop tragfaehig. Der Protocol-v5-Vertrag trennt Relay-`type` von Engine-`kind`, bildet den Shock-Loop inklusive Ziel und Mana ab und wird an der externen Grenze zur Laufzeit validiert. Der Offline-Test validierte sieben sanitiserte Fixture-Nachrichten und alle 228 Nachrichten des lokalen erfolgreichen Captures. `stateDelta`, `error` und `fatal` wurden im erfolgreichen Lauf nicht real emittiert und bleiben als noch nicht capture-bewiesene Vertraege markiert.
 
-**Next proof:** In `ARCH-001` die Prozess-, Reconnect-, Secret- und Lizenzgrenze zwischen Browser, eigener API, Relay und Forge-Engine festlegen.
+**Next proof:** `APP-001` baut das startbare Web-/API-/Shared-Grundgeruest entlang der in `docs/architecture.md` beschlossenen Grenze. `ENGINE-001` extrahiert danach den wiederverwendbaren serverseitigen Relay-Client.
 
 **Execution log (2026-09-16):** Der Capture wurde so erweitert, dass leere `chooseAction`-Prompts weiter mit `pass` beantwortet werden. Erfolg wird nur bei einer Engine-gelieferten `actionId` und einem Zustandswechsel derselben Spielerperspektive gemeldet. Der Lauf `manabrew-real-session-2026-09-16T14-36-11-587Z` bestand dieses Kriterium: `Play Mountain`, `hand` -> `battlefield`, gleicher Zug und Schritt, geaenderter Fingerprint, keine Fehler.
 

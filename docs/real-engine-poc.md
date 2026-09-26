@@ -178,4 +178,4 @@ The custom capture client can drive the real relay, so the own-client strategy i
 - One self-hosted node successfully supplied all three bot seats in the real capture.
 - The capture now waits for all four ready seats before sending `StartGame`.
 
-The multi-prompt spell proof and `PROTO-005` DTO/parser alignment are complete. The next engineering step is `ARCH-001`: define the process, reconnect, secret, deployment, and license boundary before extracting the reusable engine client.
+The multi-prompt spell proof, `PROTO-005` DTO/parser alignment and `ARCH-001` architecture decision are complete. The browser will connect only to the own API/WebSocket layer; the Relay and Forge node remain internal services. The next engineering step is `APP-001`, followed by extracting the reusable engine client in `ENGINE-001`.

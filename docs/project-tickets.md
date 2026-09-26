@@ -29,7 +29,7 @@ Wer das Repository auf einem anderen Rechner klont, sollte zuerst den Abschnitt 
 
 ## Aktueller Checkpoint
 
-Stand: 19. September 2026
+Stand: 26. September 2026
 
 ### Was bereits funktioniert
 
@@ -46,6 +46,7 @@ Stand: 19. September 2026
 - Capture-Logs redigieren das Relay-Passwort.
 - Lokale Secrets, rohe Captures und temporaere Source-Checkouts sind von Git ausgeschlossen.
 - Der Projektstand ist auf Branch `main` im GitHub-Remote `origin` versioniert und von einem zweiten Rechner klonbar.
+- `ARCH-001` ist abgeschlossen: Browser, eigene API, Relay und Forge-node haben dokumentierte Prozess-, Secret-, Reconnect-, Deployment- und Lizenzgrenzen.
 
 ### Was noch nicht existiert
 
@@ -66,17 +67,19 @@ Stand: 19. September 2026
 - Lokaler Fixture-PoC: `scripts/protocol-poc.mjs`
 - Minimale Protocol-Typen: `packages/shared/src/manabrew-protocol.ts`
 - Docker-Setup: `infra/manabrew-forge-room/compose.yml`
+- Architekturentscheidung: `docs/architecture.md`
 - Entscheidungen und Risiken: `docs/wayfinding.md`
 - Git-Baseline: Commit `04f9ee9` auf `origin/main` (`https://github.com/FruechteBini/mtg_commander.git`)
 
 ## Empfohlene Reihenfolge
 
-1. `ARCH-001` erledigen und damit Browser-, API-, Relay- und Engine-Grenzen festlegen.
-2. `APP-001`, `ENGINE-001` und `UI-001` als vertikalen App-Slice bauen; sie koennen auf dem abgeschlossenen Protocol-Vertrag aufsetzen.
-3. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
-4. Save/Load mit `SAVE-001` frueh klaeren, bevor die API-Struktur festgezurrt wird.
-5. Danach UI, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
-6. `BOOT-001` ist abgeschlossen; neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
+1. `APP-001` als naechsten vertikalen Schritt erledigen: startbares React-/API-/Shared-Grundgeruest mit getrennten Healthchecks und ohne Browser-Secrets.
+2. `ENGINE-001` umsetzen und die Relay-/Game-Logik aus dem Capture-Skript in einen wiederverwendbaren serverseitigen Client extrahieren.
+3. `UI-001` und `UI-002` auf dem echten `gameView`-Vertrag aufbauen.
+4. Echte Decks ueber `DECK-001` und `DECK-002` integrieren.
+5. Save/Load mit `SAVE-001` frueh klaeren, bevor persistente Spiel-APIs als stabil gelten.
+6. Danach UI, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
+7. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
 
 ## Ticketuebersicht
 
@@ -87,9 +90,9 @@ Stand: 19. September 2026
 | `BOOT-001` | `DONE` | Git-Baseline und klonbaren Projektstand herstellen | Branch `main` ist sauber versioniert, gepusht und klonbar. |
 | `PROTO-004` | `DONE` | Mehrstufige echte Aktion capturen | Spell inklusive Ziel-, Mana-, Prioritaets- und Aufloesungsloop bewiesen. |
 | `PROTO-005` | `DONE` | Reale DTOs gegen TypeScript-Vertrag abgleichen | App nutzt belegte statt angenommene Protocol-Typen. |
-| `ARCH-001` | `NEXT` | Prozess- und Lizenzgrenze festlegen | UI, API, Relay und Engine haben klare Verantwortungen. |
-| `APP-001` | `BLOCKED` | React/TypeScript- und API-Grundgeruest erstellen | Startbare Web-App plus API- und Shared-Packages. |
-| `ENGINE-001` | `BLOCKED` | Wiederverwendbaren Manabrew-Client bauen | Relay/Lobby/Game-Protokoll steckt nicht mehr nur im Capture-Skript. |
+| `ARCH-001` | `DONE` | Prozess- und Lizenzgrenze festlegen | UI, API, Relay und Engine haben klare Verantwortungen. |
+| `APP-001` | `NEXT` | React/TypeScript- und API-Grundgeruest erstellen | Startbare Web-App plus API- und Shared-Packages. |
+| `ENGINE-001` | `READY` | Wiederverwendbaren Manabrew-Client bauen | Relay/Lobby/Game-Protokoll steckt nicht mehr nur im Capture-Skript. |
 | `UI-001` | `BLOCKED` | `gameView` in ein stabiles UI-Modell normalisieren | Vier Spieler, Zonen, Stack und Prioritaet sind renderbar. |
 | `UI-002` | `BLOCKED` | Ersten Hybrid-Commander-Board-Slice bauen | Menschlicher Bereich, drei Bot-Panels und Prompt-Aktionen sind sichtbar. |
 | `DECK-001` | `READY` | Neutralen Commander-Decklistenimport definieren | Textliste wird in ein internes Deckmodell umgewandelt. |
@@ -207,7 +210,7 @@ Stand: 19. September 2026
 
 ### ARCH-001 - Prozess- und Lizenzgrenze festlegen
 
-- **Status:** `NEXT`
+- **Status:** `DONE`
 - **Prioritaet:** P0
 - **Fragen:**
   - Laeuft die Engine dauerhaft separat von der Node-API?
@@ -216,10 +219,14 @@ Stand: 19. September 2026
   - Welche Teile implementieren nur das CC-BY-Protokoll und welche koppeln an AGPL/Forge-Code?
 - **Empfohlene Richtung:** Browser -> eigene API/WebSocket-Schicht -> Manabrew Relay/Forge; Secrets, Saves und GLM bleiben serverseitig.
 - **Akzeptanzkriterien:** Ein kleines Architekturdiagramm und eine Entscheidung mit Konsequenzen fuer Deployment, Lizenz, Secrets und Reconnects liegen vor.
+- **Ergebnis (2026-09-26):** Der Browser spricht ausschliesslich per HTTPS/WSS mit der eigenen Node-API. Die API ist Backend-for-Frontend, Relay-Client und Spiel-Orchestrator. Relay und Forge-backed node bleiben getrennte interne Container; SQLite, Decks, Saves und GLM-Secrets bleiben serverseitig. Ausfall- und Reconnect-Verhalten ist fuer Browser, API, Relay, Engine und Z.AI getrennt beschrieben. Die eigene Protokollimplementierung stuetzt sich auf die CC-BY-4.0-Spezifikation; Manabrew-/Forge-Komponenten und deren AGPL-/GPL-Pflichten bleiben getrennt sichtbar. Vollstaendige Asset-/Lizenzpruefung bleibt `LEGAL-001`.
+- **Evidence:** `docs/architecture.md`; Manabrew `LICENSE.md` am festgehaltenen Commit `cfaf2431c872b87fc8a7208e873a92140755f47d`; Manabrew-Protokolldokumentation; GNU AGPL 3.0 Abschnitt 13; CC-BY-4.0 Abschnitt 3.
+- **Konsequenz:** `APP-001` ist der naechste Schritt. `ENGINE-001` ist startklar. Direkte Browser-Relay-Kommunikation und Secrets im Browser sind fuer Milestone 1 ausgeschlossen.
+- **Offene Nachweise:** Menschlichen Sitz nach API-/Relay-Neustart wiederaufnehmen, echten Engine-Restore beweisen sowie Projekt-/Asset-Lizenzen in `LEGAL-001` abschliessen.
 
 ### APP-001 - Web-/API-Grundgeruest erstellen
 
-- **Status:** `BLOCKED` durch `ARCH-001`
+- **Status:** `NEXT`
 - **Prioritaet:** P0
 - **Zielstruktur:** React/TypeScript-Web-App, Node/TypeScript-API und Shared-Package in einem Workspace.
 - **Akzeptanzkriterien:**
@@ -230,7 +237,7 @@ Stand: 19. September 2026
 
 ### ENGINE-001 - Wiederverwendbaren Manabrew-Client bauen
 
-- **Status:** `BLOCKED` durch `PROTO-005` und `ARCH-001`
+- **Status:** `READY`; `PROTO-005` und `ARCH-001` sind abgeschlossen
 - **Prioritaet:** P0
 - **Aufgaben:** Auth, Room-Liste, Join, Deckwahl, Ready, Bot-Batch, Start, Resync, State/Delta, Prompt/Response, Reconnect und Fehlerbehandlung aus dem Capture-Skript in eine testbare Bibliothek extrahieren.
 - **Akzeptanzkriterien:** Das Capture-Skript und spaeter die API koennen denselben Client verwenden; keine duplizierte Protocol-Logik.
