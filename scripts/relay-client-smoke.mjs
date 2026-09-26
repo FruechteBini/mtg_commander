@@ -18,11 +18,12 @@ const client = new ManabrewRelayClient({
   url,
   username: `mtg-smoke-${process.pid}`,
   password,
-  clientPlatform: "mtg-commander-smoke",
+  clientPlatform: "unknown",
   clientVersion: "0.1.0",
   reconnect: false,
 });
 
+let completed = false;
 const timeout = setTimeout(() => {
   client.close();
   console.error("Relay smoke test timed out");
@@ -30,6 +31,7 @@ const timeout = setTimeout(() => {
 }, 10_000);
 
 client.on("error", (error) => {
+  if (completed) return;
   clearTimeout(timeout);
   console.error(`Relay smoke test failed: ${error.message}`);
   process.exitCode = 1;
@@ -37,6 +39,7 @@ client.on("error", (error) => {
 });
 
 client.on("invalidMessage", ({ error }) => {
+  if (completed) return;
   clearTimeout(timeout);
   console.error(`Relay returned an invalid message: ${error.message}`);
   process.exitCode = 1;
@@ -63,6 +66,7 @@ client.on("message", (message) => {
     console.error(`Relay is reachable, but room '${roomName}' was not found`);
     process.exitCode = 1;
   } else {
+    completed = true;
     console.log(`Relay smoke test passed: authenticated and found room '${room.room_name}'`);
   }
   client.close();

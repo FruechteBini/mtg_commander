@@ -27,7 +27,7 @@ export function createEngineRuntimeFromEnvironment(): EngineRuntime {
     url,
     password,
     username: process.env.MANABREW_API_USERNAME ?? `mtg-api-${process.pid}`,
-    clientPlatform: "mtg-commander-api",
+    clientPlatform: "unknown",
     clientVersion: "0.1.0",
     reconnect: true,
   });

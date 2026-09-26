@@ -41,7 +41,7 @@ export class ManabrewRelayClient {
     this.#options = {
       identity: null,
       service: false,
-      clientPlatform: "server",
+      clientPlatform: "unknown",
       clientVersion: null,
       reconnect: true,
       reconnectMinDelayMs: 250,

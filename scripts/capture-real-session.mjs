@@ -471,7 +471,7 @@ async function main() {
     url: relayUrl,
     username,
     password: serverKey,
-    clientPlatform: "mtg-commander-capture",
+    clientPlatform: "unknown",
     clientVersion: "0.1.0",
     reconnect: true,
     reconnectMinDelayMs: 250,

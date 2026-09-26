@@ -71,7 +71,7 @@ test("authenticates, tracks state and exposes typed room commands", () => {
     password: "server-secret",
     service: false,
     identity: null,
-    client_platform: "server",
+    client_platform: "unknown",
     client_version: null,
   });
 

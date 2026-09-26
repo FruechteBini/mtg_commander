@@ -25,7 +25,7 @@ export interface ManabrewRelayClientOptions {
   password: string;
   identity?: string | null;
   service?: boolean;
-  clientPlatform?: string;
+  clientPlatform?: "web" | "pwa" | "desktop" | "mobile" | "unknown";
   clientVersion?: string | null;
   reconnect?: boolean;
   reconnectMinDelayMs?: number;
