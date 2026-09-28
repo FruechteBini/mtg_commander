@@ -1,6 +1,7 @@
 import type { NormalizedGameView } from "@mtg-commander/shared";
 import { manaEntries, playerDisplayName, roleBadges, viewerSeatOf, zoneCountText } from "./view-model.js";
 import { HandCard } from "./HandCard.js";
+import { useCardImages } from "./scryfall.js";
 import { ZonePanel } from "./ZonePanel.js";
 
 export function OwnBoard({
@@ -22,6 +23,8 @@ export function OwnBoard({
   const zones = view.playerZones.find((group) => group.playerId === viewer.id)?.zones ?? [];
   const zoneByKind = (kind: UiZoneKindOf) => zones.find((zone) => zone.kind === kind);
   const hand = zoneByKind("hand");
+  const handCards = hand?.cards ?? [];
+  const cardImages = useCardImages(handCards);
   const others = zones.filter((zone) => zone.kind === "unknown");
   const mana = manaEntries(viewer.manaPool);
   const commanderNote =
@@ -71,10 +74,16 @@ export function OwnBoard({
           ) : (
             <div className="hand-cards">
               {hand.cards.map((card) => (
-                <HandCard key={card.id} card={card} highlight={highlightCardIds?.has(card.id) ?? false} />
+                <HandCard
+                  key={card.id}
+                  card={card}
+                  imageUrl={cardImages.get(card.id) ?? null}
+                  highlight={highlightCardIds?.has(card.id) ?? false}
+                />
               ))}
             </div>
           )}
+          <p className="hand-strip-note muted">Kartenbilder live von Scryfall</p>
         </section>
       ) : null}
     </section>

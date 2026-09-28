@@ -116,7 +116,7 @@ Stand: 26. September 2026
 | `API-001` | `BLOCKED` | Node/TypeScript-API und SQLite-Schema bauen | Decks, Spiele, Saves und Logs haben persistente IDs. |
 | `SAVE-002` | `DONE` | Save/Resume-Produktentscheidung + Journal-Mitlauf | A aktiv, B-light-Journal in der API implementiert, C vorlaeufig abgelehnt (`docs/save-resume-research.md`). |
 | `SAVE-003` | `BLOCKED` | Replay-Restore per Journal implementieren | Wartet auf Upstream-Seed-Zugriff (Issue-Entwurf `docs/upstream-seed-issue.md`). |
-| `UI-003` | `IN PROGRESS` | Assistierte Prompt-Interaktion implementieren | Inkrement 1 umgesetzt: Live-Sitz + `/api/game`, klickbare legale Optionen, Auswahl-/Highlighting, Fehler sichtbar. Offen: Live-Lauf am echten Stack, weitere Prompt-Oberflaechen. |
+| `UI-003` | `IN PROGRESS` | Assistierte Prompt-Interaktion implementieren | Inkrement 1 umgesetzt: Live-Sitz + `/api/game`, klickbare legale Optionen, Auswahl-/Highlighting, Fehler sichtbar; Hand-Kartenbilder live via Scryfall (Batch-Endpoint, Namens-Fallback, Text-Kachel als Offline-Fallback). Offen: Live-Lauf am echten Stack, weitere Prompt-Oberflaechen. |
 | `UI-004` | `BLOCKED` | Manual Mode definieren und bauen | Erfahrene Spieler koennen Pass-/Prioritaetsverhalten steuern. |
 | `GLM-001` | `BLOCKED` | Strukturiertes Tutor-Kontextschema definieren | GLM erhaelt nur belegte Engine-Ereignisse und sichtbaren Kontext. |
 | `GLM-002` | `BLOCKED` | Server-seitigen Explain-Endpunkt bauen | Ein Ereignis kann auf Nachfrage erklaert werden, Key bleibt serverseitig. |

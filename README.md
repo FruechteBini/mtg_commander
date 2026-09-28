@@ -99,7 +99,7 @@ Er normalisiert das Vier-Spieler-Fixture und den Shock-Zustandswechsel determini
 
 Die Web-App rendert dieses Modell bereits: Unter `npm run dev` zeigt `http://127.0.0.1:5173` das statische Hybrid-Commander-Brett mit grossem eigenen Bereich, drei aufklappbaren Gegner-Panels, Stack-Ansicht und einem Capture-Loader, der echte `StateUpdate`-Nachrichten aus `captures/*.jsonl` statisch rendert.
 
-Mit aktiver Live-Sitz (`UI-003`, Inkrement 1) rendert dasselbe Brett den echten Engine-Zustand und offene Prompts sind klickbar: legale Aktionen werden als Buttons angeboten (inklusive Passen/Abbrechen), Auswahlprompts (Ziele/Karten) validieren min/max, betroffene Karten werden im Brett hervorgehoben und Engine-Fehler erscheinen sichtbar im Prompt-Panel. Die Web-App pollt dazu `GET /api/game` und sendet Antworten an `POST /api/game/respond`.
+Mit aktiver Live-Sitz (`UI-003`, Inkrement 1) rendert dasselbe Brett den echten Engine-Zustand und offene Prompts sind klickbar: legale Aktionen werden als Buttons angeboten (inklusive Passen/Abbrechen), Auswahlprompts (Ziele/Karten) validieren min/max, betroffene Karten werden im Brett hervorgehoben und Engine-Fehler erscheinen sichtbar im Prompt-Panel. Die Web-App pollt dazu `GET /api/game` und sendet Antworten an `POST /api/game/respond`. Die eigenen Handkarten werden als echte Kartenbilder live ueber die Scryfall-API geladen (GET `api.scryfall.com/cards/{set}/{nummer}` mit Namens-Fallback ueber `/cards/named`, Modul-Cache, Rate-Limit-konform sequenziell; ohne Netz dient eine Text-Kachel als Fallback).
 
 Der echte Engine-Schritt ist als Docker-Runbook vorbereitet und lokal mit Docker Desktop/WSL2 erfolgreich gestartet:
 [docs/real-engine-poc.md](docs/real-engine-poc.md).
