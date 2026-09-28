@@ -99,6 +99,8 @@ Er normalisiert das Vier-Spieler-Fixture und den Shock-Zustandswechsel determini
 
 Die Web-App rendert dieses Modell bereits: Unter `npm run dev` zeigt `http://127.0.0.1:5173` das statische Hybrid-Commander-Brett mit grossem eigenen Bereich, drei aufklappbaren Gegner-Panels, Stack-Ansicht und einem Capture-Loader, der echte `StateUpdate`-Nachrichten aus `captures/*.jsonl` statisch rendert.
 
+Mit aktiver Live-Sitz (`UI-003`, Inkrement 1) rendert dasselbe Brett den echten Engine-Zustand und offene Prompts sind klickbar: legale Aktionen werden als Buttons angeboten (inklusive Passen/Abbrechen), Auswahlprompts (Ziele/Karten) validieren min/max, betroffene Karten werden im Brett hervorgehoben und Engine-Fehler erscheinen sichtbar im Prompt-Panel. Die Web-App pollt dazu `GET /api/game` und sendet Antworten an `POST /api/game/respond`.
+
 Der echte Engine-Schritt ist als Docker-Runbook vorbereitet und lokal mit Docker Desktop/WSL2 erfolgreich gestartet:
 [docs/real-engine-poc.md](docs/real-engine-poc.md).
 
@@ -138,3 +140,5 @@ npm run bot:longrun
 Der aktuelle Bot-Langlauf (`BOT-002`) bestaetigt eine komplette Partie ueber 66 Turns bis zum natuerlichen GameOver: 758 Prompt-Antworten ohne Deadlock oder Engine-Fehler, Land-Policy inklusive, und ein linear stabiler forge-room-Speicher (246,9 -> 340,5 MiB).
 
 Zusaetzlich schreibt die API automatisch ein Replay-Journal (`SAVE-002`, Option "B light"): Startbedingung und jede Prompt-Antwort jeder Partie werden geordnet und versioniert als JSONL mitgeschrieben - heute fuer Audit/Debugging, spaeter als Basis fuer Replay-Restore, sobald Upstream den Spiel-Seed veroeffentlicht (Issue-Entwurf: `docs/upstream-seed-issue.md`). Konfiguration: `MANABREW_JOURNAL_DIR` (Standard `captures/`), `MANABREW_JOURNAL_DISABLE=1` schaltet es ab (Details: `docs/save-resume-research.md`).
+
+Live-Sitz fuer die Browser-Interaktion (`UI-003`): Die API haelt genau eine interaktive Mensch-Sitz gegen den Relay und fuehrt den bewaehrten BOT-002-Flow aus (Raum finden, beitreten, Deck waehlen, Bots spawnen, ready, Spiel starten). Aktivierung per `MANABREW_ROOM_NAME` (zusaetzlich zu `MANABREW_RELAY_URL`/`MANABREW_SERVER_KEY`); Optionen: `MANABREW_ROOM_PASSWORD` (Standard `local-dev`), `MANABREW_DECK_FILE` (Standard `decks/dina-sacrifice.txt`; `MANABREW_DECK_DISABLE=1` = nur zuschauen), `MANABREW_DECK_NAME`/`MANABREW_DECK_OWNER`/`MANABREW_DECK_COMMANDER`, `MANABREW_SPAWN_BOTS=0` und `MANABREW_BOT_COUNT` (1-3, Standard 3). Engine bleibt Regeln-Autoritaet: Die Session leitet nur Prompts des eigenen Sitzes weiter (`apps/api/src/engine-session.ts`).

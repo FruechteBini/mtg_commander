@@ -209,6 +209,72 @@
 }
 .state-loader button:hover { background: rgba(112, 210, 139, 0.22); }
 
+/* UI-003: Live-Prompt-Interaktion */
+
+.prompt-panel { display: flex; flex-direction: column; gap: 10px; }
+.prompt-headline { margin: 0; font-weight: 700; letter-spacing: 0.02em; }
+.prompt-source { margin: 0; font-size: 0.85rem; color: #c7d2c9; }
+
+.prompt-options { display: flex; flex-direction: column; gap: 6px; }
+
+.prompt-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #dfe7e1;
+  cursor: pointer;
+  text-align: left;
+}
+.prompt-option:hover:not(:disabled) { border-color: rgba(157, 214, 171, 0.5); }
+.prompt-option:disabled { opacity: 0.55; cursor: wait; }
+.prompt-option.primary {
+  border-color: rgba(112, 210, 139, 0.65);
+  background: rgba(112, 210, 139, 0.1);
+  color: #b8e8c4;
+}
+.prompt-option.kind-pass,
+.prompt-option.kind-cancel { opacity: 0.8; }
+
+.selection-block { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.selection-list { display: flex; flex-direction: column; gap: 6px; }
+
+.selection-item {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  color: #dfe7e1;
+  cursor: pointer;
+  text-align: left;
+}
+.selection-item.is-selected {
+  border-color: rgba(112, 210, 139, 0.7);
+  background: rgba(112, 210, 139, 0.12);
+  color: #b8e8c4;
+}
+.selection-item:disabled { opacity: 0.55; cursor: wait; }
+
+.prompt-unsupported summary { cursor: pointer; color: #ddc778; }
+.prompt-unsupported pre {
+  max-height: 220px;
+  overflow: auto;
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.card-chip.is-highlight {
+  border-color: rgba(221, 199, 120, 0.75);
+  box-shadow: 0 0 0 1px rgba(221, 199, 120, 0.35);
+}
+
 @media (max-width: 980px) {
   .board-layout { grid-template-columns: 1fr; }
   .own-zones { grid-template-columns: 1fr; }

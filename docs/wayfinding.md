@@ -46,6 +46,7 @@ Ein privater Commander-Prototyp fuer die Playgroup: Ein Mensch kann auf einem De
 - Stack: React/TypeScript, Node/TypeScript, SQLite, Docker Compose.
 - Zugriff: privater Invite-/Playgroup-Code statt Accounts.
 - Prozessgrenze fuer Milestone 1: Browser -> eigene Node-API/WebSocket-Schicht -> interner Manabrew-Relay -> separater Forge-backed node.
+- UI-003-Architektur: Die API haelt genau eine interaktive Mensch-Sitz (BOT-002-Flow, aktiv per `MANABREW_ROOM_NAME`); der Browser pollt `GET /api/game` und antwortet per `POST /api/game/respond`. Die Engine bleibt Regeln-Autoritaet - die API validiert nur Sitz-Eigentum und Prompt-Frische, erfindet keine Aktionen.
 - Die eigene API ist Relay-Client und Spiel-Orchestrator; Browser und React-App erhalten keine Relay-, Raum- oder GLM-Secrets.
 - SQLite, Deckbibliothek, Saves und strukturierte Logs bleiben serverseitig; sichtbares `gameView` gilt nicht als vollstaendiges Savegame.
 - Relay und Forge bleiben getrennte Drittanbieterprozesse. Die eigene Protokollimplementierung folgt der CC-BY-4.0-Spezifikation; AGPL-/GPL- und Asset-Fragen werden entlang dieser Grenze dokumentiert.
@@ -188,7 +189,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Current answer:** Die UI soll nicht reiner Vier-Spieler-Tisch und nicht reines Arena-Layout werden, sondern eine Hybridansicht fuer Solo-vs-Bots auf Desktop-PC.
 
-**Next proof:** Erfuellt – `UI-002` rendert das UI-Modell als ersten React-Board-Slice (grosser eigener Bereich, drei kompakte aufklappbare Gegner-Panels, Stack sichtbar, Capture-Loader fuer echte States). Offen ist die Interaktion: Prompt-Antworten, Highlighting legaler Aktionen und Live-States.
+**Next proof:** Erfuellt – `UI-002` rendert das UI-Modell als ersten React-Board-Slice (grosser eigener Bereich, drei kompakte aufklappbare Gegner-Panels, Stack sichtbar, Capture-Loader fuer echte States). `UI-003` Inkrement 1 ergaenzt Live-Interaktion: Die API haelt die einzige interaktive Mensch-Sitz, der Browser pollt `/api/game`, rendert offene Prompts als klickbare legale Optionen (inkl. Auswahl-UIs und Highlighting betroffener Karten) und sendet Antworten zurueck. Offen: ein Live-Lauf am echten Forge-Stack und Manual Mode (`UI-004`).
 
 **Open risk:** Commander-Boardstates koennen sehr gross werden; Lesbarkeit und Performance muessen frueh mit echten Boardstates geprueft werden.
 

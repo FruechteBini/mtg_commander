@@ -13,7 +13,11 @@ const configuredPort = Number.parseInt(process.env.API_PORT ?? "8787", 10);
 const port = Number.isFinite(configuredPort) ? configuredPort : 8787;
 
 const engineRuntime = createEngineRuntimeFromEnvironment();
-const server = createApiServer({ engineStatus: () => engineRuntime.status() });
+const server = createApiServer({
+  engineStatus: () => engineRuntime.status(),
+  gameSnapshot: () => engineRuntime.gameSnapshot(),
+  gameRespond: (request) => engineRuntime.respond(request),
+});
 
 server.listen(port, host, () => {
   console.log(`MTG Commander API listening on http://${host}:${port}`);

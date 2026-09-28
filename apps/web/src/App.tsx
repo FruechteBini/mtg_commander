@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { AppStatus } from "@mtg-commander/shared";
 import { GameBoard } from "./game/GameBoard.js";
+import { useLiveGame, type LiveGamePanel } from "./game/useLiveGame.js";
 
 type ApiState =
   | { kind: "loading" }
@@ -9,6 +10,7 @@ type ApiState =
 
 export function App() {
   const [apiState, setApiState] = useState<ApiState>({ kind: "loading" });
+  const live = useLiveGame();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -29,6 +31,17 @@ export function App() {
   }, []);
 
   const apiReady = apiState.kind === "ready" && apiState.status.status === "ok";
+  const livePanel: LiveGamePanel | null =
+    live.connection.kind === "live"
+      ? {
+          snapshot: live.connection.snapshot,
+          sending: live.sending,
+          respondError: live.respondError,
+          onRespond: (request) => {
+            void live.respond(request);
+          },
+        }
+      : null;
 
   return (
     <main className="shell">
@@ -36,9 +49,9 @@ export function App() {
         <p className="eyebrow">PRIVATE PLAYGROUP PROTOTYPE</p>
         <h1>MTG Commander</h1>
         <p className="intro">
-          Ein Mensch, drei Bots und echte Commander-Decks. Das Spielbrett unten rendert den
-          normalisierten UI-Zustand (UI-Modell v1) und zeigt zuerst einen statischen
-          Vier-Spieler-Fixture-Zustand.
+          Ein Mensch, drei Bots und echte Commander-Decks. Mit aktiver Live-Sitz rendert das
+          Spielbrett den echten Engine-Zustand und offene Prompts sind direkt im Browser
+          beantwortbar (UI-003).
         </p>
       </header>
 
@@ -54,9 +67,15 @@ export function App() {
           </p>
         )}
         {apiState.kind === "error" && <p className="detail error">{apiState.message}</p>}
+        {livePanel ? (
+          <p className="detail">
+            Live-Sitz: {livePanel.snapshot.humanPlayerName}
+            {livePanel.snapshot.roomId ? ` \u00b7 Raum ${livePanel.snapshot.roomId}` : ""}
+          </p>
+        ) : null}
       </section>
 
-      <GameBoard />
+      <GameBoard live={livePanel} />
     </main>
   );
 }

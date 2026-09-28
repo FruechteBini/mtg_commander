@@ -5,9 +5,11 @@ import { gameViewFromJson } from "./view-model.js";
 export function StateLoader({
   source,
   onLoaded,
+  onReset = null,
 }: {
   source: string;
   onLoaded: (view: NormalizedGameView, label: string) => void;
+  onReset?: (() => void) | null;
 }) {
   const [text, setText] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -38,6 +40,9 @@ export function StateLoader({
       />
       <div className="state-loader-actions">
         <button type="button" onClick={load}>Rendern</button>
+        {onReset ? (
+          <button type="button" onClick={onReset}>Zurueck zum Live-Spiel</button>
+        ) : null}
         <span className="muted">Aktuelle Quelle: {source}</span>
       </div>
       {error ? <p className="detail error">{error}</p> : null}

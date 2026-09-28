@@ -75,3 +75,90 @@ test("unknown routes return a JSON 404", async () => {
   assert.equal(response.status, 404);
   assert.deepEqual(await response.json(), { error: "not_found" });
 });
+
+test("game snapshot defaults to an empty disabled snapshot", async () => {
+  const response = await fetch(`${baseUrl}/api/game`);
+  const body = (await response.json()) as Record<string, unknown>;
+
+  assert.equal(response.status, 200);
+  assert.equal(body.engineStatus, "disabled");
+  assert.equal(body.gameView, null);
+  assert.equal(body.prompt, null);
+  assert.equal(body.humanPlayerName, null);
+});
+
+test("respond endpoint validates the request body", async () => {
+  const invalid = await fetch(`${baseUrl}/api/game/respond`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ promptId: -1, actionType: "", output: [] }),
+  });
+  assert.equal(invalid.status, 400);
+});
+
+test("respond endpoint reports 503 without an engine session", async () => {
+  const response = await fetch(`${baseUrl}/api/game/respond`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ promptId: 3, actionType: "chooseAction", output: { type: "pass", exhaustStack: false } }),
+  });
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: "engine_unavailable" });
+});
+
+test("game endpoints forward live snapshots and prompt answers", async () => {
+  const snapshot = {
+    engineStatus: "authenticated" as const,
+    humanPlayerName: "mtg-api-test",
+    roomId: "room-1",
+    gameId: "game-1",
+    viewerPlayerId: "player-0",
+    gameEnded: false,
+    gameView: null,
+    prompt: null,
+    lastError: null,
+  };
+  const responses: Array<{ promptId: number; actionType: string; output: Record<string, unknown> }> = [];
+  const gameServer = createApiServer({
+    engineStatus: () => "authenticated",
+    gameSnapshot: () => snapshot,
+    gameRespond: (request) => {
+      responses.push(request);
+      return request.promptId === 7 ? { ok: true } : { ok: false, error: "Prompt 7 erwartet." };
+    },
+  });
+  await new Promise<void>((resolve, reject) => {
+    gameServer.once("error", reject);
+    gameServer.listen(0, "127.0.0.1", resolve);
+  });
+
+  try {
+    const address = gameServer.address() as AddressInfo;
+    const gameUrl = `http://127.0.0.1:${address.port}`;
+
+    const gameResponse = await fetch(`${gameUrl}/api/game`);
+    const gameBody = (await gameResponse.json()) as Record<string, unknown>;
+    assert.equal(gameBody.gameId, "game-1");
+    assert.equal(gameBody.engineStatus, "authenticated");
+
+    const accepted = await fetch(`${gameUrl}/api/game/respond`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ promptId: 7, actionType: "chooseAction", output: { type: "pass", exhaustStack: false } }),
+    });
+    assert.equal(accepted.status, 204);
+    assert.equal(responses.length, 1);
+
+    const rejected = await fetch(`${gameUrl}/api/game/respond`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ promptId: 8, actionType: "chooseAction", output: { type: "pass", exhaustStack: false } }),
+    });
+    assert.equal(rejected.status, 409);
+    assert.deepEqual(await rejected.json(), { error: "Prompt 7 erwartet." });
+  } finally {
+    await new Promise<void>((resolve, reject) => {
+      gameServer.close((error) => (error ? reject(error) : resolve()));
+    });
+  }
+});

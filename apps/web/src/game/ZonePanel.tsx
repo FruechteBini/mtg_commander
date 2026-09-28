@@ -6,10 +6,12 @@ export function ZonePanel({
   zone,
   wide = false,
   note = null,
+  highlightCardIds = null,
 }: {
   zone: UiZone;
   wide?: boolean;
   note?: string | null;
+  highlightCardIds?: Set<string> | null;
 }) {
   const title = zone.kind === "unknown" ? `${zoneLabel(zone.kind)} (${zone.rawName})` : zoneLabel(zone.kind);
 
@@ -25,7 +27,7 @@ export function ZonePanel({
         <ul className="card-list">
           {zone.cards.map((card) => (
             <li key={card.id}>
-              <CardChip card={card} />
+              <CardChip card={card} highlight={highlightCardIds?.has(card.id) ?? false} />
             </li>
           ))}
         </ul>

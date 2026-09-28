@@ -1,21 +1,85 @@
+import { readFileSync } from "node:fs";
 import { ManabrewRelayClient, type RelayClientStatus } from "@mtg-commander/manabrew-client";
-import type { EngineConnectionStatus } from "@mtg-commander/shared";
+import type {
+  EngineConnectionStatus,
+  GameRespondRequest,
+  GameRespondResult,
+  GameSnapshotDto,
+} from "@mtg-commander/shared";
 import { createGameJournalFromEnvironment } from "./game-journal.js";
+import {
+  createInteractiveSession,
+  type InteractiveSession,
+  type InteractiveSessionConfig,
+  type SessionDeckConfig,
+} from "./engine-session.js";
 
 export interface EngineRuntime {
   start(): void;
   close(): void;
   status(): EngineConnectionStatus;
+  /** UI-003: live state + open prompt for the browser. */
+  gameSnapshot(): GameSnapshotDto;
+  /** UI-003: forward a prompt answer from the browser to the relay. */
+  respond(request: GameRespondRequest): GameRespondResult;
+}
+
+function emptySnapshot(engineStatus: EngineConnectionStatus): GameSnapshotDto {
+  return {
+    engineStatus,
+    humanPlayerName: null,
+    roomId: null,
+    gameId: null,
+    viewerPlayerId: null,
+    gameEnded: false,
+    gameView: null,
+    prompt: null,
+    lastError: null,
+  };
 }
 
 const disabledRuntime: EngineRuntime = {
   start() {},
   close() {},
   status: () => "disabled",
+  gameSnapshot: () => emptySnapshot("disabled"),
+  respond: () => ({ ok: false, error: "Engine-Integration ist deaktiviert (MANABREW_RELAY_URL/MANABREW_SERVER_KEY fehlen)." }),
 };
 
 function asEngineStatus(status: RelayClientStatus): EngineConnectionStatus {
   return status;
+}
+
+function deckConfigFromEnvironment(): SessionDeckConfig | null {
+  if (process.env.MANABREW_DECK_DISABLE === "1") return null;
+  const file = process.env.MANABREW_DECK_FILE ?? "decks/dina-sacrifice.txt";
+  let deckText: string;
+  try {
+    deckText = readFileSync(file, "utf8");
+  } catch {
+    console.error(`[manabrew] Deck-Datei nicht lesbar: ${file} (Sitz beobachtet nur)`);
+    return null;
+  }
+  return {
+    deckText,
+    owner: process.env.MANABREW_DECK_OWNER ?? "Korbi",
+    name: process.env.MANABREW_DECK_NAME ?? "Dina Sacrifice",
+    commanderName: process.env.MANABREW_DECK_COMMANDER ?? "Dina, Essence Brewer",
+  };
+}
+
+function sessionConfigFromEnvironment(username: string): InteractiveSessionConfig | null {
+  const roomName = process.env.MANABREW_ROOM_NAME;
+  if (!roomName) return null;
+  const botCount = Number.parseInt(process.env.MANABREW_BOT_COUNT ?? "3", 10);
+  return {
+    username,
+    roomName,
+    roomPassword: process.env.MANABREW_ROOM_PASSWORD ?? "local-dev",
+    deck: deckConfigFromEnvironment(),
+    spawnBots: process.env.MANABREW_SPAWN_BOTS !== "0",
+    botCount: Number.isFinite(botCount) && botCount >= 1 && botCount <= 3 ? botCount : 3,
+  };
 }
 
 export function createEngineRuntimeFromEnvironment(): EngineRuntime {
@@ -24,10 +88,12 @@ export function createEngineRuntimeFromEnvironment(): EngineRuntime {
 
   if (!url || !password) return disabledRuntime;
 
+  const username = process.env.MANABREW_API_USERNAME ?? `mtg-api-${process.pid}`;
+
   const client = new ManabrewRelayClient({
     url,
     password,
-    username: process.env.MANABREW_API_USERNAME ?? `mtg-api-${process.pid}`,
+    username,
     clientPlatform: "unknown",
     clientVersion: "0.1.0",
     reconnect: true,
@@ -39,6 +105,13 @@ export function createEngineRuntimeFromEnvironment(): EngineRuntime {
   client.on("relayError", (message: { code?: string; message: string }) => {
     console.error(`[manabrew] relay error ${message.code ?? "unknown"}: ${message.message}`);
   });
+
+  // UI-003: optional interactive seat (join lobby, deck, ready, bots, start).
+  const sessionConfig = sessionConfigFromEnvironment(username);
+  let session: InteractiveSession | null = null;
+  if (sessionConfig) {
+    session = createInteractiveSession(client, sessionConfig, (message) => console.log(message));
+  }
 
   // SAVE-002 "B light": record start condition and every prompt response
   // in order so the game can be replayed once the upstream exposes the seed.
@@ -80,5 +153,12 @@ export function createEngineRuntimeFromEnvironment(): EngineRuntime {
       journal?.sessionEnd("close");
     },
     status: () => asEngineStatus(client.status),
+    gameSnapshot: () =>
+      session ? session.snapshot(asEngineStatus(client.status)) : emptySnapshot(asEngineStatus(client.status)),
+    respond: (request) =>
+      session
+        ? session.respond(request)
+        : { ok: false, error: "Keine interaktive Sitz aktiv (MANABREW_ROOM_NAME nicht gesetzt)." },
   };
 }
+

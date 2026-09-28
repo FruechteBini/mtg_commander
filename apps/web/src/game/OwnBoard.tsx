@@ -2,7 +2,13 @@ import type { NormalizedGameView } from "@mtg-commander/shared";
 import { manaEntries, playerDisplayName, roleBadges, viewerSeatOf } from "./view-model.js";
 import { ZonePanel } from "./ZonePanel.js";
 
-export function OwnBoard({ view }: { view: NormalizedGameView }) {
+export function OwnBoard({
+  view,
+  highlightCardIds = null,
+}: {
+  view: NormalizedGameView;
+  highlightCardIds?: Set<string> | null;
+}) {
   const viewer = viewerSeatOf(view);
   if (!viewer) {
     return (
@@ -43,8 +49,8 @@ export function OwnBoard({ view }: { view: NormalizedGameView }) {
         ) : null}
       </header>
       <div className="own-zones">
-        {zoneByKind("battlefield") ? <ZonePanel wide zone={zoneByKind("battlefield")!} /> : null}
-        {zoneByKind("hand") ? <ZonePanel zone={zoneByKind("hand")!} /> : null}
+        {zoneByKind("battlefield") ? <ZonePanel wide zone={zoneByKind("battlefield")!} highlightCardIds={highlightCardIds} /> : null}
+        {zoneByKind("hand") ? <ZonePanel zone={zoneByKind("hand")!} highlightCardIds={highlightCardIds} /> : null}
         {zoneByKind("command") ? <ZonePanel zone={zoneByKind("command")!} note={commanderNote} /> : null}
         {zoneByKind("library") ? <ZonePanel zone={zoneByKind("library")!} /> : null}
         {zoneByKind("graveyard") ? <ZonePanel zone={zoneByKind("graveyard")!} /> : null}

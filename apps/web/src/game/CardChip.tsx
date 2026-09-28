@@ -1,7 +1,7 @@
 import type { UiCard } from "@mtg-commander/shared";
 import { cardBadges, cardTitle, creatureStats } from "./view-model.js";
 
-export function CardChip({ card }: { card: UiCard }) {
+export function CardChip({ card, highlight = false }: { card: UiCard; highlight?: boolean }) {
   const stats = creatureStats(card);
   const badges = cardBadges(card);
 
@@ -11,6 +11,7 @@ export function CardChip({ card }: { card: UiCard }) {
         "card-chip",
         card.tapped ? "is-tapped" : "",
         card.visibility !== "visible" ? "is-unknown" : "",
+        highlight ? "is-highlight" : "",
       ]
         .filter(Boolean)
         .join(" ")}

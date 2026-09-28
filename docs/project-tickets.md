@@ -84,7 +84,7 @@ Stand: 26. September 2026
 
 ## Empfohlene Reihenfolge
 
-1. UI-Interaktion (`UI-003`: Prompt-Antworten im Browser, Highlighting, Live-States) als naechster Milestone-1-Hebel - `SAVE-002` ist entschieden und umgesetzt (A + B-light-Journal), `SAVE-003` wartet auf Upstream-Seed.
+1. UI-003 Live-Validierung gegen einen echten Forge-Raum: Inkrement 1 (Live-Sitz, `GET /api/game`, klickbare Prompt-Optionen, Highlighting) ist implementiert und gruen getestet; jetzt einmal real gegen den laufenden Stack spielen und Erkenntnisse zurueckfliessen lassen. Danach Persistenz (`API-001`) und UI-004 (Manual Mode) - `SAVE-003` wartet weiter auf Upstream-Seed.
 2. Danach UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
 3. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
 5. Erkenntnisse fliessen zurueck in Ticketstatus, Evidence und Wayfinding.
@@ -116,7 +116,7 @@ Stand: 26. September 2026
 | `API-001` | `BLOCKED` | Node/TypeScript-API und SQLite-Schema bauen | Decks, Spiele, Saves und Logs haben persistente IDs. |
 | `SAVE-002` | `DONE` | Save/Resume-Produktentscheidung + Journal-Mitlauf | A aktiv, B-light-Journal in der API implementiert, C vorlaeufig abgelehnt (`docs/save-resume-research.md`). |
 | `SAVE-003` | `BLOCKED` | Replay-Restore per Journal implementieren | Wartet auf Upstream-Seed-Zugriff (Issue-Entwurf `docs/upstream-seed-issue.md`). |
-| `UI-003` | `BLOCKED` | Assistierte Prompt-Interaktion implementieren | Legale Karten/Aktionen werden hervorgehoben und beantwortet. |
+| `UI-003` | `IN PROGRESS` | Assistierte Prompt-Interaktion implementieren | Inkrement 1 umgesetzt: Live-Sitz + `/api/game`, klickbare legale Optionen, Auswahl-/Highlighting, Fehler sichtbar. Offen: Live-Lauf am echten Stack, weitere Prompt-Oberflaechen. |
 | `UI-004` | `BLOCKED` | Manual Mode definieren und bauen | Erfahrene Spieler koennen Pass-/Prioritaetsverhalten steuern. |
 | `GLM-001` | `BLOCKED` | Strukturiertes Tutor-Kontextschema definieren | GLM erhaelt nur belegte Engine-Ereignisse und sichtbaren Kontext. |
 | `GLM-002` | `BLOCKED` | Server-seitigen Explain-Endpunkt bauen | Ein Ereignis kann auf Nachfrage erklaert werden, Key bleibt serverseitig. |
@@ -368,6 +368,13 @@ Stand: 26. September 2026
 - Engine-legale Aktionen markieren.
 - Prompt-spezifische Oberflaechen fuer Ziele, Modi, Mana, Reihenfolge, Mulligan und Pass anbieten.
 - Fehler der Engine sichtbar und wiederherstellbar behandeln.
+
+**Ergebnis (Inkrement 1, umgesetzt):**
+
+- **Result:** Die API haelt eine interaktive Mensch-Sitz (`apps/api/src/engine-session.ts`, BOT-002-Flow: Raum/Deck/Bots/Ready/Start, aktiv per `MANABREW_ROOM_NAME`), cached den letzten eigenen `gameView` plus offenen Prompt und stellt ihn via `GET /api/game` bereit; Antworten gehen via `POST /api/game/respond` zurueck zum Relay (validiert auf Sitz-Eigentum, Prompt-Frische und actionType). Der Browser pollt den Snapshot, rendert legale Optionen als Buttons (chooseAction inkl. Passen, payManaCost inkl. Pool-Pay/Abbrechen, Mulligan, Boolean, Bestaetigungs-Familien), Auswahl-UIs fuer `chooseBoardTargets`/`chooseCards` mit min/max-Validierung, hebt betroffene Karten im Brett hervor und zeigt Engine-/Antwortfehler sichtbar. Unbekannte Prompt-Familien werden angezeigt, aber nicht blind beantwortet.
+- **Regression:** `apps/api/src/engine-session.test.ts` (Lobby-Flow, eigener Sitz-State/Prompt, respond-Validierung, gameOver/Fehler, Zuschauer-Modus), `apps/api/src/server.test.ts` (4 neue Endpoint-Tests), `apps/web/src/game/prompt-options.test.ts` (6 Tests: Optionen, Defaults, Auswahl-Constraints, Unsupported, Highlighting).
+- **Evidence:** `packages/shared/src/api-contract.ts` (Snapshot-Vertrag), `apps/api/src/{engine-session.ts,engine-runtime.ts,server.ts,index.ts}`, `apps/web/src/game/{prompt-options.ts,useLiveGame.ts,PromptPanel.tsx}`.
+- **Offen:** Live-Lauf gegen echten Forge-Raum (Forge-Room muss frisch sein), Prompt-spezifische Oberflaechen fuer Modi/Reihenfolge verfeinern, SSE statt Polling, UI-004 Manual Mode anschliessen.
 
 ### UI-004 - Manual Mode
 
