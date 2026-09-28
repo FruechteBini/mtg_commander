@@ -88,6 +88,8 @@ export interface UiCard {
   creature: UiCreatureState | null;
   manaCost: string | null;
   cmc: number | null;
+  /** Full rules text as reported by the engine, when available. */
+  rulesText: string | null;
   /** Color symbols from the observed `color` string, e.g. "BR" -> ["B", "R"], sorted. */
   colors: string[];
   types: string[];
@@ -348,6 +350,7 @@ function normalizeCard(card: CardViewDto, fallbackIndex: number): UiCard {
         }
       : null,
     manaCost: asNullableString(card.manaCost),
+    rulesText: asNullableString(card.text),
     cmc: typeof card.cmc === "number" && Number.isFinite(card.cmc) ? card.cmc : null,
     colors: typeof card.color === "string" ? [...card.color].sort() : [],
     types,

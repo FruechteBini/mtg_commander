@@ -249,7 +249,7 @@ export function createInteractiveSession(
         const knownSeat = candidates.find(
           (room) =>
             Array.isArray(room.players) &&
-            room.players.some((player) => player.username === config.username),
+            room.players.some((player: { username?: string }) => player.username === config.username),
         );
         if (state.gameId || knownSeat) {
           // reconnect into a running game (dropped socket or fresh process):

@@ -72,6 +72,25 @@ export function cardTitle(card: UiCard): string {
   return card.name ?? `Karte ${card.id}`;
 }
 
+const MTG_COLOR_SYMBOLS = ["W", "U", "B", "R", "G"];
+
+/** Maps a card to its MTG color class (hand-card styling), e.g. "color-b". */
+export function cardColorClass(card: UiCard): string {
+  if (card.types.includes("Land")) return "color-land";
+  const colors = card.colors.filter((symbol) => MTG_COLOR_SYMBOLS.includes(symbol));
+  const [first] = colors;
+  if (colors.length >= 2) return "color-multi";
+  if (first !== undefined) return `color-${first.toLowerCase()}`;
+  return "color-colorless";
+}
+
+/** "Creature — Elf Druid" style type line for card tiles. */
+export function typeLine(card: UiCard): string {
+  const types = card.types.join(" ");
+  const subtypes = card.subtypes.join(" ");
+  return subtypes.length > 0 ? `${types} \u2014 ${subtypes}` : types;
+}
+
 export function creatureStats(card: UiCard): string | null {
   if (!card.creature) return null;
   return `${card.creature.power ?? "?"}/${card.creature.toughness ?? "?"}`;

@@ -275,6 +275,82 @@
   box-shadow: 0 0 0 1px rgba(221, 199, 120, 0.35);
 }
 
+/* UI-003: echte Hand-Leiste mit grossen, lesbaren Karten-Kacheln */
+
+.hand-strip {
+  margin-top: 14px;
+  padding: 14px 16px 16px;
+  border: 1px solid rgba(157, 214, 171, 0.18);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.28);
+}
+.hand-strip-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+.hand-strip-head h3 { margin: 0; font-size: 0.95rem; letter-spacing: 0.03em; }
+
+.hand-cards { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.hand-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 158px;
+  min-height: 178px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-left-width: 5px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(241, 240, 232, 0.96), rgba(226, 226, 214, 0.92));
+  color: #1c231d;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.hand-card:hover { transform: translateY(-6px); box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45); }
+
+.hand-card-top { display: flex; justify-content: flex-end; min-height: 20px; }
+.hand-card-cost {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(28, 35, 29, 0.85);
+  color: #f1f0e8;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.hand-card-name { font-weight: 750; font-size: 0.92rem; line-height: 1.2; }
+.hand-card-type {
+  font-size: 0.72rem;
+  font-style: italic;
+  color: #3c463d;
+  border-bottom: 1px solid rgba(28, 35, 29, 0.18);
+  padding-bottom: 6px;
+}
+.hand-card-stats { font-size: 0.85rem; font-weight: 700; color: #23301f; }
+.hand-card-text {
+  margin: 0;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  color: #2c352d;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Farbleiste je Farbe (links) */
+.hand-card.color-w { border-left-color: #f3e5ab; }
+.hand-card.color-u { border-left-color: #78b4d4; }
+.hand-card.color-b { border-left-color: #55506b; }
+.hand-card.color-r { border-left-color: #d47b6a; }
+.hand-card.color-g { border-left-color: #6fae72; }
+.hand-card.color-multi { border-left-color: #d8b45a; }
+.hand-card.color-land { border-left-color: #a89f84; }
+.hand-card.color-colorless { border-left-color: #b9b9b1; }
+
+.hand-card.is-highlight {
+  border-color: rgba(202, 156, 44, 0.9);
+  box-shadow: 0 0 0 2px rgba(221, 199, 120, 0.45);
+}
+
 @media (max-width: 980px) {
   .board-layout { grid-template-columns: 1fr; }
   .own-zones { grid-template-columns: 1fr; }

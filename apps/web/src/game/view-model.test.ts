@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import fs from "node:fs";
 import { normalizeStateEnvelope } from "@mtg-commander/shared";
-import type { StateEnvelope } from "@mtg-commander/shared";
+import type { StateEnvelope, UiCard } from "@mtg-commander/shared";
 import {
   cardBadges,
+  cardColorClass,
   creatureStats,
   gameViewFromJson,
   manaEntries,
@@ -13,6 +14,7 @@ import {
   playerDisplayName,
   roleBadges,
   turnHeadline,
+  typeLine,
   viewerSeatOf,
   zoneCountText,
   zoneLabel,
@@ -97,4 +99,49 @@ test("gameViewFromJson rejects invalid input with user-facing errors", () => {
   assert.throws(() => gameViewFromJson("kein json"), /gueltiges JSON/);
   assert.throws(() => gameViewFromJson("[1,2,3]"), /JSON-Objekt/);
   assert.throws(() => gameViewFromJson("{}"), /StateUpdate-Nachricht/);
+});
+
+function uiCard(overrides: Partial<UiCard> = {}): UiCard {
+  return {
+    id: "engine-card-1",
+    name: "Victimize",
+    visibility: "visible",
+    ownerId: "player-0",
+    controllerId: "player-0",
+    tapped: false,
+    creature: null,
+    manaCost: "{2}{B}",
+    cmc: 3,
+    rulesText: "Choose two target creature cards in your graveyard.",
+    colors: ["B"],
+    types: ["Sorcery"],
+    subtypes: [],
+    supertypes: [],
+    keywords: [],
+    counters: {},
+    summoningSick: false,
+    faceDown: false,
+    transformed: false,
+    phasedOut: false,
+    exerted: false,
+    commanderTax: 0,
+    isToken: false,
+    setCode: "TDC",
+    cardNumber: "198",
+    ...overrides,
+  };
+}
+
+test("cardColorClass maps mono, multi, lands and colorless cards", () => {
+  assert.equal(cardColorClass(uiCard()), "color-b");
+  assert.equal(cardColorClass(uiCard({ colors: ["W"], types: ["Creature"], subtypes: ["Kor"] })), "color-w");
+  assert.equal(cardColorClass(uiCard({ colors: ["B", "R"] })), "color-multi");
+  assert.equal(cardColorClass(uiCard({ colors: [], manaCost: "no cost", types: ["Land"] })), "color-land");
+  assert.equal(cardColorClass(uiCard({ colors: [], types: ["Artifact"], manaCost: "{2}" })), "color-colorless");
+});
+
+test("typeLine joins types and subtypes in card-tile format", () => {
+  assert.equal(typeLine(uiCard()), "Sorcery");
+  assert.equal(typeLine(uiCard({ types: ["Creature"], subtypes: ["Elf", "Druid"] })), "Creature \u2014 Elf Druid");
+  assert.equal(typeLine(uiCard({ types: ["Legendary", "Creature"], subtypes: ["Zombie"] })), "Legendary Creature \u2014 Zombie");
 });
