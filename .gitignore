@@ -12,7 +12,8 @@ dist/
 coverage/
 
 # Raw protocol captures can contain private game data and grow very large.
-captures/*.jsonl
+# Also covers runtime replay journals (e.g. apps/api/captures) from dev servers.
+**/captures/*.jsonl
 
 # Temporary source checkouts used for protocol research.
 .tmp-*/

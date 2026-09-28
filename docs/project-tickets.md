@@ -84,7 +84,7 @@ Stand: 26. September 2026
 
 ## Empfohlene Reihenfolge
 
-1. Produktentscheidung `SAVE-002`: Replay-Journal (Option B) vs. Fork/Upstream (Option C), siehe `docs/save-resume-research.md` (`BOT-002` ist abgeschlossen).
+1. UI-Interaktion (`UI-003`: Prompt-Antworten im Browser, Highlighting, Live-States) als naechster Milestone-1-Hebel - `SAVE-002` ist entschieden und umgesetzt (A + B-light-Journal), `SAVE-003` wartet auf Upstream-Seed.
 2. Danach UI-Interaktion, Persistenz, Tutor und NAS-Deployment zum Milestone-1-Slice verbinden.
 3. Neue Arbeitsstaende werden regulaer auf `main` committed und gepusht.
 5. Erkenntnisse fliessen zurueck in Ticketstatus, Evidence und Wayfinding.
@@ -114,7 +114,8 @@ Stand: 26. September 2026
 | ID | Status | Ticket | Ergebnis |
 | --- | --- | --- | --- |
 | `API-001` | `BLOCKED` | Node/TypeScript-API und SQLite-Schema bauen | Decks, Spiele, Saves und Logs haben persistente IDs. |
-| `SAVE-002` | `BLOCKED` | Versionierte Saves implementieren | Wartet auf Produktentscheidung B vs. C (`docs/save-resume-research.md`); Engine-Restore nur mit Fork/Upstream. |
+| `SAVE-002` | `DONE` | Save/Resume-Produktentscheidung + Journal-Mitlauf | A aktiv, B-light-Journal in der API implementiert, C vorlaeufig abgelehnt (`docs/save-resume-research.md`). |
+| `SAVE-003` | `BLOCKED` | Replay-Restore per Journal implementieren | Wartet auf Upstream-Seed-Zugriff (Issue-Entwurf `docs/upstream-seed-issue.md`). |
 | `UI-003` | `BLOCKED` | Assistierte Prompt-Interaktion implementieren | Legale Karten/Aktionen werden hervorgehoben und beantwortet. |
 | `UI-004` | `BLOCKED` | Manual Mode definieren und bauen | Erfahrene Spieler koennen Pass-/Prioritaetsverhalten steuern. |
 | `GLM-001` | `BLOCKED` | Strukturiertes Tutor-Kontextschema definieren | GLM erhaelt nur belegte Engine-Ereignisse und sichtbaren Kontext. |
@@ -327,7 +328,25 @@ Stand: 26. September 2026
 - **Ergebnis:** **No-Go** fuer echten Engine-Restore im Upstream-Stack: Das Forge-Backend-FFI hat keinen Save/Load-Entrypoint, Sessions leben nur im RAM (keine Volumes), `restoreSnapshot` ist im Java-Backend explizit unsupported, die Checkpoint-Mechanik gehoert zur Rust-Engine (In-Memory-Zug-Undo), der Relay persistiert keine Games (nur ChatHistory), und der Partie-Seed wird per `rand::random()` gewaehlt und nicht veroeffentlicht. Der geplante Minimaltest ist damit am unveraenderten Stack gegenstandslos; das dokumentierte No-Go ersetzt ihn.
 - **Alternativarchitektur:** Option A (Partie als unterbrochen markieren, Status quo), Option B (Replay-Journal: Startbedingung + geordnete Prompt-Antworten; braucht Determinismus-Beweis und Upstream-Seed-Kontrolle), Option C (Fork/Upstream: `forge_save_game`/`forge_load_game` in der forge-harness).
 - **Evidence:** `docs/save-resume-research.md` (Beweiskette mit Datei/Zeilen-Referenzen gegen Manabrew-Clone `35868343c77132714e43b6a227092658f956296a`), `docker inspect`/`docker logs` des forge-room-Containers.
-- **Naechster Schritt:** Produktentscheidung fuer `SAVE-002` (B vs. C).
+- **Naechster Schritt:** Erfuellt - `SAVE-002` entschied A + B-light-Journal; der Replay-Restore ist als `SAVE-003` blockiert auf Upstream-Seed.
+
+### SAVE-002 - Save/Resume-Produktentscheidung + Journal-Mitlauf
+
+- **Status:** `DONE` (2026-09-26)
+- **Prioritaet:** P0
+- **Akzeptanzkriterien:** Die Produktentscheidung B vs. C ist dokumentiert und umgesetzt; Partien hinterlassen ohne Fork-Kosten ein versioniertes Replay-Artefakt.
+- **Entscheidung:** Option A bleibt Produktverhalten (Engine-Neustart = Partieverlust). Option B wird als "B light" mitgenommen: Die API journalisiert Startbedingung und jede Prompt-Antwort geordnet und versioniert. Option C (Fork mit `forge_save_game`/`forge_load_game`) wird vorlaeufig abgelehnt (dauerhafte Fork-Pflege steht in keinem Verhaeltnis zum lokalen Playgroup-Produkt). Begruendung: Ohne Seed-Kontrolle (`rand::random()` in `run_hosted_engine_game_inner`, nicht veroeffentlicht) kann B sein Restore-Versprechen nicht halten - das Journal kostet aber fast nichts und macht B sofort vollwertig, sobald Upstream den Seed liefert (B2-Issue-Entwurf: `docs/upstream-seed-issue.md`).
+- **Ergebnis:** `apps/api/src/game-journal.ts` (JSONL, `journalFormat: 1`, Records `session`/`game-started`/`response`/`game-over`/`session-end`, sequenziell nummeriert, gameId-Vererbung, stiller Degrad bei Schreibfehlern) ist an die Engine-Runtime gekoppelt: Jede gesendete Prompt-Antwort (`BroadcastState`/`kind:"response"`) sowie `GameStarted` und ein terminaler `gameOver`-Prompt landen automatisch im Journal, sobald `MANABREW_RELAY_URL`/`MANABREW_SERVER_KEY` gesetzt sind. Steuerung: `MANABREW_JOURNAL_DIR` (Default `<cwd>/captures`), `MANABREW_JOURNAL_DISABLE=1`.
+- **Regression:** `apps/api/src/game-journal.test.ts` (Records/Reihenfolge/Sequenz, gameId-Vererbung, Env-Factory, stiller Degrad).
+- **Evidence:** `docs/save-resume-research.md` (Abschnitt "Entscheidung"), `apps/api/src/{game-journal.ts,engine-runtime.ts}`, `docs/upstream-seed-issue.md`.
+- **Naechster Schritt:** Issue-Entwurf bei Manabrew einreichen; UI-Interaktion (`UI-003`) als naechstes Ticket angehen; `SAVE-003` bleibt blockiert.
+
+### SAVE-003 - Replay-Restore per Journal
+
+- **Status:** `BLOCKED` (2026-09-26)
+- **Prioritaet:** P2
+- **Aufgaben:** Replay-Minimaltest: identische Startbedingung + geordnetes Abspielen eines SAVE-002-Journals reproduzieren denselben Spielzustand nach Engine-Restart; danach Restore-Workflow in API/UI.
+- **Blocker:** Upstream-Seed-Zugriff (B2, `docs/upstream-seed-issue.md`); zusaetzlich B1 (Forge-Determinismus-Beweis ueber lange Partien) und B3-Rest (Engine-Version im Relay abfragbar machen).
 
 ## Weitere Milestone-1-Tickets
 
@@ -470,7 +489,7 @@ Stand: 26. September 2026
 
 | Risiko | Auswirkung | Zugehoeriges Ticket |
 | --- | --- | --- |
-| Engine bietet keinen vollstaendigen Save/Resume-State | **Bestaetigt (SAVE-001):** Upstream-Node hat keinen Restore-Pfad. Pause/Fortsetzen braucht Replay-Journal (B) oder Fork/Upstream (C); bis dahin gilt Engine-Neustart als Partieverlust. | `SAVE-001`, `SAVE-002` |
+| Engine bietet keinen vollstaendigen Save/Resume-State | **Bestaetigt (SAVE-001):** Upstream-Node hat keinen Restore-Pfad. Entschieden (SAVE-002): Journal-Mitlauf laeuft, Replay-Restore wartet auf Upstream-Seed; bis dahin gilt Engine-Neustart als Partieverlust. | `SAVE-001`, `SAVE-003` |
 | Protocol-DTOs weichen von der ersten lokalen Annahme ab | UI/API koennen bei realen Nachrichten brechen. | `PROTO-005` |
 | Weitere Prompt-Familien sind noch nicht bewiesen | Modi, Mehrfachziele, Trigger-Reihenfolge oder Combat koennen den Client noch blockieren. | `PROTO-005`, `TEST-002` |
 | Vier Forge-Spieler koennen die 6-GB-NAS ueberlasten | Deployment-Ziel waere nicht tragfaehig. | `OPS-002` |

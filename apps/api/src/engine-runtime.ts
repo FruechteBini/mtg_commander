@@ -1,5 +1,6 @@
 import { ManabrewRelayClient, type RelayClientStatus } from "@mtg-commander/manabrew-client";
 import type { EngineConnectionStatus } from "@mtg-commander/shared";
+import { createGameJournalFromEnvironment } from "./game-journal.js";
 
 export interface EngineRuntime {
   start(): void;
@@ -39,9 +40,45 @@ export function createEngineRuntimeFromEnvironment(): EngineRuntime {
     console.error(`[manabrew] relay error ${message.code ?? "unknown"}: ${message.message}`);
   });
 
+  // SAVE-002 "B light": record start condition and every prompt response
+  // in order so the game can be replayed once the upstream exposes the seed.
+  const journal = createGameJournalFromEnvironment();
+  if (journal) {
+    journal.session({ relayUrl: url, protocolVersion: 5, clientVersion: "0.1.0" });
+    client.on("send", (message: any) => {
+      if (message?.type !== "BroadcastState" || message.state?.kind !== "response") return;
+      journal.response({
+        fromPlayer: message.state.fromPlayer,
+        promptId: message.state.promptId,
+        actionType: message.state.action?.type,
+        output: message.state.action?.output,
+      });
+    });
+    client.on("message", (message: any) => {
+      if (message?.type === "GameStarted") {
+        journal.gameStarted({
+          gameId: String(message.game_id ?? ""),
+          roomId: message.room_id ?? null,
+          playerOrder: message.player_order ?? null,
+        });
+        return;
+      }
+      if (
+        message?.type === "StateUpdate" &&
+        message.state?.kind === "prompt" &&
+        message.state.prompt?.input?.type === "gameOver"
+      ) {
+        journal.gameOver({});
+      }
+    });
+  }
+
   return {
     start: () => client.connect(),
-    close: () => client.close(),
+    close: () => {
+      client.close();
+      journal?.sessionEnd("close");
+    },
     status: () => asEngineStatus(client.status),
   };
 }

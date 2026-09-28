@@ -136,3 +136,5 @@ npm run bot:longrun
 ```
 
 Der aktuelle Bot-Langlauf (`BOT-002`) bestaetigt eine komplette Partie ueber 66 Turns bis zum natuerlichen GameOver: 758 Prompt-Antworten ohne Deadlock oder Engine-Fehler, Land-Policy inklusive, und ein linear stabiler forge-room-Speicher (246,9 -> 340,5 MiB).
+
+Zusaetzlich schreibt die API automatisch ein Replay-Journal (`SAVE-002`, Option "B light"): Startbedingung und jede Prompt-Antwort jeder Partie werden geordnet und versioniert als JSONL mitgeschrieben - heute fuer Audit/Debugging, spaeter als Basis fuer Replay-Restore, sobald Upstream den Spiel-Seed veroeffentlicht (Issue-Entwurf: `docs/upstream-seed-issue.md`). Konfiguration: `MANABREW_JOURNAL_DIR` (Standard `captures/`), `MANABREW_JOURNAL_DISABLE=1` schaltet es ab (Details: `docs/save-resume-research.md`).

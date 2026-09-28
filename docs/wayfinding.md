@@ -113,7 +113,7 @@ Arbeitsregel: Jedes Wayfinder-/Frontier-Ticket wird beim Bearbeiten direkt hier 
 
 **Current answer:** Nein - der Upstream-Stack bietet keinen vollstaendigen Save/Restore. FFI ohne Save-Entrypoint, Sessions nur im RAM, `restoreSnapshot` im Java-Backend unsupported, Relay persistiert keine Games, Partie-Seed per `rand::random()` nicht steuerbar. Alternativen: A Unterbrechungsmarkierung (Status quo), B Replay-Journal (braucht Determinismus-Beweis + Upstream-Seed-Kontrolle), C Fork/Upstream mit `forge_save_game`/`forge_load_game`.
 
-**Next proof:** SAVE-002-Proof nach Produktentscheidung B vs. C: fuer B ein Replay-Minimaltest (identische Startbedingung + geordnete Prompt-Antworten reproduzieren denselben Spielzustand), fuer C ein forge-harness-Fork-Prototyp.
+**Next proof:** Entscheidung gefallen (2026-09-26): A aktiv + B-light-Journal in der API (SAVE-002 DONE), C vorlaeufig abgelehnt. Offen bleibt der Replay-Restore-Proof (SAVE-003): identische Startbedingung + geordnete Prompt-Antworten reproduzieren denselben Spielzustand - blockiert auf Upstream-Seed-Zugriff (Issue-Entwurf `docs/upstream-seed-issue.md`).
 
 **Open risk:** Forge-Determinismus ueber lange Commander-Partien ist unbewiesen; Seed-Kontrolle erfordert ein Upstream-Feature.
 

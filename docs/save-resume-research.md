@@ -33,3 +33,12 @@ Quellen: Clone `witchesofthehill/manabrew` @ `35868343c77132714e43b6a227092658f9
 - `SAVE-002`: Akzeptanz "Partie nach Prozessneustart fortsetzen" ist ohne Fork nicht erreichbar; Ziel wird versioniertes Journal + Unterbrechungsmarkierung (B) oder Fork-Arbeit (C).
 - `API-001`: Tabellen `game`, `engine_version`, `prompt_response` (geordnet) und `game_abortion` modellieren; Journal als erstklassiges Artefakt.
 - `architecture.md`: SQLite-Absatz und Ausfalltabelle aktualisiert (Engine-Neustart = Partieverlust, Restore nur via B/C).
+
+## Entscheidung (SAVE-002, 2026-09-26)
+
+**Gewaehlt: Option A bleibt Produktverhalten + "B light"-Journal jetzt; C vorlaeufig abgelehnt.**
+
+- **A (aktiv):** Engine-/Node-Neustart bleibt Partieverlust; dokumentiertes Ausfallverhalten ohne Zusatzaufwand.
+- **B light (implementiert):** Die API schreibt pro Lauf ein versioniertes JSONL-Replay-Journal (`apps/api/src/game-journal.ts`, `journalFormat: 1`): Session-Header (Relay-URL, Protokoll-/Client-Version), Startbedingung (`GameStarted`: gameId, roomId, playerOrder) und jede gesendete Prompt-Antwort (fromPlayer, promptId, actionType, output) geordnet inkl. Sequenznummer. Laeuft automatisch mit, sobald die Engine-Umgebung konfiguriert ist (`MANABREW_RELAY_URL`/`MANABREW_SERVER_KEY`); steuerbar via `MANABREW_JOURNAL_DIR` (Default `<cwd>/captures`), abschaltbar via `MANABREW_JOURNAL_DISABLE=1`. Der eigentliche Replay-Restore ist `SAVE-003` und bleibt auf B2 (Seed-Zugriff) blockiert; der Issue-Entwurf dafuer liegt in `docs/upstream-seed-issue.md`. B3 ist vorbereitet (journalFormat/protocolVersion/clientVersion im Header); die echte Engine-Version ist im Relay-Protokoll noch nicht abfragbar und bleibt eine bekannte Luecke.
+- **C (abgelehnt, vorerst):** Fork mit `forge_save_game`/`forge_load_game` bzw. der lange Upstream-Weg stehen in keinem Verhaeltnis zum lokalen Playgroup-Produkt; wird wieder aufgegriffen, sobald echtes Pause/Fortsetzen produktentscheidend wird oder Upstream-PR-Bereitschaft besteht.
+- **Begruendung:** Ohne Seed-Kontrolle kann B sein Restore-Versprechen nicht halten, C kostet dauerhaft Fork-Pflege. Das Journal ist nahezu gratis (die API sieht jede Antwort-Envelope ohnehin), zahlt sofort auf Debugging/Audit ein und macht B vollwertig, sobald Upstream den Seed liefert.
