@@ -198,6 +198,55 @@ test("session tracks viewer state and only opens prompts for the own seat", () =
   assert.equal(session.snapshot("authenticated").prompt, ownPrompt);
 });
 
+test("repeated GameStarted resync echoes must not trigger a resync loop", () => {
+  const relay = new FakeRelay();
+  const config = baseConfig();
+  const session = createInteractiveSession(relay as unknown as RelaySessionClient, config);
+
+  relay.emit("message", startedGame(config.username, [config.username, "bot-1", "bot-2", "bot-3"]));
+  assert.equal(relay.calls("requestResync"), 1);
+
+  relay.emit("message", stateFor("player-0", 1));
+  assert.ok(session.snapshot("authenticated").gameView);
+
+  // Forge echoes GameStarted with every resync answer: same game with a known
+  // gameView must never trigger another resync, or the session loops forever.
+  for (let echo = 0; echo < 3; echo += 1) {
+    relay.emit("message", startedGame(config.username, [config.username, "bot-1", "bot-2", "bot-3"]));
+  }
+  assert.equal(relay.calls("requestResync"), 1);
+
+  // a genuinely new game id still triggers a resync
+  relay.emit("message", { type: "GameStarted", game_id: "game-2", room_id: "room-1", player_order: [config.username, "bot-1"] });
+  assert.equal(relay.calls("requestResync"), 2);
+});
+
+test("fresh process reconnects into a running room when our seat is listed", () => {
+  const relay = new FakeRelay();
+  const config = baseConfig();
+  const session = createInteractiveSession(relay as unknown as RelaySessionClient, config);
+
+  relay.emit("message", { type: "AuthResult", success: true });
+  relay.emit("message", {
+    type: "RoomList",
+    rooms: [
+      {
+        room_id: "room-1",
+        room_name: "MTG-Commander PoC",
+        status: "InGame",
+        players: [{ ...meWithoutDeck, connected: false }],
+      },
+    ],
+  });
+  assert.equal(relay.calls("joinRoom"), 0);
+  assert.equal(relay.calls("requestResync"), 1);
+  assert.equal(session.snapshot("authenticated").lastError, null);
+
+  relay.emit("message", startedGame(config.username, [config.username, "bot-1", "bot-2", "bot-3"]));
+  relay.emit("message", stateFor("player-0", 2));
+  assert.ok(session.snapshot("authenticated").gameView);
+});
+
 test("respond validates ownership, prompt freshness and actionType, then clears the prompt", () => {
   const relay = new FakeRelay();
   const config = baseConfig();

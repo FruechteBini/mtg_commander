@@ -19,3 +19,4 @@ coverage/
 .tmp-*/
 
 captures/*-console*.log
+dev*.log

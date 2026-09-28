@@ -246,8 +246,15 @@ export function createInteractiveSession(
       const candidates = rooms.filter((room) => room.room_name === config.roomName);
       const lobby = candidates.find((room) => room.status === "Lobby");
       if (!lobby) {
-        if (state.gameId) {
-          // reconnect into a running game: resync instead of joining again
+        const knownSeat = candidates.find(
+          (room) =>
+            Array.isArray(room.players) &&
+            room.players.some((player) => player.username === config.username),
+        );
+        if (state.gameId || knownSeat) {
+          // reconnect into a running game (dropped socket or fresh process):
+          // the relay resolves the resync to our seat, no re-join needed.
+          log("[session] running game found for our seat, resyncing instead of joining");
           client.requestResync();
           return;
         }
@@ -269,14 +276,22 @@ export function createInteractiveSession(
     }
 
     if (message.type === "GameStarted") {
-      state.gameId = String(message.game_id ?? "");
+      const gameId = String(message.game_id ?? "");
+      const isNewGame = gameId !== state.gameId;
+      // Forge echoes GameStarted with every resync answer; resyncing on every
+      // echo loops forever (~100+/s). Only resync a new game or a session that
+      // has not received its own gameView yet (covers reconnects).
+      const needsResync = isNewGame || state.gameView === null;
+      state.gameId = gameId;
       state.gameEnded = false;
-      state.activePrompt = null;
+      if (isNewGame) state.activePrompt = null;
       const order = Array.isArray(message.player_order) ? message.player_order : [];
       const slotIndex = order.findIndex((name) => name === config.username);
       state.viewerSlot = slotIndex >= 0 ? `player-${slotIndex}` : null;
-      log(`[session] game started ${state.gameId} as ${state.viewerSlot ?? "spectator"}`);
-      client.requestResync();
+      if (needsResync) {
+        log(`[session] game started ${state.gameId} as ${state.viewerSlot ?? "spectator"}`);
+        client.requestResync();
+      }
       return;
     }
 
