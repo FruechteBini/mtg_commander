@@ -84,6 +84,7 @@ test("game snapshot defaults to an empty disabled snapshot", async () => {
   assert.equal(body.engineStatus, "disabled");
   assert.equal(body.gameView, null);
   assert.equal(body.prompt, null);
+  assert.equal(body.autoPass, false);
   assert.equal(body.humanPlayerName, null);
 });
 
@@ -116,6 +117,7 @@ test("game endpoints forward live snapshots and prompt answers", async () => {
     gameEnded: false,
     gameView: null,
     prompt: null,
+    autoPass: true,
     lastError: null,
   };
   const responses: Array<{ promptId: number; actionType: string; output: Record<string, unknown> }> = [];
@@ -156,6 +158,54 @@ test("game endpoints forward live snapshots and prompt answers", async () => {
     });
     assert.equal(rejected.status, 409);
     assert.deepEqual(await rejected.json(), { error: "Prompt 7 erwartet." });
+  } finally {
+    await new Promise<void>((resolve, reject) => {
+      gameServer.close((error) => (error ? reject(error) : resolve()));
+    });
+  }
+});
+
+test("auto-pass endpoint validates the request body", async () => {
+  const invalid = await fetch(`${baseUrl}/api/game/auto-pass`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ enabled: "yes" }),
+  });
+  assert.equal(invalid.status, 400);
+});
+
+test("auto-pass endpoint reports 503 without an engine session", async () => {
+  const response = await fetch(`${baseUrl}/api/game/auto-pass`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ enabled: true }),
+  });
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: "engine_unavailable" });
+});
+
+test("auto-pass endpoint toggles the session setting", async () => {
+  const toggles: boolean[] = [];
+  const gameServer = createApiServer({
+    gameSetAutoPass: (enabled) => {
+      toggles.push(enabled);
+      return { ok: true };
+    },
+  });
+  await new Promise<void>((resolve, reject) => {
+    gameServer.once("error", reject);
+    gameServer.listen(0, "127.0.0.1", resolve);
+  });
+
+  try {
+    const address = gameServer.address() as AddressInfo;
+    const accepted = await fetch(`http://127.0.0.1:${address.port}/api/game/auto-pass`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ enabled: false }),
+    });
+    assert.equal(accepted.status, 204);
+    assert.deepEqual(toggles, [false]);
   } finally {
     await new Promise<void>((resolve, reject) => {
       gameServer.close((error) => (error ? reject(error) : resolve()));

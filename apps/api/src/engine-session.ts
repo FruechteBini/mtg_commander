@@ -50,6 +50,12 @@ export interface InteractiveSessionConfig {
   deck: SessionDeckConfig | null;
   spawnBots: boolean;
   botCount: number;
+  /**
+   * UI-004 stage 1: answer chooseAction prompts without legal actions
+   * automatically with `pass` (default: true) so priority checks during bot
+   * turns never block the browser.
+   */
+  autoPass?: boolean;
 }
 
 interface SessionState {
@@ -132,6 +138,7 @@ export function createInteractiveSession(
   };
 
   const answeredPromptIds = new Set<number>();
+  let autoPassEnabled = config.autoPass !== false;
   let deckRequested = false;
   let readyRequested = false;
   let botsRequested = false;
@@ -188,6 +195,28 @@ export function createInteractiveSession(
     maybeStartGame(room);
   }
 
+  /**
+   * A chooseAction prompt with zero legal actions is a pure priority check
+   * (typically after a bot move): passing is the only possible answer.
+   */
+  function isPassOnlyPrompt(prompt: AgentPrompt): boolean {
+    const input = prompt.input as { type?: unknown; actions?: unknown };
+    return input.type === "chooseAction" && Array.isArray(input.actions) && input.actions.length === 0;
+  }
+
+  function autoPassPrompt(prompt: AgentPrompt): void {
+    if (state.viewerSlot === null) return;
+    log(`[session] auto-pass: prompt ${prompt.promptId} has no legal actions, passing`);
+    client.respond({
+      fromPlayer: state.viewerSlot,
+      promptId: prompt.promptId,
+      actionType: prompt.input.type,
+      output: { type: "pass", exhaustStack: false },
+    });
+    answeredPromptIds.add(prompt.promptId);
+    state.activePrompt = null;
+  }
+
   function handleStateEnvelope(message: RelayMessage): void {
     const envelope = message.state as StateEnvelopeLike | null | undefined;
     if (!envelope || typeof envelope !== "object") return;
@@ -218,6 +247,9 @@ export function createInteractiveSession(
       const promptId = prompt?.promptId;
       if (typeof promptId === "number" && answeredPromptIds.has(promptId)) return;
       state.activePrompt = prompt ?? null;
+      if (autoPassEnabled && state.activePrompt && isPassOnlyPrompt(state.activePrompt)) {
+        autoPassPrompt(state.activePrompt);
+      }
       return;
     }
 
@@ -325,6 +357,7 @@ export function createInteractiveSession(
         gameEnded: state.gameEnded,
         gameView: state.gameView,
         prompt: state.activePrompt,
+        autoPass: autoPassEnabled,
         lastError: state.lastError,
       };
     },
@@ -357,6 +390,15 @@ export function createInteractiveSession(
       });
       answeredPromptIds.add(request.promptId);
       state.activePrompt = null;
+      return { ok: true };
+    },
+    setAutoPass(enabled: boolean): GameRespondResult {
+      autoPassEnabled = enabled;
+      log(`[session] auto-pass ${enabled ? "enabled" : "disabled"}`);
+      // enabling auto-pass immediately clears a pending action-free prompt
+      if (enabled && state.activePrompt && isPassOnlyPrompt(state.activePrompt)) {
+        autoPassPrompt(state.activePrompt);
+      }
       return { ok: true };
     },
   };

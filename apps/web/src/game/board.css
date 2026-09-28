@@ -374,6 +374,20 @@
 }
 .hand-strip-note { margin: 10px 0 0; font-size: 0.7rem; }
 
+/* Auto-Pass-Toggle (UI-004 Stufe 1) unter dem Prompt-Panel */
+.autopass-toggle {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 12px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #b9c2b9;
+  cursor: pointer;
+}
+.autopass-toggle input { margin-top: 2px; accent-color: #ca9c2c; }
+.autopass-toggle input:disabled { cursor: wait; }
+
 @media (max-width: 980px) {
   .board-layout { grid-template-columns: 1fr; }
   .own-zones { grid-template-columns: 1fr; }

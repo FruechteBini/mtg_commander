@@ -64,6 +64,20 @@ export function SidePanel({
             Kein offener Prompt. Die Engine wartet auf andere Sitze oder den naechsten Schritt.
           </p>
         )}
+        {live ? (
+          <label className="autopass-toggle">
+            <input
+              type="checkbox"
+              checked={live.snapshot.autoPass}
+              disabled={live.sending}
+              onChange={(event) => live.onSetAutoPass(event.target.checked)}
+            />
+            <span>
+              Auto-Pass: automatisch passen, wenn keine Aktionen verfuegbar sind (z. B. bei Bot-Zuegen ohne
+              Reaktionsmoeglichkeit)
+            </span>
+          </label>
+        ) : null}
         {live?.snapshot.lastError ? (
           <p className="detail error">Engine-Meldung: {live.snapshot.lastError}</p>
         ) : null}

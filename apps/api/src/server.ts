@@ -35,6 +35,7 @@ function emptyGameSnapshot(engineStatus: EngineConnectionStatus): GameSnapshotDt
     gameEnded: false,
     gameView: null,
     prompt: null,
+    autoPass: false,
     lastError: null,
   };
 }
@@ -80,6 +81,8 @@ export interface ApiServerOptions {
   engineStatus?: () => EngineConnectionStatus;
   gameSnapshot?: () => GameSnapshotDto;
   gameRespond?: (request: GameRespondRequest) => GameRespondResult;
+  /** UI-004 stage 1: toggle auto-pass for action-free chooseAction prompts. */
+  gameSetAutoPass?: (enabled: boolean) => GameRespondResult;
 }
 
 function appStatus(engineStatus: EngineConnectionStatus): AppStatus {
@@ -96,6 +99,7 @@ export function createApiServer(options: ApiServerOptions = {}) {
   const engineStatus = options.engineStatus ?? (() => "disabled");
   const gameSnapshot = options.gameSnapshot ?? (() => emptyGameSnapshot(engineStatus()));
   const gameRespond = options.gameRespond;
+  const gameSetAutoPass = options.gameSetAutoPass;
 
   return createServer((request: IncomingMessage, response: ServerResponse) => {
     const method = request.method ?? "GET";
@@ -133,6 +137,33 @@ export function createApiServer(options: ApiServerOptions = {}) {
           return;
         }
         const result = gameRespond(parsedRequest.request);
+        if (result.ok) {
+          response.writeHead(204, { "cache-control": "no-store" });
+          response.end();
+          return;
+        }
+        json(response, 409, { error: result.error });
+      })();
+      return;
+    }
+
+    if (method === "POST" && pathname === "/api/game/auto-pass") {
+      void (async () => {
+        const parsedBody = await readJsonBody(request);
+        if (!parsedBody.ok) {
+          json(response, parsedBody.status, { error: parsedBody.error });
+          return;
+        }
+        const record = parsedBody.body as Record<string, unknown>;
+        if (typeof record.enabled !== "boolean") {
+          json(response, 400, { error: "enabled muss true oder false sein." });
+          return;
+        }
+        if (!gameSetAutoPass) {
+          json(response, 503, { error: "engine_unavailable" });
+          return;
+        }
+        const result = gameSetAutoPass(record.enabled);
         if (result.ok) {
           response.writeHead(204, { "cache-control": "no-store" });
           response.end();

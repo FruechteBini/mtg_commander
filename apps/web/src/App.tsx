@@ -40,6 +40,9 @@ export function App() {
           onRespond: (request) => {
             void live.respond(request);
           },
+          onSetAutoPass: (enabled) => {
+            void live.setAutoPass(enabled);
+          },
         }
       : null;
 

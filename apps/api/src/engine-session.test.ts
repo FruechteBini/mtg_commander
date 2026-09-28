@@ -326,3 +326,72 @@ test("observer mode skips deck, ready and bots and reports missing rooms", () =>
   assert.equal(relay.calls("startGame"), 0);
 });
 
+test("auto-pass answers action-free chooseAction prompts immediately with pass", () => {
+  const relay = new FakeRelay();
+  const config = baseConfig();
+  const session = createInteractiveSession(relay as unknown as RelaySessionClient, config);
+
+  relay.emit("message", startedGame(config.username, [config.username, "bot-1", "bot-2", "bot-3"]));
+  relay.emit(
+    "message",
+    promptFor("player-0", { promptId: 21, decidingPlayerId: "player-0", input: { type: "chooseAction", actions: [] } }),
+  );
+
+  assert.equal(relay.calls("respond"), 1);
+  assert.deepEqual(relay.argsOf("respond"), {
+    fromPlayer: "player-0",
+    promptId: 21,
+    actionType: "chooseAction",
+    output: { type: "pass", exhaustStack: false },
+  });
+  const snapshot = session.snapshot("authenticated");
+  assert.equal(snapshot.prompt, null);
+  assert.equal(snapshot.autoPass, true);
+});
+
+test("auto-pass keeps prompts with legal actions open for the browser", () => {
+  const relay = new FakeRelay();
+  const config = baseConfig();
+  const session = createInteractiveSession(relay as unknown as RelaySessionClient, config);
+
+  relay.emit("message", startedGame(config.username, [config.username, "bot-1", "bot-2", "bot-3"]));
+  const ownPrompt: AgentPrompt = {
+    promptId: 23,
+    decidingPlayerId: "player-0",
+    input: { type: "chooseAction", actions: [{ id: "a1", type: "playLand", label: "Play Forest" }] },
+  };
+  relay.emit("message", promptFor("player-0", ownPrompt));
+
+  assert.equal(relay.calls("respond"), 0);
+  assert.equal(session.snapshot("authenticated").prompt, ownPrompt);
+});
+
+test("auto-pass can be disabled and re-enabled at runtime, answering the pending prompt", () => {
+  const relay = new FakeRelay();
+  const config = { ...baseConfig(), autoPass: false };
+  const session = createInteractiveSession(relay as unknown as RelaySessionClient, config);
+
+  relay.emit("message", startedGame(config.username, [config.username, "bot-1", "bot-2", "bot-3"]));
+  const emptyPrompt: AgentPrompt = {
+    promptId: 25,
+    decidingPlayerId: "player-0",
+    input: { type: "chooseAction", actions: [] },
+  };
+  relay.emit("message", promptFor("player-0", emptyPrompt));
+
+  assert.equal(relay.calls("respond"), 0);
+  assert.equal(session.snapshot("authenticated").autoPass, false);
+  assert.equal(session.snapshot("authenticated").prompt, emptyPrompt);
+
+  const toggled = session.setAutoPass(true);
+  assert.equal(toggled.ok, true);
+  assert.equal(relay.calls("respond"), 1);
+  assert.deepEqual(relay.argsOf("respond"), {
+    fromPlayer: "player-0",
+    promptId: 25,
+    actionType: "chooseAction",
+    output: { type: "pass", exhaustStack: false },
+  });
+  assert.equal(session.snapshot("authenticated").prompt, null);
+});
+

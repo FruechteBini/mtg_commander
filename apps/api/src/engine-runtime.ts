@@ -22,6 +22,8 @@ export interface EngineRuntime {
   gameSnapshot(): GameSnapshotDto;
   /** UI-003: forward a prompt answer from the browser to the relay. */
   respond(request: GameRespondRequest): GameRespondResult;
+  /** UI-004 stage 1: toggle auto-pass for action-free chooseAction prompts. */
+  setAutoPass(enabled: boolean): GameRespondResult;
 }
 
 function emptySnapshot(engineStatus: EngineConnectionStatus): GameSnapshotDto {
@@ -34,6 +36,7 @@ function emptySnapshot(engineStatus: EngineConnectionStatus): GameSnapshotDto {
     gameEnded: false,
     gameView: null,
     prompt: null,
+    autoPass: false,
     lastError: null,
   };
 }
@@ -44,6 +47,7 @@ const disabledRuntime: EngineRuntime = {
   status: () => "disabled",
   gameSnapshot: () => emptySnapshot("disabled"),
   respond: () => ({ ok: false, error: "Engine-Integration ist deaktiviert (MANABREW_RELAY_URL/MANABREW_SERVER_KEY fehlen)." }),
+  setAutoPass: () => ({ ok: false, error: "Engine-Integration ist deaktiviert (MANABREW_RELAY_URL/MANABREW_SERVER_KEY fehlen)." }),
 };
 
 function asEngineStatus(status: RelayClientStatus): EngineConnectionStatus {
@@ -79,6 +83,7 @@ function sessionConfigFromEnvironment(username: string): InteractiveSessionConfi
     deck: deckConfigFromEnvironment(),
     spawnBots: process.env.MANABREW_SPAWN_BOTS !== "0",
     botCount: Number.isFinite(botCount) && botCount >= 1 && botCount <= 3 ? botCount : 3,
+    autoPass: process.env.MANABREW_AUTO_PASS !== "0",
   };
 }
 
@@ -158,6 +163,10 @@ export function createEngineRuntimeFromEnvironment(): EngineRuntime {
     respond: (request) =>
       session
         ? session.respond(request)
+        : { ok: false, error: "Keine interaktive Sitz aktiv (MANABREW_ROOM_NAME nicht gesetzt)." },
+    setAutoPass: (enabled) =>
+      session
+        ? session.setAutoPass(enabled)
         : { ok: false, error: "Keine interaktive Sitz aktiv (MANABREW_ROOM_NAME nicht gesetzt)." },
   };
 }

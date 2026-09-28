@@ -16,6 +16,12 @@ export interface GameSnapshotDto {
   gameEnded: boolean;
   gameView: GameViewDto | null;
   prompt: AgentPrompt | null;
+  /**
+   * UI-004 stage 1: when true the session answers chooseAction prompts that
+   * carry no legal actions (pure priority checks, e.g. after bot moves)
+   * automatically with `pass` so they never block the browser.
+   */
+  autoPass: boolean;
   /** Last engine/relay error message so the UI can surface failures. */
   lastError: string | null;
 }

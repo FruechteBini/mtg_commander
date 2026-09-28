@@ -17,6 +17,7 @@ const server = createApiServer({
   engineStatus: () => engineRuntime.status(),
   gameSnapshot: () => engineRuntime.gameSnapshot(),
   gameRespond: (request) => engineRuntime.respond(request),
+  gameSetAutoPass: (enabled) => engineRuntime.setAutoPass(enabled),
 });
 
 server.listen(port, host, () => {

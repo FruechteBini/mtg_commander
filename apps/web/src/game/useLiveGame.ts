@@ -18,6 +18,7 @@ export interface LiveGamePanel {
   sending: boolean;
   respondError: string | null;
   onRespond: (request: GameRespondRequest) => void;
+  onSetAutoPass: (enabled: boolean) => void;
 }
 
 export interface LiveGame {
@@ -25,6 +26,7 @@ export interface LiveGame {
   sending: boolean;
   respondError: string | null;
   respond: (request: GameRespondRequest) => Promise<boolean>;
+  setAutoPass: (enabled: boolean) => Promise<boolean>;
 }
 
 export function useLiveGame(pollMs = 1500): LiveGame {
@@ -85,5 +87,29 @@ export function useLiveGame(pollMs = 1500): LiveGame {
     [refresh],
   );
 
-  return { connection, sending, respondError, respond };
+  const setAutoPass = useCallback(
+    async (enabled: boolean): Promise<boolean> => {
+      try {
+        const response = await fetch("/api/game/auto-pass", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ enabled }),
+        });
+        if (response.status === 204) {
+          await refresh();
+          return true;
+        }
+        const body = (await response.json().catch(() => null)) as { error?: string } | null;
+        setRespondError(body?.error ?? `Auto-Pass konnte nicht umgeschaltet werden (HTTP ${response.status}).`);
+        await refresh();
+        return false;
+      } catch (error) {
+        setRespondError(error instanceof Error ? error.message : "Auto-Pass konnte nicht umgeschaltet werden.");
+        return false;
+      }
+    },
+    [refresh],
+  );
+
+  return { connection, sending, respondError, respond, setAutoPass };
 }

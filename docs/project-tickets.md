@@ -381,6 +381,8 @@ Stand: 26. September 2026
 - Auto-Pass-/Stop-Regeln definieren.
 - Wechsel zwischen assistiertem Modus und manueller Prioritaet ohne unterschiedlichen Regelpfad.
 
+**Teilumsetzung (Stufe 1, umgesetzt):** Auto-Pass in der API-Sitz, damit reine Prioritaetsfragen Bot-Zuege nicht blockieren: `chooseAction`-Prompts ohne legale Aktionen werden sofort automatisch mit `pass` beantwortet (`{ type: "pass", exhaustStack: false }`, identisch zum BOT-002-Protokollmuster). Default aktiv; `MANABREW_AUTO_PASS=0` startet deaktiviert; zur Laufzeit umschaltbar per `POST /api/game/auto-pass { "enabled": bool }` bzw. Toggle im Prompt-Panel; Zustand im Snapshot-Feld `autoPass` sichtbar. Prompts mit legalen Aktionen und alle anderen Prompt-Familien (Ziele, Karten, Mana, Mulligan, ...) bleiben unangetastet. Regression: `engine-session.test.ts` (3 neue Tests), `server.test.ts` (3 neue Endpoint-Tests).
+
 ### GLM-001 / GLM-002 - Tutor
 
 - GLM erklaert, entscheidet aber im ersten Meilenstein keine Regeln.
