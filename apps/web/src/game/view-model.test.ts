@@ -13,6 +13,7 @@ import {
   phaseLabel,
   playerDisplayName,
   roleBadges,
+  stepLabel,
   turnHeadline,
   typeLine,
   viewerSeatOf,
@@ -32,6 +33,13 @@ test("labels cover every zone kind and phase", () => {
   assert.equal(phaseLabel("beginning"), "Beginn");
   assert.equal(phaseLabel("combat"), "Kampf");
   assert.equal(turnHeadline(view.turn), "Zug 1 \u00b7 Beginn");
+});
+
+test("step labels translate known engine steps and keep unknown ones raw", () => {
+  assert.equal(stepLabel("main1"), "Hauptphase 1");
+  assert.equal(stepLabel("combatDeclareAttackers"), "Angreifer deklarieren");
+  assert.equal(stepLabel("endOfTurn"), "Zugende");
+  assert.equal(stepLabel("cleanupX"), "cleanupX");
 });
 
 test("viewer perspective from the fixture is the human seat", () => {

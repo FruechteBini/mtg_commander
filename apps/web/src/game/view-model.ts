@@ -48,6 +48,23 @@ export function phaseLabel(phase: UiPhase): string {
   return PHASE_LABELS[phase];
 }
 
+const STEP_LABELS: Readonly<Record<string, string>> = {
+  untap: "Enttappen",
+  upkeep: "Unterhalt",
+  draw: "Karte ziehen",
+  main1: "Hauptphase 1",
+  combatBegin: "Kampf-Beginn",
+  combatDeclareAttackers: "Angreifer deklarieren",
+  combatEnd: "Kampf-Ende",
+  main2: "Hauptphase 2",
+  endOfTurn: "Zugende",
+};
+
+/** Translates known engine step ids; unknown steps fall back to the raw id. */
+export function stepLabel(step: string): string {
+  return STEP_LABELS[step] ?? step;
+}
+
 export function turnHeadline(turn: UiTurnInfo): string {
   return `Zug ${turn.displayTurn} \u00b7 ${PHASE_LABELS[turn.phase]}`;
 }
